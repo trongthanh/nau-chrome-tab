@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "nau-tab",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "Nau Newtab extension",
+    "description": "The description of the application"
+  }
+}
