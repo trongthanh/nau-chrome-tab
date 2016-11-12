@@ -1,45 +1,46 @@
 {
-  "name": "NauTab",
-  "version": "0.0.1",
-  "manifest_version": 2,
-  "description": "New tab page alternative for Chrome by Nau team",
-  "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
-  },
-  "default_locale": "en",
-  "background": {
-    "scripts": [
-      "scripts/chromereload.js",
-      "scripts/background.js"
-    ]
-  },
-  "permissions": [
-    "bookmarks",
-    "clipboardRead",
-    "clipboardWrite",
-    "notifications",
-    "topSites",
-    "storage",
-    "webNavigation",
-    "webRequest",
-    "*://*.google.com/"
-  ],
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
-  "chrome_url_overrides" : {
-    "newtab": "index.html"
-  },
-  "browser_action": {
-    "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
-    },
-    "default_title": "nau-tab"
-  },
-  "web_accessible_resources": [
-    "images/icon-48.png"
-  ]
+	"name": "NauTab",
+	"version": "0.0.1",
+	"manifest_version": 2,
+	"description": "New tab page alternative for Chrome by Nau team",
+	"icons": {
+		"16": "images/icon-16.png",
+		"128": "images/icon-128.png"
+	},
+	"default_locale": "en",
+	"background": {
+		"scripts": [
+			"scripts/chromereload.js",
+			"scripts/background.js"
+		]
+	},
+	"permissions": [
+		"bookmarks",
+		"clipboardRead",
+		"clipboardWrite",
+		"notifications",
+		"topSites",
+		"storage",
+		"webNavigation",
+		"webRequest",
+		"*://*.google.com/"
+	],
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": false
+	},
+	"chrome_url_overrides" : {
+		"newtab": "index.html"
+	},
+	"browser_action": {
+		"default_icon": {
+			"16": "images/icon-16.png",
+			"19": "images/icon-19.png",
+			"38": "images/icon-38.png"
+		},
+		"default_title": "nau-tab"
+	},
+	"web_accessible_resources": [
+		"images/icon-48.png"
+	]
 }

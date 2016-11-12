@@ -6,4 +6,11 @@ chrome.runtime.onInstalled.addListener(details => {
 
 // chrome.browserAction.setBadgeText({text: 'Nau'});
 
-console.log('\'Allo \'Allo! Event Page for Browser Action');
+var appURL = chrome.extension.getURL('index.html');
+// Open new tab with our index.html when click on the extension button
+chrome.browserAction.onClicked.addListener(function() {
+	chrome.tabs.create({
+		url: appURL
+	});
+});
+
