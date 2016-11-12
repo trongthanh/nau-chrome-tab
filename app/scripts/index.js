@@ -3,7 +3,6 @@
  */
 (function() {
 	'use strict';
-	const fetchUnsplash = nau.fetchUnsplash;
 
 	const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 	let lastCheck = +localStorage.getItem('lastPhotoFetch');
@@ -12,9 +11,11 @@
 	let body = $('body');
 	let clock = $('#clock');
 
-	if (!lastCheck || now > lastCheck + RENEW_DURATION) {
+	const DEBUG = false;
 
-		fetchUnsplash().then(json => {
+	if (DEBUG || !lastCheck || now > lastCheck + RENEW_DURATION) {
+
+		nau.fetchUnsplash().then(json => {
 			console.log('fetch result', json);
 			var imgUrl = json.urls.custom || json.urls.full;
 
