@@ -8,10 +8,18 @@
 		<link href="styles/main.css" rel="stylesheet">
 		<!-- endbuild -->
 	</head>
-	<body>
+	<body style="background-image: url(images/bg-default.jpg);">
 		<main class="main">
-			<div class="main-item">
+			<div class="main__item main__item--top">
+				<p class="quotes">Links</p>
+			</div>
+			<div class="main__item main__item--center">
 				<div id="clock" class="clock">23:40</div>
+				<h1 class="greeting">How's your day, Thanh?</h1>
+			</div>
+			<div class="main__item main__item--bottom quotes">
+				<p id="quotes" class="quotes__text">I dream, therefore, I become!</p>
+				<p id="quotes-author" class="quotes__author"></p>
 			</div>
 		</main>
 
@@ -23,6 +31,7 @@
 		<script src="scripts/ns.js"></script>
 		<script src="scripts/fetch.js"></script>
 		<script src="scripts/clock.js"></script>
+		<script src="scripts/quotes.js"></script>
 		<script src="scripts/index.js"></script>
 		<!-- endbuild -->
 	</body>

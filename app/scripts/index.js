@@ -32,10 +32,15 @@
 	nau.clock.start(updateClock);
 
 	function setBG(url) {
-		body.style.background = `url(${url}) center / cover`;
+		body.style.backgroundImage = `url(${url})`;
 	}
 
 	function updateClock(clockHtml) {
 		clock.innerHTML = clockHtml;
 	}
+
+	// update quote
+	let quote = nau.quotes.getQuote();
+	$('#quotes').innerText = quote[0];
+	$('#quotes-author').innerText = quote[1];
 }());

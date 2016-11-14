@@ -1,6 +1,7 @@
 html {
 	height: 100%;
 	box-sizing: border-box;
+	font-size: 10px; /*for easily calculate up rem*/
 }
 
 *, *:before, *:after {
@@ -8,15 +9,21 @@ html {
 }
 
 body {
+	-webkit-font-smoothing: antialiased;
 	margin: 0;
 	padding: 20px;
 	height: 100%;
 	color: white;
+	font-size: 1.8rem;
 	/*use native font-family for fastest rendering*/
 	font-family: -apple-system, BlinkMacSystemFont,
 		"Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans",
 		"Droid Sans", "Helvetica Neue", sans-serif;
+
+	background-position: center center;
+	-webkit-background-size: cover;
+	background-size: cover;
 }
 
 /**
@@ -24,28 +31,92 @@ body {
  */
 .main {
 	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
 }
 
-.main-item {
+.main__item {
 	max-width: 50%;
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-.main-item--top {
-	align-self: flex-start;
+.main__item--top {
+	position: absolute;
+	top: 2rem;
+	left: 2rem;
 }
 
-.main-item--bottom {
-	align-self: flex-end;
+.main__item--center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.main__item--bottom {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 2rem;
+}
+
+.main__item--bottom > p {
+	margin: 0;
+}
+
+/**
+ * Quotes
+ */
+.quotes {
+	text-align: center;
+}
+
+.quotes__text,
+.quotes__author {
+	transition: all 300ms;
+	transform: translateY(0);
+}
+
+.quotes:hover > .quotes__text {
+	transform: translateY(-1.3em);
+}
+
+.quotes:hover > .quotes__author {
+	visibility: visible;
+	opacity: 1;
+}
+
+.quotes__text::before {
+	content: '“';
+}
+
+.quotes__text::after {
+	content: '”';
+}
+
+/* hidden by default */
+.quotes__author {
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	transform: translateX(-50%);
+	transition-duration: 500ms;
 }
 
 /**
  * The big clock
  */
 .clock {
-	font-size: 1125%;
-	font-weight: 500;
+	font-size: 13.5rem;
+	font-weight: 600;
 	letter-spacing: -3px;
+}
+
+/**
+ *
+ */
+.greeting {
+	/*font-weight: normal;*/
+	font-size: 4rem;
 }
