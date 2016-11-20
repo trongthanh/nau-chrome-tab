@@ -35,7 +35,6 @@ body {
 
 .main__item {
 	max-width: 50%;
-	text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .main__item--top {
@@ -50,6 +49,7 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
+	text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
 }
 
 .main__item--bottom {
@@ -70,16 +70,14 @@ body {
 	list-style: none;
 	margin: -2rem;
 	padding: 2rem 4rem 4rem 2rem;
-	opacity: 0.7;
+	opacity: 0.5;
 	-webkit-transition: opacity 200ms;
 	-o-transition: opacity 200ms;
 	transition: opacity 200ms;
-	text-decoration: none;
 }
 	.quick-links:hover {
 		opacity: 1;
 	}
-
 
 .quick-links__li {
 	display: inline-block;
@@ -90,6 +88,9 @@ body {
 	display: block;
 	color: white;
 	font-size: 2rem;
+	font-weight: bold;
+	text-decoration: none;
+	text-shadow: 0 0 3px rgba(0,0,0,0.5);
 
 	-webkit-transition: all 200ms;
 	-o-transition: all 200ms;
@@ -102,6 +103,12 @@ body {
 		transform: scale(1.5);
 	}
 
+/*Fixed width for text link*/
+.quick-links__link--fw {
+	width: 4rem;
+	text-align: center;
+}
+
 /**
  * Quotes
  */
@@ -111,7 +118,7 @@ body {
 
 .quotes__text,
 .quotes__author {
-	transition: all 300ms;
+	transition: all 500ms;
 	transform: translateY(0);
 }
 
@@ -158,4 +165,5 @@ body {
 .greeting {
 	/*font-weight: normal;*/
 	font-size: 4rem;
+	margin: 0;
 }

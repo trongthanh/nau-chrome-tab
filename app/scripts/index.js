@@ -49,6 +49,26 @@
 
 	// update quote
 	let quote = nau.quotes.getQuote();
-	$('#quotes').innerText = quote[0];
-	$('#quotes-author').innerText = quote[1];
+	$('#quotes').textContent = quote[0];
+	$('#quotes-author').textContent = quote[1];
+
+	// greeting
+	let today = new Date();
+	let hour = today.getHours();
+	let greeting = '';
+
+	if (hour < 12) {
+		// morning
+		greeting = 'Good morning';
+	} else if (hour < 18) {
+		// afternoon
+		greeting = 'Good afternoon';
+	} else if (hour < 22) {
+		// evening
+		greeting = 'Good evening';
+	} else {
+		greeting = 'Please go to bed early';
+	}
+
+	$('#greeting-text').textContent = greeting;
 }());
