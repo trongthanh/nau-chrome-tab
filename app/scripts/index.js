@@ -1,4 +1,4 @@
-/* © 2016 NauStud.io
+/* © 2016 int3ractive.com
  * @author Thanh
  */
 (function() {
@@ -32,7 +32,15 @@
 	nau.clock.start(updateClock);
 
 	function setBG(url) {
-		body.style.backgroundImage = `url(${url})`;
+		// make sure image is downloaded completely, avoid white background during fetching
+		fetch(url)
+			.then(function(response) {
+				return response.blob();
+			})
+			.then(function(myBlob) {
+				var objectURL = URL.createObjectURL(myBlob);
+				body.style.backgroundImage = `url(${objectURL})`;
+			});
 	}
 
 	function updateClock(clockHtml) {

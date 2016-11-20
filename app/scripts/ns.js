@@ -1,4 +1,4 @@
-/* © 2016 NauStud.io
+/* © 2016 int3ractive.com
  * @author Thanh
  * Just the namespace
  */
