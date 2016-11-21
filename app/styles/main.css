@@ -11,7 +11,7 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	margin: 0;
-	padding: 20px;
+	padding: 0;
 	height: 100%;
 	color: white;
 	font-size: 1.8rem;
@@ -31,6 +31,7 @@ body {
  */
 .main {
 	height: 100%;
+	padding: 2rem;
 }
 
 .main__item {
@@ -47,7 +48,7 @@ body {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate3d(-50%, -50%, 0);
 	text-align: center;
 	text-shadow: 2px 2px 3px rgba(0,0,0,0.5);
 }
@@ -67,6 +68,7 @@ body {
  * Quick links
  */
 .quick-links {
+	display: flex;
 	list-style: none;
 	margin: -2rem;
 	padding: 2rem 4rem 4rem 2rem;
@@ -80,7 +82,7 @@ body {
 	}
 
 .quick-links__li {
-	display: inline-block;
+	flex: 0 1 auto;
 }
 
 .quick-links__link {
@@ -89,6 +91,7 @@ body {
 	color: white;
 	font-size: 2rem;
 	font-weight: bold;
+	line-height: 1;
 	text-decoration: none;
 	text-shadow: 0 0 3px rgba(0,0,0,0.5);
 
@@ -101,6 +104,17 @@ body {
 		-ms-transform: scale(1.5);
 		-o-transform: scale(1.5);
 		transform: scale(1.5);
+	}
+
+	.quick-links__link:hover::after {
+		content: attr(title);
+		position: absolute;
+		left: 50%;
+		bottom: -0.3rem;
+		transform: translateX(-50%);
+		font-size: 0.45em;
+		font-weight: normal;
+		white-space: nowrap;
 	}
 
 /*Fixed width for text link*/
@@ -166,4 +180,13 @@ body {
 	/*font-weight: normal;*/
 	font-size: 4rem;
 	margin: 0;
+}
+
+
+/**
+ * Utilities
+ */
+
+.u-serif-text {
+	font-family: serif;
 }
