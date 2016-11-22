@@ -4,43 +4,54 @@
 (function() {
 	'use strict';
 
-	const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
-	let lastCheck = +localStorage.getItem('lastPhotoFetch');
+	const RENEW_DURATION =  1000 * 30; //1000 * 60 * 60; // fetch new image every hour
+	let lastCheck = +localStorage.getItem('lastPhotoFetch') || Date.now(); // 0 if no localStorage
 	let now = Date.now();
 
 	let body = $('body');
 	let clock = $('#clock');
 
+	let imgUrl = localStorage.getItem('imgUrl');
 	const DEBUG = false;
 
-	if (DEBUG || !lastCheck || now > lastCheck + RENEW_DURATION) {
-
+	// the first hour after install, user will see default background (lastCheck == now),
+	// then we'll fetch new image in the next hou
+	if (DEBUG || now > lastCheck + RENEW_DURATION) {
 		nau.fetchUnsplash().then(json => {
 			console.log('fetch result', json);
-			var imgUrl = json.urls.custom || json.urls.full;
+			let url = json.urls.custom || json.urls.full;
+			let user = json.user || {name: '', username: ''};
 
-			localStorage.setItem('lastPhotoFetch', now);
-			localStorage.setItem('imgUrl', imgUrl);
+			// cache the image via normal browser cache in the background
+			// but don't show it immediately after load, user will see new image in next open tab
+			let imgEl = document.createElement('IMG');
+			imgEl.onload = () => {
+				console.log('Image is loaded, ready for next tab open');
+				localStorage.setItem('lastPhotoFetch', now);
+				localStorage.setItem('imgUrl', imgEl.src);
+				localStorage.setItem('authorName', user.name);
+				localStorage.setItem('authorUsername', user.username);
+			};
 
-			setBG(imgUrl);
+			imgEl.onerror = () => {
+				console.log('Image load errors, we\'ll try again next open tab');
+			};
+			imgEl.src = url;
+
 		});
+	}
+
+	if (imgUrl) {
+		setBG(imgUrl);
 	} else {
-		setBG(localStorage.getItem('imgUrl'));
+		console.log('Use default background');
 	}
 
 	// start clock
 	nau.clock.start(updateClock);
 
 	function setBG(url) {
-		// make sure image is downloaded completely, avoid white background during fetching
-		fetch(url)
-			.then(function(response) {
-				return response.blob();
-			})
-			.then(function(myBlob) {
-				var objectURL = URL.createObjectURL(myBlob);
-				body.style.backgroundImage = `url(${objectURL})`;
-			});
+		body.style.backgroundImage = `url(${url})`;
 	}
 
 	function updateClock(clockHtml) {

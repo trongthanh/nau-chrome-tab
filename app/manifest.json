@@ -2,7 +2,7 @@
 	"name": "NauTab",
 	"version": "0.0.1",
 	"manifest_version": 2,
-	"description": "New tab page alternative for Chrome by Nau team",
+	"description": "New tab page alternative for Chrome by Thanh Tran for Nau Studio",
 	"icons": {
 		"16": "images/icon-16.png",
 		"128": "images/icon-128.png"
