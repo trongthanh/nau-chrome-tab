@@ -3,8 +3,8 @@
  */
 (function() {
 	'use strict';
-
-	const momentumQuotes = [
+	// Most of the quotations are from Momentum
+	const quotes = [
 		['Yesterday, you said tomorrow.', 'Nike'],
 		['Don\'t compare your beginning to someone else\'s middle.', 'Jon Acuff'],
 		['The wisest mind has something yet to learn.', 'George Santayana'],
@@ -285,8 +285,8 @@
 	// exports
 	nau.quotes = {
 		getQuote() {
-			let randomQuote = Math.floor(Math.random() * momentumQuotes.length);
-			return momentumQuotes[randomQuote];
+			let randomQuote = Math.floor(Math.random() * quotes.length);
+			return quotes[randomQuote];
 		}
 	};
 }());
