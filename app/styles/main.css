@@ -184,6 +184,7 @@ a:hover {
 	bottom: 0;
 	transform: translateX(-50%);
 	transition-duration: 500ms;
+	white-space: nowrap;
 }
 
 /**
