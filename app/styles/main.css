@@ -24,6 +24,19 @@ body {
 	background-position: center center;
 	-webkit-background-size: cover;
 	background-size: cover;
+	background-color: #eee;
+}
+
+a,
+a:visited {
+	color: white;
+}
+
+a:hover {
+	color: #eee;
+	-webkit-text-decoration-color: #977857;
+	-moz-text-decoration-color: #977857;
+	text-decoration-color: #977857;
 }
 
 /**
@@ -58,10 +71,14 @@ body {
 	left: 50%;
 	transform: translateX(-50%);
 	bottom: 2rem;
+	max-width: 50%;
 }
 
-.main__item--bottom > p {
-	margin: 0;
+.main__item--bottom-left {
+	position: absolute;
+	left: 2rem;
+	bottom: 2rem;
+	max-width: 20%;
 }
 
 /**
@@ -100,6 +117,7 @@ body {
 	transition: all 200ms;
 }
 	.quick-links__link:hover {
+		color: white;
 		-webkit-transform: scale(1.5);
 		-ms-transform: scale(1.5);
 		-o-transform: scale(1.5);
@@ -128,6 +146,10 @@ body {
  */
 .quotes {
 	text-align: center;
+}
+
+.quotes > p {
+	margin: 0;
 }
 
 .quotes__text,
@@ -174,7 +196,7 @@ body {
 }
 
 /**
- *
+ * Greeting text
  */
 .greeting {
 	font-size: 4rem;
@@ -219,10 +241,12 @@ body {
 	outline: 0;
 }
 
-.greeting__name {
-
+/**
+ * Photo credit
+ */
+.photo-credit {
+	font-size: 0.8em;
 }
-
 
 
 /**
