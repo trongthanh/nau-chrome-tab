@@ -1,8 +1,8 @@
 {
-	"name": "NauTab",
-	"version": "0.0.1",
+	"name": "Nau Tab",
+	"version": "1.0.0",
 	"manifest_version": 2,
-	"description": "New tab page alternative for Chrome by Thanh Tran for Nau Studio",
+	"description": "Custom tab page landing for Chrome by Thanh Tran",
 	"icons": {
 		"16": "images/icon-16.png",
 		"128": "images/icon-128.png"
@@ -16,14 +16,10 @@
 	},
 	"permissions": [
 		"bookmarks",
-		"clipboardRead",
-		"clipboardWrite",
-		"notifications",
 		"topSites",
 		"storage",
 		"webNavigation",
-		"webRequest",
-		"*://*.google.com/"
+		"webRequest"
 	],
 	"options_ui": {
 		"page": "options.html",
