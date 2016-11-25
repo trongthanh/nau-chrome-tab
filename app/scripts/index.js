@@ -61,9 +61,7 @@
 		body.style.backgroundImage = `url(${url})`;
 	}
 
-	// update quote
-	let quote = nau.quotes.getQuote();
-	$('#quotes').textContent = quote[0];
-	$('#quotes-author').textContent = quote[1];
+	// display quote
+	nau.quotes.render();
 
 }());

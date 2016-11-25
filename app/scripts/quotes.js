@@ -3,6 +3,21 @@
  */
 (function() {
 	'use strict';
+
+	// exports
+	nau.quotes = {
+		render() {
+			let quote = this.getQuote();
+			$('#quotes').textContent = quote[0];
+			$('#quotes-author').textContent = quote[1];
+		},
+
+		getQuote() {
+			let randomQuote = Math.floor(Math.random() * quotes.length);
+			return quotes[randomQuote];
+		}
+	};
+
 	// Most of the quotations are from Momentum
 	const quotes = [
 		['Yesterday, you said tomorrow.', 'Nike'],
@@ -281,12 +296,4 @@
 		['What you seek is seeking you.', 'Rumi'],
 		['If you lose, don\'t lose the lesson.', 'Dalai Lama']
 	];
-
-	// exports
-	nau.quotes = {
-		getQuote() {
-			let randomQuote = Math.floor(Math.random() * quotes.length);
-			return quotes[randomQuote];
-		}
-	};
 }());

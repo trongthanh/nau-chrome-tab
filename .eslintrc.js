@@ -38,7 +38,7 @@ module.exports = {
 		'space-before-blocks'         : 2,
 		'space-infix-ops'             : 2,
 		'space-unary-ops'             :[2, { 'words': true }],
-		'strict'                      : 0,
+		'strict'                      :[2, 'function'],
 		'valid-jsdoc'                 : 2,
 	},
 	'globals': {
@@ -60,7 +60,7 @@ module.exports = {
 		'ecmaVersion': 6,
 		// 'sourceType': 'module',
 		'ecmaFeatures': {
-			'impliedStrict': true,
+			'impliedStrict': false,
 			// 'jsx': true,
 			// 'classes': true,
 		}
