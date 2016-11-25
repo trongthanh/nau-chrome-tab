@@ -3,21 +3,28 @@
  */
 (function() {
 	'use strict';
+	/**
+	 * The clock component
+	 * @type {Object}
+	 */
 	nau.clock = {
-		start(callback) {
-			if (typeof callback !== 'function') {
-				throw new Error('Clock.start: callback is not function');
+		start(selector) {
+			this.clock = $(selector);
+
+			if (!this.clock) {
+				throw new Error('Clock.start: cannot find Clock element with selector', selector);
 			}
+
 			// update time immediately
 			this.currentTime = this.getCurrentTime();
-			callback(this.currentTime);
+			this.render();
 
-			this.cb = callback;
+			// check every second but only render when text is different
 			this.tickId = setInterval(() => {
-				const timeText = this.getCurrentTime();
-				if (timeText !== this.currentTime) {
-					this.currentTime = timeText;
-					callback(this.currentTime);
+				const time = this.getCurrentTime();
+				if (!$.shallowEqual(time, this.currentTime)) {
+					this.currentTime = time;
+					this.render();
 				}
 			}, 1000);
 		},
@@ -35,7 +42,12 @@
 			let minutes = now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes();
 			// let seconds = now.getSeconds() < 10 ? '0' + now.getSeconds() : now.getSeconds();
 
-			return `<span class="clock__hour">${hours}</span>:<span class="clock__minute">${minutes}</span>`;
+			return {hours, minutes};
+		},
+
+		render() {
+			let {hours, minutes} = this.currentTime;
+			this.clock.innerHTML = `<span class="clock__hour">${hours}</span>:<span class="clock__minute">${minutes}</span>`;
 		}
 	};
 

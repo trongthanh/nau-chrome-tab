@@ -9,7 +9,6 @@
 	let now = Date.now();
 
 	let body = $('body');
-	let clock = $('#clock');
 
 	let imgUrl = localStorage.getItem('imgUrl');
 	const DEBUG = false;
@@ -56,14 +55,10 @@
 	}
 
 	// start clock
-	nau.clock.start(updateClock);
+	nau.clock.start('#clock');
 
 	function setBG(url) {
 		body.style.backgroundImage = `url(${url})`;
-	}
-
-	function updateClock(clockHtml) {
-		clock.innerHTML = clockHtml;
 	}
 
 	// update quote
