@@ -15,6 +15,7 @@ var nau = {}; //eslint-disable-line
  */
 /*eslint eqeqeq:0*/
 $.shallowEqual = function(a, b) {
+	'use strict';
 	let isEqual = a == b;
 	if (isEqual) {
 		return true;
@@ -23,7 +24,7 @@ $.shallowEqual = function(a, b) {
 	if (typeof a === 'object' && typeof b === 'object') {
 		let props = Object.keys(a).concat(Object.keys(b));
 		// let's not worry prop duplication for now
-		return props.every((prop) => (a[prop] == b[prop]));
+		return props.every(prop => a[prop] == b[prop]);
 	} else {
 		return false;
 	}
