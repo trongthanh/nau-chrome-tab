@@ -55,13 +55,13 @@
 	}
 
 	// start clock
-	nau.clock.start('#clock');
+	nau.clock.init('#clock');
 
 	function setBG(url) {
 		body.style.backgroundImage = `url(${url})`;
 	}
 
 	// display quote
-	nau.quotes.render();
+	nau.quotes.init('#quotation');
 
 }());

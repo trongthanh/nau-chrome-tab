@@ -6,10 +6,21 @@
 
 	// exports
 	nau.quotes = {
+		init(selector) {
+			this.quotation = $(selector);
+			this.quoteEl = $('.quotes__text', this.quotation);
+			this.authorEl = $('.quotes__author', this.quotation);
+			if (!this.quotation || !this.quoteEl || !this.authorEl) {
+				throw new Error('Quotes::start elements cannot be found');
+			}
+
+			this.render();
+		},
+
 		render() {
 			let quote = this.getQuote();
-			$('#quotes').textContent = quote[0];
-			$('#quotes-author').textContent = quote[1];
+			this.quoteEl.textContent = quote[0];
+			this.authorEl.textContent = quote[1];
 		},
 
 		getQuote() {

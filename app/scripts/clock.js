@@ -8,7 +8,7 @@
 	 * @type {Object}
 	 */
 	nau.clock = {
-		start(selector) {
+		init(selector) {
 			this.clock = $(selector);
 
 			if (!this.clock) {
