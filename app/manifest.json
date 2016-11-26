@@ -5,6 +5,7 @@
 	"description": "Custom tab page landing for Chrome by Thanh Tran",
 	"icons": {
 		"16": "images/icon-16.png",
+		"48": "images/icon-48.png",
 		"128": "images/icon-128.png"
 	},
 	"default_locale": "en",
