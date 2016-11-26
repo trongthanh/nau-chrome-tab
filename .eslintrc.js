@@ -46,6 +46,9 @@ module.exports = {
 		// bliss globals
 		'$': false,
 		'$$': false,
+		// localstorage helper
+		'Lockr': false,
+		// our namespace
 		'nau': true,
 	},
 	'env': {

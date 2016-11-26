@@ -205,21 +205,21 @@ a:hover {
 	white-space: nowrap;
 }
 
-.greeting__name-comp {
+.greeting__name {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
 }
 
-.greeting__name-comp--active > .greeting__input {
+.greeting__name--active > .greeting__name__input {
 	display: inline;
 }
 
-.greeting__name-comp--active > .greeting__name {
+.greeting__name--active > .greeting__name__output {
 	visibility: hidden;
 }
 
-.greeting__input {
+.greeting__name__input {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
@@ -238,7 +238,7 @@ a:hover {
     top: 0;
 }
 
-.greeting__input:focus {
+.greeting__name__input:focus {
 	outline: 0;
 }
 

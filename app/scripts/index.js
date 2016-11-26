@@ -9,6 +9,9 @@
 	// start clock
 	nau.clock.init('#clock');
 
+	// display greeting
+	nau.greeting.init('#greeting');
+
 	// display quote
 	nau.quotes.init('#quotation');
 

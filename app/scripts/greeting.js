@@ -3,73 +3,121 @@
  */
 (function() {
 	'use strict';
-	// greeting
-	let today = new Date();
-	let hour = today.getHours();
-	let greeting = '';
 
-	if (hour < 12) {
-		// morning
-		greeting = 'Good morning';
-	} else if (hour < 18) {
-		// afternoon
-		greeting = 'Good afternoon';
-	} else if (hour < 22) {
-		// evening
-		greeting = 'Good evening';
-	} else {
-		greeting = 'Please go to bed early';
-	}
+	nau.greeting = {
+		init(selector) {
+			this.greeting = $(selector);
+			this.greetingTextEl = $('#greeting-text', this.greeting);
 
-	$('#greeting-text').textContent = greeting;
+			nau.greeting.name.init('#greeting-name', this.greeting);
 
-	// name edit
-	let nameComp = $('#greeting-name');
-	let nameInput = nameComp.querySelector('.greeting__input');
-	let nameText = nameComp.querySelector('.greeting__name');
-	let currentName = localStorage.getItem('greetingName');
-
-	if (!currentName) {
-		localStorage.setItem('greetingName', 'set me');
-	}
-	// set name at startup
-	nameText.textContent = currentName;
-
-	nameComp._.events({
-		click(event) {
-			event.stopPropagation();
-			nameComp.classList.add('greeting__name-comp--active');
-			nameInput.focus();
-			nameInput.setSelectionRange(0, nameInput.value.length);
-			// bind click outside
-			document.addEventListener('click', nameInputSubmit);
+			this.update();
 		},
-	});
 
-	nameInput._.events({
-		blur() {
-			nameInputSubmit();
-		},
-		keypress(event) {
-			// enter
-			if (event.charCode === 13) {
-				nameInputSubmit();
+		update() {
+			// greeting
+			let today = new Date();
+			let hour = today.getHours();
+			let greetText = '';
+
+			if (hour < 12) {
+				// morning
+				greetText = 'Good morning';
+			} else if (hour < 18) {
+				// afternoon
+				greetText = 'Good afternoon';
+			} else if (hour < 22) {
+				// evening
+				greetText = 'Good evening';
+			} else {
+				greetText = 'Please go to bed early';
 			}
+
+			this.greetText = greetText;
+			this.render();
+		},
+
+		render() {
+			this.greetingTextEl.textContent = this.greetText;
+			this.name.render();
 		}
-	});
+	};
 
-	function nameInputSubmit(event) {
-		let newName = nameInput.value.trim();
+	/**
+	 * Name component
+	 * Subcomponent of greeting
+	 * @type {Object}
+	 */
+	nau.greeting.name = {
+		init(selector) {
+			// name edit
+			let nameEl = this.nameEl = $(selector);
+			if (!nameEl) {
+				throw new Error('nau.greeting.nam::init nameEl is not found');
+			}
+			let nameInput = this.nameInput = $('.greeting__name__input', nameEl);
+			let nameText = this.nameText = $('.greeting__name__output', nameEl);
+			if (!nameInput && !nameText) {
+				throw new Error('nau.greeting.nam::init nameInput or nameText is not found');
+			}
 
-		if (newName) {
-			nameText.textContent = newName + '.';
-			localStorage.setItem('greetingName', newName);
-		} else {
-			nameText.textContent = localStorage.getItem('greetingName');
+			let currentName = Lockr.get('greetingName');
+
+			if (!currentName) {
+				currentName = '________';
+				Lockr.set('greetingName', currentName);
+			}
+
+			nameEl._.events({
+				click: (event) => {
+					event.stopPropagation();
+					nameEl.classList.add('greeting__name--active');
+					nameInput.focus();
+					nameInput.setSelectionRange(0, nameInput.value.length);
+					// bind click outside
+					document.addEventListener('click', nameInputSubmit);
+				},
+			});
+
+			nameInput._.events({
+				blur() {
+					nameInputSubmit();
+				},
+				keypress(event) {
+					// enter
+					if (event.charCode === 13) {
+						nameInputSubmit();
+					}
+				}
+			});
+
+			let self = this;
+			function nameInputSubmit(event) {
+				let newName = nameInput.value.trim();
+
+				if (newName) {
+					self.currentName = newName;
+					Lockr.set('greetingName', newName);
+				} else {
+					self.currentName = Lockr.get('greetingName');
+				}
+				self.render();
+				nameEl.classList.remove('greeting__name--active');
+				document.removeEventListener('click', nameInputSubmit);
+			}
+			this.currentName = currentName;
+			// set name at startup
+			this.render();
+		},
+
+		update() {
+
+			this.render();
+		},
+
+		render() {
+			this.nameText.textContent = this.currentName + '.';
 		}
-
-		nameComp.classList.remove('greeting__name-comp--active');
-		document.removeEventListener('click', nameInputSubmit);
-	}
+	};
 
 }());
