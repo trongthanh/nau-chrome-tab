@@ -3,6 +3,7 @@
  */
 (function() {
 	'use strict';
+	const Store = nau.Store;
 
 	nau.greeting = {
 		init(selector) {
@@ -61,11 +62,11 @@
 				throw new Error('nau.greeting.nam::init nameInput or nameText is not found');
 			}
 
-			let currentName = Lockr.get('greetingName');
+			let currentName = Store.get('greetingName');
 
 			if (!currentName) {
 				currentName = '________';
-				Lockr.set('greetingName', currentName);
+				Store.set('greetingName', currentName);
 			}
 
 			nameEl._.events({
@@ -97,9 +98,9 @@
 
 				if (newName) {
 					self.currentName = newName;
-					Lockr.set('greetingName', newName);
+					Store.set('greetingName', newName);
 				} else {
-					self.currentName = Lockr.get('greetingName');
+					self.currentName = Store.get('greetingName');
 				}
 				self.render();
 				nameEl.classList.remove('greeting__name--active');
