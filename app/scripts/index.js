@@ -4,7 +4,7 @@
 (function() {
 	'use strict';
 	// render wallpaper
-	nau.wallpaper.init('body');
+	nau.wallpaper.init('#wallpaper');
 
 	// start clock
 	nau.clock.init('#clock');
