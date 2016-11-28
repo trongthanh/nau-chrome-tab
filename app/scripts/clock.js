@@ -7,7 +7,7 @@
 	 * The clock component
 	 * @type {Object}
 	 */
-	nau.clock = {
+	nau.define('clock', {
 		init(selector) {
 			this.clock = $(selector);
 
@@ -49,6 +49,6 @@
 			let {hours, minutes} = this.currentTime;
 			this.clock.innerHTML = `<span class="clock__hour">${hours}</span>:<span class="clock__minute">${minutes}</span>`;
 		}
-	};
+	});
 
 }());

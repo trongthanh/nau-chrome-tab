@@ -4,8 +4,7 @@
 (function() {
 	'use strict';
 
-	// exports
-	nau.quotes = {
+	nau.define('quotes', {
 		init(selector) {
 			this.quotation = $(selector);
 			this.quoteEl = $('.quotes__text', this.quotation);
@@ -27,7 +26,7 @@
 			let randomQuote = Math.floor(Math.random() * quotes.length);
 			return quotes[randomQuote];
 		}
-	};
+	});
 
 	// Most of the quotations are from Momentum
 	const quotes = [

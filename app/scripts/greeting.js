@@ -5,12 +5,14 @@
 	'use strict';
 	const Store = nau.Store;
 
-	nau.greeting = {
+	nau.define('greeting', {
 		init(selector) {
 			this.greeting = $(selector);
 			this.greetingTextEl = $('#greeting-text', this.greeting);
 
-			nau.greeting.name.init('#greeting-name', this.greeting);
+			// sub component
+			this.Name = nau.nameComponent;
+			this.Name.init('#greeting-name', this.greeting);
 
 			this.update();
 		},
@@ -40,16 +42,16 @@
 
 		render() {
 			this.greetingTextEl.textContent = this.greetText;
-			this.name.render();
+			this.Name.render();
 		}
-	};
+	});
 
 	/**
 	 * Name component
 	 * Subcomponent of greeting
 	 * @type {Object}
 	 */
-	nau.greeting.name = {
+	nau.define('nameComponent', {
 		init(selector) {
 			// name edit
 			let nameEl = this.nameEl = $(selector);
@@ -119,6 +121,6 @@
 		render() {
 			this.nameText.textContent = this.currentName + '.';
 		}
-	};
+	});
 
 }());

@@ -28,7 +28,7 @@
 	 * @param {Object} options Additional options to pass to the unsplash GET API
 	 * @return {Promise}        the request resolving promise object
 	 */
-	nau.fetchUnsplash = function fetchUnsplash(options) {
+	nau.define('fetchUnsplash', function fetchUnsplash(options) {
 		const unsplashAPI = 'https://api.unsplash.com/photos/random';
 
 		let defaults = {
@@ -70,5 +70,5 @@
 			console.log('Errors:', err);
 			return err;
 		});
-	};
+	});
 }());
