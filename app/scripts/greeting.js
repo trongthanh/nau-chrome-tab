@@ -64,11 +64,11 @@
 				throw new Error('nau.greeting.nam::init nameInput or nameText is not found');
 			}
 
-			let currentName = Store.get('greetingName');
+			let currentName = Store.get('greetingName', '');
 
 			if (!currentName) {
-				currentName = '________';
-				Store.set('greetingName', currentName);
+				nameEl.classList.add('greeting__name--active');
+				nameInput.classList.add('greeting__name__input--empty');
 			}
 
 			nameEl._.events({
@@ -102,10 +102,15 @@
 					self.currentName = newName;
 					Store.set('greetingName', newName);
 				} else {
-					self.currentName = Store.get('greetingName');
+					self.currentName = Store.get('greetingName', '');
+				}
+
+				if (self.currentName) {
+					// only hide the input if currentName is defined
+					nameEl.classList.remove('greeting__name--active');
+					nameInput.classList.remove('greeting__name__input--empty');
 				}
 				self.render();
-				nameEl.classList.remove('greeting__name--active');
 				document.removeEventListener('click', nameInputSubmit);
 			}
 			this.currentName = currentName;
@@ -114,7 +119,6 @@
 		},
 
 		update() {
-
 			this.render();
 		},
 

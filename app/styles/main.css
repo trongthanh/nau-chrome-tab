@@ -102,14 +102,14 @@ a:hover {
 	display: flex;
 	list-style: none;
 	margin: -2rem;
-	padding: 2rem 4rem 4rem 2rem;
 	opacity: 0.5;
+	padding: 2rem 6rem 6rem 2rem;
 	-webkit-transition: opacity 200ms;
 	-o-transition: opacity 200ms;
 	transition: opacity 200ms;
 }
 	.quick-links:hover {
-		opacity: 1;
+		opacity: 0.95;
 	}
 
 .quick-links__li {
@@ -160,6 +160,7 @@ a:hover {
  */
 .quotes {
 	text-align: center;
+	padding-top: 2rem; /* make sure hover on the quotes won't slip at the space between 2 lines */
 }
 
 .quotes > p {
@@ -205,8 +206,8 @@ a:hover {
  * The big clock
  */
 .clock {
-	font-size: 13.5rem;
-	font-weight: 600;
+	font-size: 14.5rem;
+	font-weight: 100;
 	letter-spacing: -3px;
 }
 
@@ -250,6 +251,20 @@ a:hover {
     position: absolute;
     display: none;
     top: 0;
+}
+/*need this for empty greeting name*/
+.greeting__name__input--empty {
+	position: relative;
+}
+
+.greeting__name__input::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.8);
+}
+.greeting__name__input::-moz-placeholder {
+	color: rgba(255, 255, 255, 0.8);
+}
+.greeting__name__input::-ms-input-placeholder {
+	color: rgba(255, 255, 255, 0.8);
 }
 
 .greeting__name__input:focus {
