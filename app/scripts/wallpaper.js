@@ -48,6 +48,7 @@
 				}
 			});
 
+			this.initDragDrop();
 		},
 
 		_fetchNewPhoto(now) {
@@ -80,10 +81,41 @@
 			});
 		},
 
+		initDragDrop() {
+			this.wallpaper._.events({
+				dragover: (event) => {
+					event.stopPropagation();
+					event.preventDefault();
+					event.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+				},
+				drop: (event) => {
+					event.stopPropagation();
+					event.preventDefault();
 
-			// for this hour
-			this.imgData = currentPhoto || defaultPhoto;
-			this.render();
+					let files = event.dataTransfer.files; // FileList object.
+					console.log('Num files', files.length);
+					// files is a FileList of File objects. List some properties.
+					for (let i = 0, f; i < files.length; i++) {
+						f = files[i];
+						console.log(escape(f.name), ' (type ', f.type || 'n/a', ') - ',
+							f.size, ' bytes, last modified: ',
+							f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
+					}
+
+					let reader = new FileReader();
+					reader.onload = e => {
+						this.imgData = {
+							imgUrl: e.target.result,
+							imgId: '',
+							authorName: 'You',
+							authorUsername: '',
+						};
+						this.render();
+						Store.set({ currentPhoto: this.imgData });
+					};
+					reader.readAsDataURL(files[0]);
+				},
+			});
 		},
 
 		render() {
