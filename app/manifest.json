@@ -19,6 +19,7 @@
 		"bookmarks",
 		"topSites",
 		"storage",
+		"unlimitedStorage",
 		"webNavigation",
 		"webRequest"
 	],

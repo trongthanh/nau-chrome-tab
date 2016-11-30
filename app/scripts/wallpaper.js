@@ -19,46 +19,67 @@
 		init(selector) {
 			this.wallpaper = $(selector);
 
-			let lastCheck = Store.get('lastPhotoFetch', 0);
-			let now = Date.now();
-			let currentPhoto = Store.get('currentPhoto');
+			Store.get(['lastPhotoFetch', 'currentPhoto']).then(result => {
 
-			const DEBUG = false;
-			// the first hour after install, user will see default background,
-			// then we'll fetch new image in the next hou
-			if (DEBUG || now > lastCheck + RENEW_DURATION) {
-				let nextPhoto = Store.get('nextPhoto');
-				if (nextPhoto) {
-					currentPhoto = nextPhoto;
-					Store.set('currentPhoto', currentPhoto);
-					Store.set('nextPhoto', null);
+				let lastCheck = result.lastPhotoFetch || 0;
+				let now = Date.now();
+				let currentPhoto = result.currentPhoto;
+
+				const DEBUG = false;
+				// the first hour after install, user will see default background,
+				// then we'll fetch new image in the next hour
+				if (DEBUG || now > lastCheck + RENEW_DURATION) {
+					Store.get('nextPhoto').then(nextResult=> {
+						if (nextResult.nextPhoto) {
+							currentPhoto = nextResult.nextPhoto;
+							Store.set({
+								currentPhoto: currentPhoto
+							});
+						}
+						// use next photo
+						this.imgData = currentPhoto || defaultPhoto;
+						this.render();
+						this._fetchNewPhoto(now);
+					});
+				} else {
+					// for this hour
+					this.imgData = currentPhoto || defaultPhoto;
+					this.render();
 				}
+			});
 
-				nau.fetchUnsplash().then(json => {
-					console.log('fetch result', json);
-					let url = json.urls.custom || json.urls.full;
-					let user = json.user || {name: '', username: ''};
+		},
 
-					// cache the image via normal browser cache in the background
-					// but don't show it immediately after load, user will see new image in next open tab
-					let imgEl = document.createElement('IMG');
-					imgEl.onload = () => {
-						console.log('Image is loaded, ready for view in next hour');
-						Store.set('lastPhotoFetch', now);
-						Store.set('nextPhoto', {
+		_fetchNewPhoto(now) {
+			nau.fetchUnsplash().then(json => {
+				console.log('fetch result', json);
+				let url = json.urls.custom || json.urls.full;
+				let user = json.user || {name: '', username: ''};
+
+				// cache the image via normal browser cache in the background
+				// but don't show it immediately after load, user will see new image in next open tab
+				let imgEl = document.createElement('IMG');
+				imgEl.onload = () => {
+					console.log('Image is loaded, ready for view in next hour');
+					Store.set({
+						lastPhotoFetch: now,
+						nextPhoto: {
 							imgUrl: imgEl.src,
 							imgId: json.id,
 							authorName: user.name,
 							authorUsername: user.username,
-						});
-					};
+						},
+					});
+				};
 
-					imgEl.onerror = () => {
-						console.log('Image load errors, we\'ll try again next open tab');
-					};
-					imgEl.src = url;
-				});
-			}
+				imgEl.onerror = () => {
+					console.log('Image load errors, we\'ll try again next open tab');
+					Store.set({nextPhoto: null});
+				};
+				imgEl.src = url;
+			});
+		},
+
 
 			// for this hour
 			this.imgData = currentPhoto || defaultPhoto;
@@ -77,7 +98,12 @@
 					<a href="https://unsplash.com/photos/${imgData.imgId}"
 						class="photo-credit__origin">Unsplash</a>
 				`;
+			} else {
+				$('#photo-credit').innerHTM = '';
 			}
+			setTimeout(() => {
+				this.wallpaper.classList.add('wallpaper--ready');
+			}, 12);
 		}
 	});
 

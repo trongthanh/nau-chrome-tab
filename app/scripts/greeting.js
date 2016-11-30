@@ -42,7 +42,6 @@
 
 		render() {
 			this.greetingTextEl.textContent = this.greetText;
-			this.Name.render();
 		}
 	});
 
@@ -64,13 +63,24 @@
 				throw new Error('nau.greeting.nam::init nameInput or nameText is not found');
 			}
 
-			let currentName = Store.get('greetingName', '');
+			Store.get('greetingName').then(result => {
+				let currentName = result.greetingName;
+				if (!currentName) {
+					nameEl.classList.add('greeting__name--active');
+					nameInput.classList.add('greeting__name__input--empty');
+				}
 
-			if (!currentName) {
-				nameEl.classList.add('greeting__name--active');
-				nameInput.classList.add('greeting__name__input--empty');
-			}
+				this.currentName = currentName || '';
+				// set name at startup
+				this.render();
+			});
 
+			this._initEvents();
+		},
+
+		_initEvents() {
+			let nameEl = this.nameEl;
+			let nameInput = this.nameInput;
 			nameEl._.events({
 				click: (event) => {
 					event.stopPropagation();
@@ -100,22 +110,17 @@
 
 				if (newName) {
 					self.currentName = newName;
-					Store.set('greetingName', newName);
+					self.render();
+					Store.set({greetingName: newName});
 				} else {
-					self.currentName = Store.get('greetingName', '');
+					Store.get('greetingName').then(result => {
+						self.currentName = result.greetingName;
+						self.render();
+					});
 				}
 
-				if (self.currentName) {
-					// only hide the input if currentName is defined
-					nameEl.classList.remove('greeting__name--active');
-					nameInput.classList.remove('greeting__name__input--empty');
-				}
-				self.render();
 				document.removeEventListener('click', nameInputSubmit);
 			}
-			this.currentName = currentName;
-			// set name at startup
-			this.render();
 		},
 
 		update() {
@@ -123,6 +128,11 @@
 		},
 
 		render() {
+			if (this.currentName) {
+				// only hide the input if currentName is defined
+				this.nameEl.classList.remove('greeting__name--active');
+				this.nameInput.classList.remove('greeting__name__input--empty');
+			}
 			this.nameText.textContent = this.currentName + '.';
 		}
 	});
