@@ -91,8 +91,13 @@ a:hover {
 	background-position: center center;
 	-webkit-background-size: cover;
 	background-size: cover;
-	transition: all 300ms;
+	transition: opacity 500ms;
+	opacity: 0;
 	z-index: 0;
+}
+
+.wallpaper--ready {
+	opacity: 1;
 }
 
 /**
@@ -153,6 +158,14 @@ a:hover {
 .quick-links__link--fw {
 	width: 4rem;
 	text-align: center;
+}
+
+/*apply drop shadow for any shape icon*/
+.quick-links__link--svg {
+	text-shadow: none;
+	-webkit-filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
+	-o-filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
+	filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
 }
 
 /**
