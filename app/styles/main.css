@@ -63,7 +63,7 @@ a:hover {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-align: center;
-	text-shadow: 0 0 5px rgba(0,0,0,0.1);
+	text-shadow: 0 0 25px rgba(0,0,0,0.3);
 }
 
 .main__item--bottom {
@@ -114,7 +114,7 @@ a:hover {
 	transition: opacity 200ms;
 }
 	.quick-links:hover {
-		opacity: 0.95;
+		opacity: 1;
 	}
 
 .quick-links__li {
@@ -129,7 +129,7 @@ a:hover {
 	font-weight: bold;
 	line-height: 1;
 	text-decoration: none;
-	text-shadow: 0 0 3px rgba(0,0,0,0.5);
+	text-shadow: 0 0 3px rgba(0,0,0,0.3);
 
 	-webkit-transition: all 200ms;
 	-o-transition: all 200ms;
@@ -137,21 +137,34 @@ a:hover {
 }
 	.quick-links__link:hover {
 		color: white;
-		-webkit-transform: scale(1.5);
-		-ms-transform: scale(1.5);
-		-o-transform: scale(1.5);
-		transform: scale(1.5);
+		-webkit-transform: translateY(-5px);
+		-ms-transform: translateY(-5px);
+		-o-transform: translateY(-5px);
+		transform: translateY(-5px);
 	}
 
-	.quick-links__link:hover::after {
+	.quick-links__link::after {
 		content: attr(title);
 		position: absolute;
 		left: 50%;
-		bottom: -0.3rem;
+		bottom: -1.5rem;
 		transform: translateX(-50%);
-		font-size: 0.45em;
+		font-size: 0.7em;
 		font-weight: normal;
 		white-space: nowrap;
+		-webkit-transition: all 200ms;
+		-o-transition: all 200ms;
+		transition: all 200ms;
+		visibility: hidden;
+		opacity: 0;
+		-webkit-filter: none;
+		-o-filter: none;
+		filter: none;
+	}
+
+	.quick-links__link:hover::after {
+		visibility: visible;
+		opacity: 1;
 	}
 
 /*Fixed width for text link*/
@@ -163,9 +176,9 @@ a:hover {
 /*apply drop shadow for any shape icon*/
 .quick-links__link--svg {
 	text-shadow: none;
-	-webkit-filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
-	-o-filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
-	filter: drop-shadow(0 0 3px rgba(0,0,0,0.5)) blur(0);
+	-webkit-filter: drop-shadow(0 0 3px rgba(0,0,0,0.3)) blur(0);
+	-o-filter: drop-shadow(0 0 3px rgba(0,0,0,0.3)) blur(0);
+	filter: drop-shadow(0 0 3px rgba(0,0,0,0.3)) blur(0);
 }
 
 /**
@@ -173,6 +186,7 @@ a:hover {
  */
 .quotes {
 	text-align: center;
+	text-shadow: 0 0 3px rgba(0,0,0,0.3);
 	padding-top: 2rem; /* make sure hover on the quotes won't slip at the space between 2 lines */
 }
 
