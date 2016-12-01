@@ -86,7 +86,7 @@
 				dragover: (event) => {
 					event.stopPropagation();
 					event.preventDefault();
-					event.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+					event.dataTransfer.dropEffect = 'link'; // Explicitly show this is a copy.
 				},
 				drop: (event) => {
 					event.stopPropagation();
@@ -102,18 +102,17 @@
 							f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
 					}
 
-					let reader = new FileReader();
-					reader.onload = e => {
+
+					this._readAndResizeImage(files[0]).then(imgDataUrl => {
 						this.imgData = {
-							imgUrl: e.target.result,
+							imgUrl: imgDataUrl,
 							imgId: '',
 							authorName: 'You',
 							authorUsername: '',
 						};
 						this.render();
 						Store.set({ currentPhoto: this.imgData });
-					};
-					reader.readAsDataURL(files[0]);
+					});
 				},
 			});
 		},
@@ -136,6 +135,30 @@
 			setTimeout(() => {
 				this.wallpaper.classList.add('wallpaper--ready');
 			}, 12);
+		},
+
+		_readAndResizeImage(file) {
+			const URL = window.URL;
+			const canvas = document.createElement('CANVAS');
+			const canvasWidth = canvas.width = window.screen.width; // match canvasWidth with full screen width
+
+			return new Promise((resolve, reject) => {
+				let ctx = canvas.getContext('2d');
+				let url = URL.createObjectURL(file);
+				let img = new Image();
+				img.onload = () => {
+					// keep ratio by maintain width
+					let ratio = img.height / img.width;
+
+					let canvasHeight = Math.round(ratio * canvasWidth);
+					canvas.height = canvasHeight;
+					ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight); // scale the image down/up to the canvas sizes
+					let imgDataUrl = canvas.toDataURL('image/jpeg', 0.8); // 0.8 is of decent quality with optimal size
+					console.log('Resized image size:', imgDataUrl.length / 1024, 'KB');
+					resolve(imgDataUrl);
+				};
+				img.src = url;
+			});
 		}
 	});
 
