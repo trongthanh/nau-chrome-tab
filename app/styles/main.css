@@ -27,6 +27,14 @@ body {
 	background-color: #eee;
 }
 
+button {
+	cursor: pointer;
+}
+
+button:focus {
+	outline: none;
+}
+
 a,
 a:visited {
 	color: white;
@@ -78,8 +86,19 @@ a:hover {
 	position: absolute;
 	left: 2rem;
 	bottom: 2rem;
-	max-width: 20%;
+	max-width: 25%;
+	padding-left: 4rem; /*reserve space for button*/
 }
+
+	.main__item--bottom-left__btn {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.main__item--bottom-left__text {
+		margin-top: 1.2rem;
+	}
 
 /**
  * Wallpaper background
@@ -303,13 +322,151 @@ a:hover {
  */
 .photo-credit {
 	font-size: 0.8em;
+	display: inline-block;
+}
+
+/**
+ * Modal popup
+ * Shamelessly copied from: http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/;
+ */
+.modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	max-width: 630px;
+	min-width: 320px;
+	max-height: 80%;
+	overflow: hidden;
+	z-index: 1001;
+	visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.modal--show {
+	visibility: visible;
+}
+
+.modal__close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 2.2rem;
+}
+
+/* simulate frosted glass effect, image url will be set dynamically */
+.modal__background {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	background-position: center;
+	background-size: 100vw auto;
+	filter: blur(5px);
+}
+
+/* modal content styles */
+.modal__content {
+	background: rgba(0,0,0,0.5);
+	position: relative;
+	border-radius: 3px;
+	margin: 0 auto;
+}
+
+.modal__title {
+	margin: 0;
+	padding: 0.5em;
+	text-align: center;
+	background: rgba(0,0,0,0.5);
+	border-radius: 3px 3px 0 0;
+}
+
+.modal__body {
+	padding: 2rem;
+}
+
+.modal-overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(0,0,0,0.3);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.modal--show ~ .modal-overlay {
+	opacity: 1;
+	visibility: visible;
+}
+
+/* Effect 3: Slide from the bottom */
+.modal--slide-up .modal__content {
+	-webkit-transform: translateY(20%);
+	-moz-transform: translateY(20%);
+	-ms-transform: translateY(20%);
+	transform: translateY(20%);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.modal--show.modal--slide-up .modal__content {
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateY(0);
+	opacity: 1;
+}
+
+/**
+ * Settings Panel
+ */
+.settings__label {
+	display: inline-block;
+	margin-right: 2rem;
+	padding: 1rem 0;
+}
+
+[id='setting-wallpaper-mode-your-photo']:checked ~ [id="setting-photo-selector"] {
+	display: block;
 }
 
 
 /**
  * Utilities
  */
+.icon-btn {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 0;
+	background: none;
+	color: white;
+	padding: 1rem;
+}
+
+.icon-btn:hover {
+	color: #977857;
+}
 
 .u-serif-text {
 	font-family: serif;
+}
+
+.u-hidden {
+	display: none;
 }

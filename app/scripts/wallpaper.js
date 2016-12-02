@@ -119,7 +119,9 @@
 
 		render() {
 			let imgData = this.imgData;
-			this.wallpaper.style.backgroundImage = `url(${imgData.imgUrl})`;
+			let imgUrl = `url(${imgData.imgUrl})`;
+			this.wallpaper.style.backgroundImage = imgUrl;
+			$('.modal__background').style.backgroundImage = imgUrl;
 			if (imgData.authorUsername) {
 				$('#photo-credit').innerHTML = `
 					Photo by
