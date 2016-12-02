@@ -14,16 +14,18 @@ var nau = {
 	 * The module is accessible via normal object.property access
 	 * @param  {string} moduleName Name of the module.
 	 * @param  {*} value  Value of the module
-	 * @return {nau}        `nau` object
+	 * @return {*}        The newly defined value / object
 	 */
 	define(moduleName, value) {
 		'use strict';
-		return Object.defineProperty(this, moduleName, {
+		Object.defineProperty(this, moduleName, {
 			enumerable: true,
 			configurable: false,
 			writable: false,
 			value: value,
 		});
+
+		return this[moduleName];
 	}
 };
 
@@ -70,7 +72,7 @@ $.shallowEqual = function(a, b) {
 	 * and use Chrome Storage similar API
 	 * @type {Object}
 	 */
-	nau.define('Store', {
+	const Store = nau.define('Store', {
 		/**
 		 * set data object to local storage
 		 * @param {object} obj Object to save to local storage, data type (string, number, boolean, Object, Array) is mantained
@@ -90,8 +92,6 @@ $.shallowEqual = function(a, b) {
 					resolve(obj);
 				}
 			});
-
-
 		},
 
 		/**
@@ -121,5 +121,56 @@ $.shallowEqual = function(a, b) {
 				}
 			});
 		},
+	});
+
+	nau.define('Settings', {
+
+		init() {
+			// default
+			this._settings = {
+				wallpaperMode: 'unsplash'
+			};
+
+			return Store.get('settings').then(result => {
+				console.log('setting resume', result);
+				this._settings = Object.assign(this._settings, result.settings);
+				this.initUI();
+			});
+		},
+
+		initUI() {
+			// wallpaper modes
+			$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
+
+			$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
+				console.log('event.target.value', event.target.value);
+				this.set('wallpaperMode', event.target.value);
+			});
+
+			// file selector
+			$('#setting-photo-selector').addEventListener('change', (event) => {
+				console.log('file selector change:', event.target.files);
+			});
+		},
+
+		subscribe(key, handler) {
+			// we'll make use of DOM events for our custom events
+			document.addEventListener('setting:' + key, handler);
+		},
+
+		get(key) {
+			return this._settings[key];
+		},
+
+		set(key, value) {
+			this._settings[key] = value;
+			this.save(key);
+		},
+
+		save(key) {
+			nau.Store.set({settings: this._settings}).then(() => {
+				document._.fire('setting:' + key, { value: this._settings[key]});
+			});
+		}
 	});
 }());

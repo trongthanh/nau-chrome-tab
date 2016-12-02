@@ -3,17 +3,20 @@
  */
 (function() {
 	'use strict';
-	// start clock
-	nau.clock.init('#clock');
+	// make sure settings are get and ready first
+	nau.Settings.init().then(() => {
+		// start clock
+		nau.clock.init('#clock');
 
-	// display greeting
-	nau.greeting.init('#greeting');
+		// display greeting
+		nau.greeting.init('#greeting');
 
-	// display quote
-	nau.quotes.init('#quotation');
+		// display quote
+		nau.quotes.init('#quotation');
 
-	// render wallpaper last since this is heavy routine
-	nau.wallpaper.init('#wallpaper');
+		// render wallpaper last since this is heavy routine
+		nau.wallpaper.init('#wallpaper');
+	});
 
 	$('#settings-btn')._.events({
 		click(event) {

@@ -5,6 +5,7 @@
 	'use strict';
 	// imports
 	const Store = nau.Store;
+	const Settings = nau.Settings;
 
 	const RENEW_DURATION =  1000 * 60 * 60; // fetch new image every hour
 
@@ -18,9 +19,29 @@
 	nau.define('wallpaper', {
 		init(selector) {
 			this.wallpaper = $(selector);
+			const wallpaperMode = this.currentMode = Settings.get('wallpaperMode');
 
+			if (wallpaperMode === 'user') {
+				this._initUserMode();
+			} else {
+				// unsplash
+				this._initUnsplashMode();
+			}
+
+			this.initEvents();
+			this.initDragDrop();
+		},
+
+		_initUserMode() {
+			Store.get('userPhoto').then(result => {
+				// use user photo
+				this.imgData = result.userPhoto || defaultPhoto;
+				this.render();
+			});
+		},
+
+		_initUnsplashMode() {
 			Store.get(['lastPhotoFetch', 'currentPhoto']).then(result => {
-
 				let lastCheck = result.lastPhotoFetch || 0;
 				let now = Date.now();
 				let currentPhoto = result.currentPhoto;
@@ -47,8 +68,6 @@
 					this.render();
 				}
 			});
-
-			this.initDragDrop();
 		},
 
 		_fetchNewPhoto(now) {
@@ -81,6 +100,21 @@
 			});
 		},
 
+		initEvents() {
+			Settings.subscribe('wallpaperMode', (event) => {
+				console.log('Settings fire event', event);
+				if (event.value !== this.currentMode) {
+					if (event.value === 'user') {
+						this._initUserMode();
+					} else {
+						this._initUnsplashMode();
+					}
+					this.currentMode = event.value;
+				}
+
+			});
+		},
+
 		initDragDrop() {
 			this.wallpaper._.events({
 				dragover: (event) => {
@@ -102,16 +136,17 @@
 							f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
 					}
 
-
-					this._readAndResizeImage(files[0]).then(imgDataUrl => {
+					let file = files[0];
+					this._readAndResizeImage(file).then(imgDataUrl => {
 						this.imgData = {
 							imgUrl: imgDataUrl,
-							imgId: '',
+							imgId: file.name,
 							authorName: 'You',
 							authorUsername: '',
 						};
 						this.render();
-						Store.set({ currentPhoto: this.imgData });
+						Store.set({ userPhoto: this.imgData });
+						Settings.set('wallpaperMode', 'user');
 					});
 				},
 			});

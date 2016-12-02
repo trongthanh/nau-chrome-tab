@@ -53,20 +53,20 @@
 		</main>
 
 		<!-- modal settings popup -->
-		<div class="modal" id="settings-modal">
+		<div class="modal modal--slide-up" id="settings-modal">
 			<div class="modal__background"></div>
 			<div class="modal__content">
 				<h3 class="modal__title">Settings</h3>
-				<form class="modal__body settings">
+				<form id="settings-panel" class="modal__body settings">
 					<fieldset>
 						<legend>Wallpaper Mode</legend>
-						<input id="setting-wallpaper-mode-unsplash" type="radio" name="setting-wallpaper-mode">
+						<input id="setting-wallpaper-mode-unsplash" type="radio" name="setting-wallpaper-mode" value="unsplash">
 						<label class="settings__label" for="setting-wallpaper-mode-unsplash">
 							Unsplash
 						</label>
 
-						<input id="setting-wallpaper-mode-your-photo" type="radio" name="setting-wallpaper-mode">
-						<label class="settings__label settings__label--your-photo" for="setting-wallpaper-mode-your-photo">
+						<input id="setting-wallpaper-mode-user" type="radio" name="setting-wallpaper-mode" value="user">
+						<label class="settings__label" for="setting-wallpaper-mode-user">
 							Your Photo
 						</label>
 

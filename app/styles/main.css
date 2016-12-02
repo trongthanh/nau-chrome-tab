@@ -412,23 +412,24 @@ a:hover {
 	visibility: visible;
 }
 
-/* Effect 3: Slide from the bottom */
-.modal--slide-up .modal__content {
-	-webkit-transform: translateY(20%);
-	-moz-transform: translateY(20%);
-	-ms-transform: translateY(20%);
-	transform: translateY(20%);
+/* Effect 3: Slide from the bottom, change from origin: apply to container, to avoid
+conflicting with the frosty glass effect*/
+.modal--slide-up {
+	-webkit-transform: translateX(-50%) translateY(-40%);
+	-moz-transform: translateX(-50%) translateY(-40%);
+	-ms-transform: translateX(-50%) translateY(-40%);
+	transform: translateX(-50%) translateY(-40%);
 	opacity: 0;
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
 }
 
-.modal--show.modal--slide-up .modal__content {
-	-webkit-transform: translateY(0);
-	-moz-transform: translateY(0);
-	-ms-transform: translateY(0);
-	transform: translateY(0);
+.modal--show.modal--slide-up {
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
 	opacity: 1;
 }
 
@@ -441,7 +442,7 @@ a:hover {
 	padding: 1rem 0;
 }
 
-[id='setting-wallpaper-mode-your-photo']:checked ~ [id="setting-photo-selector"] {
+[id='setting-wallpaper-mode-user']:checked ~ [id="setting-photo-selector"] {
 	display: block;
 }
 
