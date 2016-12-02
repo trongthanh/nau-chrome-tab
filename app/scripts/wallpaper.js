@@ -160,7 +160,7 @@
 						class="photo-credit__origin">Unsplash</a>
 				`;
 			} else {
-				$('#photo-credit').innerHTM = '';
+				$('#photo-credit').innerHTML = '';
 			}
 			setTimeout(() => {
 				this.wallpaper.classList.add('wallpaper--ready');
