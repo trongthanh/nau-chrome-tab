@@ -150,6 +150,12 @@ $.shallowEqual = function(a, b) {
 			// file selector
 			$('#setting-photo-selector').addEventListener('change', (event) => {
 				console.log('file selector change:', event.target.files);
+				let file = event.target.files[0];
+				if (file.type.includes('image')) {
+					document._.fire('setting:userPhotoSelected', { file });
+				} else {
+					alert('Please select only file of type image (JPG, PNG)');
+				}
 			});
 		},
 

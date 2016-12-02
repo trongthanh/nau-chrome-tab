@@ -101,7 +101,7 @@
 		},
 
 		initEvents() {
-			Settings.subscribe('wallpaperMode', (event) => {
+			Settings.subscribe('wallpaperMode', event => {
 				console.log('Settings fire event', event);
 				if (event.value !== this.currentMode) {
 					if (event.value === 'user') {
@@ -111,7 +111,10 @@
 					}
 					this.currentMode = event.value;
 				}
+			});
 
+			Settings.subscribe('userPhotoSelected', event => {
+				this._storeUserPhoto(event.file);
 			});
 		},
 
@@ -137,17 +140,7 @@
 					}
 
 					let file = files[0];
-					this._readAndResizeImage(file).then(imgDataUrl => {
-						this.imgData = {
-							imgUrl: imgDataUrl,
-							imgId: file.name,
-							authorName: 'You',
-							authorUsername: '',
-						};
-						this.render();
-						Store.set({ userPhoto: this.imgData });
-						Settings.set('wallpaperMode', 'user');
-					});
+					this._storeUserPhoto(file);
 				},
 			});
 		},
@@ -172,6 +165,20 @@
 			setTimeout(() => {
 				this.wallpaper.classList.add('wallpaper--ready');
 			}, 12);
+		},
+
+		_storeUserPhoto(file) {
+			this._readAndResizeImage(file).then(imgDataUrl => {
+				this.imgData = {
+					imgUrl: imgDataUrl,
+					imgId: file.name,
+					authorName: 'You',
+					authorUsername: '',
+				};
+				this.render();
+				Store.set({ userPhoto: this.imgData });
+				Settings.set('wallpaperMode', 'user');
+			});
 		},
 
 		_readAndResizeImage(file) {
