@@ -140,6 +140,7 @@
 					}
 
 					let file = files[0];
+					Settings.set('userPhotoName', file.name);
 					this._storeUserPhoto(file);
 				},
 			});

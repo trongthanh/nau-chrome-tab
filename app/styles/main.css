@@ -47,6 +47,12 @@ a:hover {
 	text-decoration-color: #977857;
 }
 
+[type="radio"],
+[type="check"],
+input + label {
+	cursor: pointer;
+}
+
 /**
  * Main container
  */
@@ -438,14 +444,40 @@ conflicting with the frosty glass effect*/
  */
 .settings__label {
 	display: inline-block;
-	margin-right: 2rem;
-	padding: 1rem 0;
+	margin-right: 1rem;
+	padding: 1rem 0.5rem;
 }
 
 [id='setting-wallpaper-mode-user']:checked ~ [id="setting-photo-selector"] {
-	display: block;
+	display: inline-block;
 }
 
+
+/**
+ * File input
+ */
+.file-input {
+	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 20rem;
+	text-overflow: ellipsis;
+	vertical-align: -13px;
+}
+
+.file-input:hover {
+	background-color: rgba(0,0,0,0.5);
+}
+
+.file-input > [type="file"] {
+	/*hide native input UI*/
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
 
 /**
  * Utilities

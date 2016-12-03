@@ -128,10 +128,11 @@ $.shallowEqual = function(a, b) {
 		init() {
 			// default
 			this._settings = {
-				wallpaperMode: 'unsplash'
+				wallpaperMode: 'unsplash', // unsplash or user
+				userPhotoName: '', // file name to display at file selector
 			};
 
-			return Store.get('settings').then(result => {
+			return Store.get(['settings']).then(result => {
 				console.log('setting resume', result);
 				this._settings = Object.assign(this._settings, result.settings);
 				this.initUI();
@@ -139,24 +140,34 @@ $.shallowEqual = function(a, b) {
 		},
 
 		initUI() {
-			// wallpaper modes
-			$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
-
 			$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
 				console.log('event.target.value', event.target.value);
 				this.set('wallpaperMode', event.target.value);
 			});
 
 			// file selector
-			$('#setting-photo-selector').addEventListener('change', (event) => {
+			$('#setting-photo-selector-input').addEventListener('change', (event) => {
 				console.log('file selector change:', event.target.files);
 				let file = event.target.files[0];
 				if (file.type.includes('image')) {
+					this.set('userPhotoName', file.name);
 					document._.fire('setting:userPhotoSelected', { file });
 				} else {
 					alert('Please select only file of type image (JPG, PNG)');
 				}
 			});
+
+			this.render();
+		},
+
+		render() {
+			// wallpaper modes
+			$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
+			if (this.get('userPhotoName')) {
+				$('#setting-photo-selector-label').textContent = this.get('userPhotoName');
+			} else {
+				$('#setting-photo-selector-label').textContent = 'Choose a file';
+			}
 		},
 
 		subscribe(key, handler) {
@@ -170,6 +181,7 @@ $.shallowEqual = function(a, b) {
 
 		set(key, value) {
 			this._settings[key] = value;
+			this.render();
 			this.save(key);
 		},
 
