@@ -1,8 +1,8 @@
 {
 	"name": "Nau Tab",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"manifest_version": 2,
-	"description": "Custom tab page landing for Chrome by Thanh Tran",
+	"description": "Beautiful new tab page for Chrome by Thanh Tran",
 	"icons": {
 		"16": "images/icon-16.png",
 		"48": "images/icon-48.png",
