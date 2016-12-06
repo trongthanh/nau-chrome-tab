@@ -14,6 +14,9 @@
 		// display quote
 		nau.quotes.init('#quotation');
 
+		// display quicklinks
+		nau.quicklinks.init('#quicklinks');
+
 		// render wallpaper last since this is heavy routine
 		nau.wallpaper.init('#wallpaper');
 	});

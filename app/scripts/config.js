@@ -130,6 +130,23 @@ $.shallowEqual = function(a, b) {
 			this._settings = {
 				wallpaperMode: 'unsplash', // unsplash or user
 				userPhotoName: '', // file name to display at file selector
+				activeQuicklinks: {
+					'gmail': true,
+					'gcalendar': false,
+					'gdrive': false,
+					'github': false,
+					'bitbucket': false,
+					'trello': false,
+					'facebook': true,
+					'twitter': false,
+					'gplus': false,
+					'tuoitre': false,
+					'vnexpress': true,
+					'thanhnien': false,
+					'gphotos': false,
+					'youtube': false,
+					'naujukebox': false,
+				}
 			};
 
 			return Store.get(['settings']).then(result => {
@@ -157,6 +174,14 @@ $.shallowEqual = function(a, b) {
 				}
 			});
 
+			$('#setting-quicklinks')._.delegate('change', '[type="checkbox"]', event => {
+				console.log('event.target', event.target, event.target.checked);
+				let input = event.target;
+				let ql = this.get('activeQuicklinks');
+				ql[input.dataset.linkId] = input.checked;
+				this.set('activeQuicklinks', ql);
+			});
+
 			this.render();
 		},
 
@@ -168,6 +193,13 @@ $.shallowEqual = function(a, b) {
 			} else {
 				$('#setting-photo-selector-label').textContent = 'Choose a file';
 			}
+
+			let ql = this.get('activeQuicklinks');
+			// console.log(ql);
+			$$('#setting-quicklinks [type="checkbox"]').forEach(input => {
+				input.checked = ql[input.dataset.linkId];
+				// console.log(input.dataset.linkId, ql[input.dataset.linkId]);
+			});
 		},
 
 		subscribe(key, handler) {

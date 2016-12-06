@@ -9,6 +9,7 @@ html {
 }
 
 body {
+	text-rendering: geometricPrecision; /*this will make thin font not being bolden by subpixel-antialias Chrome*/
 	-webkit-font-smoothing: antialiased;
 	margin: 0;
 	padding: 0;
@@ -49,8 +50,13 @@ a:hover {
 
 [type="radio"],
 [type="check"],
-input + label {
+input + label,
+.settings__label {
 	cursor: pointer;
+}
+
+fieldset {
+	margin-bottom: 1rem;
 }
 
 /**
@@ -90,7 +96,7 @@ input + label {
 
 .main__item--bottom-left {
 	position: absolute;
-	left: 2rem;
+	left: 1rem;
 	bottom: 2rem;
 	max-width: 25%;
 	padding-left: 4rem; /*reserve space for button*/
@@ -129,9 +135,7 @@ input + label {
  * Quick links
  */
 .quick-links {
-	display: flex;
-	list-style: none;
-	margin: -2rem;
+	margin: -3rem;
 	opacity: 0.5;
 	padding: 2rem 6rem 6rem 2rem;
 	-webkit-transition: opacity 200ms;
@@ -141,6 +145,18 @@ input + label {
 	.quick-links:hover {
 		opacity: 1;
 	}
+
+/* Brand logo */
+.brand-logo {
+	display: inline-block;
+}
+
+.quick-links__list {
+	display: inline-flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
 
 .quick-links__li {
 	flex: 0 1 auto;
@@ -353,6 +369,7 @@ input + label {
 	-moz-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
+	padding-top: 4.5rem; /*space for heading*/
 }
 
 .modal--show {
@@ -376,6 +393,7 @@ input + label {
 	background-position: center;
 	background-size: 100vw auto;
 	filter: blur(5px);
+	z-index: 0;
 }
 
 /* modal content styles */
@@ -384,14 +402,21 @@ input + label {
 	position: relative;
 	border-radius: 3px;
 	margin: 0 auto;
+	height: auto;
+    overflow: auto;
+    max-height: 70vh;
+    min-height: 40vh;
 }
 
 .modal__title {
 	margin: 0;
 	padding: 0.5em;
 	text-align: center;
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.8);
 	border-radius: 3px 3px 0 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
 }
 
 .modal__body {
@@ -462,7 +487,7 @@ conflicting with the frosty glass effect*/
 	overflow: hidden;
 	max-width: 20rem;
 	text-overflow: ellipsis;
-	vertical-align: -13px;
+	vertical-align: middle;
 }
 
 .file-input:hover {
