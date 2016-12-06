@@ -39,6 +39,9 @@ button:focus {
 a,
 a:visited {
 	color: white;
+	-webkit-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
 }
 
 a:hover {
@@ -477,6 +480,9 @@ conflicting with the frosty glass effect*/
 	display: inline-block;
 }
 
+.copyright .icon-btn {
+	padding: 0.5rem;
+}
 
 /**
  * File input
@@ -515,6 +521,9 @@ conflicting with the frosty glass effect*/
 	background: none;
 	color: white;
 	padding: 1rem;
+	-webkit-transition: color 200ms ease;
+	-o-transition: color 200ms ease;
+	transition: color 200ms ease;
 }
 
 .icon-btn:hover {
