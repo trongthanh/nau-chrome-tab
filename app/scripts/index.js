@@ -4,7 +4,7 @@
 (function() {
 	'use strict';
 	// make sure settings are get and ready first
-	nau.Settings.init().then(() => {
+	nau.Settings.init().then(settings => {
 		// start clock
 		nau.clock.init('#clock');
 

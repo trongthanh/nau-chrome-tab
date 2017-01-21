@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<title>^_^</title>
@@ -60,19 +60,31 @@
 		<!-- modal settings popup -->
 		<div class="modal modal--slide-up" id="settings-modal">
 			<div class="modal__background"></div>
-			<h3 class="modal__title">Settings</h3>
+			<h3 class="modal__title" i18n="settings">Settings</h3>
 			<button id="settings-close-btn" class="modal__close icon-btn mdi mdi--close"></button>
 			<div class="modal__content">
 				<form id="settings-panel" class="modal__body settings">
 					<fieldset>
-						<legend>Wallpaper Mode</legend>
+						<legend>Choose language / Chọn ngôn ngữ</legend>
+						<input id="setting-lang-en" type="radio" name="setting-language" value="en"><!--
+					--><label class="settings__label" for="setting-lang-en">
+							English
+						</label>
+
+						<input id="setting-lang-vi" type="radio" name="setting-language" value="vi"><!--
+					--><label class="settings__label" for="setting-lang-vi">
+							Tiếng Việt
+						</label>
+					</fieldset>
+					<fieldset>
+						<legend i18n="wallpaper_mode">Wallpaper Mode</legend>
 						<input id="setting-wallpaper-mode-unsplash" type="radio" name="setting-wallpaper-mode" value="unsplash"><!--
 					--><label class="settings__label" for="setting-wallpaper-mode-unsplash">
 							Unsplash
 						</label>
 
 						<input id="setting-wallpaper-mode-user" type="radio" name="setting-wallpaper-mode" value="user"><!--
-					--><label class="settings__label" for="setting-wallpaper-mode-user">
+					--><label class="settings__label" for="setting-wallpaper-mode-user" i18n="your_photo">
 							Your Photo
 						</label>
 
@@ -86,7 +98,7 @@
 
 					</fieldset>
 					<fieldset id="setting-quicklinks">
-						<legend>Quick Links</legend>
+						<legend i18n="quick_links">Quick Links</legend>
 						<label title="https://mail.google.com" class="settings__label" ><input type="checkbox" data-link-id="gmail"> <i class="mdi mdi--gmail"></i> GMail</label>
 						<label title="https://calendar.google.com" class="settings__label" ><input type="checkbox" data-link-id="gcalendar"> <i class="mdi mdi--calendar"></i> Google Calendar</label>
 						<label title="https://drive.google.com" class="settings__label" ><input type="checkbox" data-link-id="gdrive"> <i class="mdi mdi--google-drive"></i> Google Drive</label>
@@ -104,7 +116,7 @@
 						<label title="https://jukebox.naustud.io" class="settings__label" ><input type="checkbox" data-link-id="naujukebox"> <i class="mdi mdi--play"></i> Nau Jukebox</label>
 					</fieldset>
 					<div class="copyright">
-						<small>&copy; 2016 <a href="http://int3ractive.com">Thanh Tran</a>. Open source under Apache License v2.0.</small>
+						<small>&copy; 2016 <a href="http://int3ractive.com">Thanh Tran</a>. <span i18n="oss_notice">Open source under Apache License v2.0</span>.</small>
 						<a class="icon-btn" href="https://github.com/trongthanh/nau-chrome-tab" title="Source code on Github"><i class="mdi mdi--github-circle"></i></a><!--
 					 --><a class="icon-btn" href="https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en" title="Install this extension on Chrome Webstore"><i class="mdi mdi--google-chrome"></i></a>
 					</div>
@@ -116,10 +128,12 @@
 		<!-- build:js scripts/vendor.js -->
 		<script src="vendor/bliss.min.js"></script>
 		<script src="vendor/lockr.js"></script>
+		<script src="vendor/polyglot.min.js"></script>
 		<!-- endbuild -->
 
 		<!-- build:js scripts/index.js -->
 		<script src="scripts/config.js"></script>
+		<script src="scripts/i18n.js"></script>
 		<script src="scripts/fetch.js"></script>
 		<script src="scripts/wallpaper.js"></script>
 		<script src="scripts/clock.js"></script>

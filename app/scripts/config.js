@@ -128,6 +128,7 @@ $.shallowEqual = function(a, b) {
 		init() {
 			// default
 			this._settings = {
+				language: navigator.language.includes('vi') ? 'vi' : 'en',
 				wallpaperMode: 'unsplash', // unsplash or user
 				userPhotoName: '', // file name to display at file selector
 				activeQuicklinks: {
@@ -152,11 +153,29 @@ $.shallowEqual = function(a, b) {
 			return Store.get(['settings']).then(result => {
 				console.log('setting resume', result);
 				this._settings = Object.assign(this._settings, result.settings);
+
+				// init i18n first
+				nau.i18n.init(this._settings.language);
+
 				this.initUI();
+				// return whole settings object in resolve callback
+				return this._settings;
 			});
 		},
 
 		initUI() {
+			$$('[name="setting-language"]')._.addEventListener('change', event => {
+				console.log('event.target.value', event.target.value);
+				this.set('language', event.target.value);
+			});
+
+			// listen to language change event to rerender locale
+			this.subscribe('language', event => {
+				console.log('language settings changed', event.value);
+				nau.i18n.switchLocale(event.value);
+				this.renderLocale();
+			});
+
 			$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
 				console.log('event.target.value', event.target.value);
 				this.set('wallpaperMode', event.target.value);
@@ -186,12 +205,16 @@ $.shallowEqual = function(a, b) {
 		},
 
 		render() {
+			// language
+			$('#setting-lang-' + this.get('language')).checked = true;
+			this.renderLocale();
+
 			// wallpaper modes
 			$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
 			if (this.get('userPhotoName')) {
 				$('#setting-photo-selector-label').textContent = this.get('userPhotoName');
 			} else {
-				$('#setting-photo-selector-label').textContent = 'Choose a file';
+				$('#setting-photo-selector-label').textContent = nau.t('choose_file');
 			}
 
 			let ql = this.get('activeQuicklinks');
@@ -199,6 +222,17 @@ $.shallowEqual = function(a, b) {
 			$$('#setting-quicklinks [type="checkbox"]').forEach(input => {
 				input.checked = ql[input.dataset.linkId];
 				// console.log(input.dataset.linkId, ql[input.dataset.linkId]);
+			});
+		},
+
+		renderLocale() {
+			$('html').setAttribute('lang', this.get('language'));
+
+			// swap translate text content
+			$$('[i18n]').forEach(el => {
+				if (!el.hasAttribute('i18n-disabled') ) {
+					el.textContent = nau.t(el.getAttribute('i18n'));
+				}
 			});
 		},
 

@@ -6,7 +6,7 @@ module.exports = {
 	],
 	'rules': {
 		'block-scoped-var'            : 1,
-		'camelcase'                   : 2,
+		'camelcase'                   :[2, {'properties': 'never'}],
 		'comma-style'                 :[2, 'last' ],
 		'comma-dangle'                : 0, // We allow trailing commas in list for benefit of version control diff
 		'comma-spacing'               :[2, { 'before': false, 'after': true} ],
@@ -46,6 +46,8 @@ module.exports = {
 		// bliss globals
 		'$': false,
 		'$$': false,
+		// Polyglot intl lib
+		'Polyglot': false,
 		// our namespace
 		'nau': true,
 	},

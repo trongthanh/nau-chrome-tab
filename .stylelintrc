@@ -1,0 +1,27 @@
+{
+	"extends": "stylelint-config-standard",
+	"rules": {
+		"at-rule-empty-line-before": null,
+		"block-closing-brace-newline-after": ["always", {
+			"ignoreAtRules": ["if", "else"]
+		} ],
+		"block-closing-brace-space-before": null,
+		"color-named": "never",
+		"color-no-hex": true,
+		"declaration-block-no-duplicate-properties": true,
+		"declaration-block-semicolon-space-after": null,
+		"declaration-block-single-line-max-declarations": 3,
+		"declaration-colon-newline-after": null,
+		"indentation": "tab",
+		"max-empty-lines": 5,
+		"max-nesting-depth": 5,
+		"number-no-trailing-zeros": null,
+		"selector-class-pattern": "^[a-z]+(?:-[a-z0-9]+)*(?:__[a-z0-9\\-]+){0,2}(?:--[a-z0-9\\-]+)?$",
+		"selector-list-comma-newline-after": null,
+		"selector-no-id": true,
+		"shorthand-property-no-redundant-values": null,
+		"string-quotes": "single",
+		"stylelint-disable-reason": "always-after"
+	},
+	"ignoreFiles": ["src/styles/mui/**/**.scss", "src/styles/airbnb-calendar/**/**.scss", "src/styles/_normalize-5.0.0.scss", "src/styles/_react-big-calendar.scss"]
+}
