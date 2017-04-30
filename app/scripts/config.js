@@ -1,41 +1,9 @@
 /* © 2016 int3ractive.com
  * @author Thanh
  */
-/**
- * This is initial config and namespace for the page
- * @type {Object}
- */
-/*global Lockr:true*/
-
-//eslint-disable-next-line
-var nau = {
-	/**
-	 * Create a new module under this namespace, making it immutable to avoid writing by mistake
-	 * The module is accessible via normal object.property access
-	 * @param  {string} moduleName Name of the module.
-	 * @param  {*} value  Value of the module
-	 * @return {*}        The newly defined value / object
-	 */
-	define(moduleName, value) {
-		'use strict';
-		Object.defineProperty(this, moduleName, {
-			enumerable: true,
-			configurable: false,
-			writable: false,
-			value: value,
-		});
-
-		return this[moduleName];
-	}
-};
-
-// make the define method unwritable
-Object.defineProperty(nau, 'define', {
-	enumerable: true,
-	configurable: false,
-	writable: false,
-	value: nau.define,
-});
+import Lockr from 'lockr';
+import { i18n, t } from './i18n';
+import greeting from './greeting';
 
 /**
  * Quick and dirty method to compare 2 objects, with implicit conversion
@@ -45,217 +13,215 @@ Object.defineProperty(nau, 'define', {
  */
 /*eslint eqeqeq:0*/
 $.shallowEqual = function(a, b) {
-	'use strict';
-	let isEqual = a == b;
+	const isEqual = a == b;
 	if (isEqual) {
 		return true;
 	}
 
 	if (typeof a === 'object' && typeof b === 'object') {
-		let props = Object.keys(a).concat(Object.keys(b));
+		const props = Object.keys(a).concat(Object.keys(b));
 		// let's not worry prop duplication for now
 		return props.every(prop => a[prop] == b[prop]);
-	} else {
-		return false;
 	}
+	return false;
+
 };
 
-(function() {
-	'use strict';
-	let chromeStorage = null;
-	if ('chrome' in window) {
-		chromeStorage = chrome && chrome.storage && chrome.storage.local;
-	}
+let chromeStorage = null;
+if ('chrome' in window) {
+	chromeStorage = chrome && chrome.storage && chrome.storage.local;
+}
+/**
+ * Augment the global Lockr object or Chrome Storage object to our Store object
+ * Since the Chrome Storage object is asynchronous, we'll standardize our Store
+ * object with Promise approach
+ * and use Chrome Storage similar API
+ * @type {Object}
+ */
+export const Store = {
 	/**
-	 * Augment the global Lockr object or Chrome Storage object to our Store object
-	 * Since the Chrome Storage object is asynchronous, we'll standardize our Store object with Promise approach
-	 * and use Chrome Storage similar API
-	 * @type {Object}
+	 * set data object to local storage
+	 * @param {object} obj Object to save to local storage, data type
+	 * (string, number, boolean, Object, Array) is mantained
+	 * @return {object} the promise object which resolve when storing is done
 	 */
-	const Store = nau.define('Store', {
-		/**
-		 * set data object to local storage
-		 * @param {object} obj Object to save to local storage, data type (string, number, boolean, Object, Array) is mantained
-		 * @return {object} the promise object which resolve when storing is done
-		 */
-		set(obj) {
-			return new Promise((resolve, reject) => {
-				if (chromeStorage) {
-					chromeStorage.set(obj, () => {
-						resolve(obj);
-					});
-				} else {
-					Object.keys(obj)
-						.forEach(key => {
-							Lockr.set(key, obj[key]);
-						});
+	set(obj) {
+		return new Promise((resolve/*, reject*/) => {
+			if (chromeStorage) {
+				chromeStorage.set(obj, () => {
 					resolve(obj);
-				}
-			});
-		},
-
-		/**
-		 * get stored data
-		 * @param  {string|Array} keys key string or array of key string
-		 * @return {object} The result object
-		 */
-		get(keys) {
-			if (typeof keys === 'string') {
-				keys = [keys];
-			} else if (!Array.isArray(keys)) {
-				throw new Error('key must be either string or Array of key strings');
-			}
-
-			return new Promise((resolve, reject) => {
-				if (chromeStorage) {
-					chromeStorage.get(keys, (result) => {
-						resolve(result);
-					});
-				} else {
-					let result = {};
-					keys.forEach((key) => {
-						result[key] = Lockr.get(key);
-					});
-
-					resolve(result);
-				}
-			});
-		},
-	});
-
-	nau.define('Settings', {
-
-		init() {
-			// default
-			this._settings = {
-				language: navigator.language.includes('vi') ? 'vi' : 'en',
-				wallpaperMode: 'unsplash', // unsplash or user
-				userPhotoName: '', // file name to display at file selector
-				activeQuicklinks: {
-					'gmail': true,
-					'gcalendar': false,
-					'gdrive': false,
-					'github': false,
-					'bitbucket': false,
-					'trello': false,
-					'facebook': true,
-					'twitter': false,
-					'gplus': false,
-					'tuoitre': false,
-					'vnexpress': true,
-					'thanhnien': false,
-					'gphotos': false,
-					'youtube': false,
-					'naujukebox': false,
-				}
-			};
-
-			return Store.get(['settings']).then(result => {
-				console.log('setting resume', result);
-				this._settings = Object.assign(this._settings, result.settings);
-
-				// init i18n first
-				nau.i18n.init(this._settings.language);
-
-				this.initUI();
-				// return whole settings object in resolve callback
-				return this._settings;
-			});
-		},
-
-		initUI() {
-			$$('[name="setting-language"]')._.addEventListener('change', event => {
-				console.log('event.target.value', event.target.value);
-				this.set('language', event.target.value);
-			});
-
-			// listen to language change event to rerender locale
-			this.subscribe('language', event => {
-				console.log('language settings changed', event.value);
-				nau.i18n.switchLocale(event.value);
-				this.renderLocale();
-				nau.greeting.update();
-			});
-
-			$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
-				console.log('event.target.value', event.target.value);
-				this.set('wallpaperMode', event.target.value);
-			});
-
-			// file selector
-			$('#setting-photo-selector-input').addEventListener('change', (event) => {
-				console.log('file selector change:', event.target.files);
-				let file = event.target.files[0];
-				if (file.type.includes('image')) {
-					this.set('userPhotoName', file.name);
-					document._.fire('setting:userPhotoSelected', { file });
-				} else {
-					alert('Please select only file of type image (JPG, PNG)');
-				}
-			});
-
-			$('#setting-quicklinks')._.delegate('change', '[type="checkbox"]', event => {
-				console.log('event.target', event.target, event.target.checked);
-				let input = event.target;
-				let ql = this.get('activeQuicklinks');
-				ql[input.dataset.linkId] = input.checked;
-				this.set('activeQuicklinks', ql);
-			});
-
-			this.render();
-		},
-
-		render() {
-			// language
-			$('#setting-lang-' + this.get('language')).checked = true;
-			this.renderLocale();
-
-			// wallpaper modes
-			$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
-			if (this.get('userPhotoName')) {
-				$('#setting-photo-selector-label').textContent = this.get('userPhotoName');
+				});
 			} else {
-				$('#setting-photo-selector-label').textContent = nau.t('choose_file');
+				Object.keys(obj)
+					.forEach(key => {
+						Lockr.set(key, obj[key]);
+					});
+				resolve(obj);
 			}
+		});
+	},
 
-			let ql = this.get('activeQuicklinks');
-			// console.log(ql);
-			$$('#setting-quicklinks [type="checkbox"]').forEach(input => {
-				input.checked = ql[input.dataset.linkId];
-				// console.log(input.dataset.linkId, ql[input.dataset.linkId]);
-			});
-		},
-
-		renderLocale() {
-			$('html').setAttribute('lang', this.get('language'));
-
-			// swap translate text content
-			$$('[i18n]').forEach(el => {
-				if (!el.hasAttribute('i18n-disabled') ) {
-					el.textContent = nau.t(el.getAttribute('i18n'));
-				}
-			});
-		},
-
-		subscribe(key, handler) {
-			// we'll make use of DOM events for our custom events
-			document.addEventListener('setting:' + key, handler);
-		},
-
-		get(key) {
-			return this._settings[key];
-		},
-
-		set(key, value) {
-			this._settings[key] = value;
-			this.render();
-			this.save(key);
-		},
-
-		save(key) {
-			nau.Store.set({settings: this._settings}).then(() => {
-				document._.fire('setting:' + key, { value: this._settings[key]});
-			});
+	/**
+	 * get stored data
+	 * @param  {string|Array} keys key string or array of key string
+	 * @return {object} The result object
+	 */
+	get(keys) {
+		if (typeof keys === 'string') {
+			keys = [keys];
+		} else if (!Array.isArray(keys)) {
+			throw new Error('key must be either string or Array of key strings');
 		}
-	});
-}());
+
+		return new Promise((resolve/*, reject*/) => {
+			if (chromeStorage) {
+				chromeStorage.get(keys, (result) => {
+					resolve(result);
+				});
+			} else {
+				const result = {};
+				keys.forEach((key) => {
+					result[key] = Lockr.get(key);
+				});
+
+				resolve(result);
+			}
+		});
+	},
+};
+
+export const Settings = {
+
+	init() {
+		// default
+		this._settings = {
+			language: navigator.language.includes('vi') ? 'vi' : 'en',
+			wallpaperMode: 'unsplash', // unsplash or user
+			userPhotoName: '', // file name to display at file selector
+			activeQuicklinks: {
+				gmail: true,
+				gcalendar: false,
+				gdrive: false,
+				github: false,
+				bitbucket: false,
+				trello: false,
+				facebook: true,
+				twitter: false,
+				gplus: false,
+				tuoitre: false,
+				vnexpress: true,
+				thanhnien: false,
+				gphotos: false,
+				youtube: false,
+				naujukebox: false,
+			},
+		};
+
+		return Store.get(['settings']).then(result => {
+			console.log('setting resume', result);
+			this._settings = Object.assign(this._settings, result.settings);
+
+			// init i18n first
+			i18n.init(this._settings.language);
+
+			this.initUI();
+			// return whole settings object in resolve callback
+			return this._settings;
+		});
+	},
+
+	initUI() {
+		$$('[name="setting-language"]')._.addEventListener('change', event => {
+			console.log('event.target.value', event.target.value);
+			this.set('language', event.target.value);
+		});
+
+		// listen to language change event to rerender locale
+		this.subscribe('language', event => {
+			console.log('language settings changed', event.value);
+			i18n.switchLocale(event.value);
+			this.renderLocale();
+			greeting.update();
+		});
+
+		$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
+			console.log('event.target.value', event.target.value);
+			this.set('wallpaperMode', event.target.value);
+		});
+
+		// file selector
+		$('#setting-photo-selector-input').addEventListener('change', (event) => {
+			console.log('file selector change:', event.target.files);
+			const file = event.target.files[0];
+			if (file.type.includes('image')) {
+				this.set('userPhotoName', file.name);
+				document._.fire('setting:userPhotoSelected', { file });
+			} else {
+				alert('Please select only file of type image (JPG, PNG)');
+			}
+		});
+
+		$('#setting-quicklinks')._.delegate('change', '[type="checkbox"]', event => {
+			console.log('event.target', event.target, event.target.checked);
+			const input = event.target;
+			const ql = this.get('activeQuicklinks');
+			ql[input.dataset.linkId] = input.checked;
+			this.set('activeQuicklinks', ql);
+		});
+
+		this.render();
+	},
+
+	render() {
+		// language
+		$('#setting-lang-' + this.get('language')).checked = true;
+		this.renderLocale();
+
+		// wallpaper modes
+		$('#setting-wallpaper-mode-' + this.get('wallpaperMode')).checked = true;
+		if (this.get('userPhotoName')) {
+			$('#setting-photo-selector-label').textContent = this.get('userPhotoName');
+		} else {
+			$('#setting-photo-selector-label').textContent = t('choose_file');
+		}
+
+		const ql = this.get('activeQuicklinks');
+		// console.log(ql);
+		$$('#setting-quicklinks [type="checkbox"]').forEach(input => {
+			input.checked = ql[input.dataset.linkId];
+			// console.log(input.dataset.linkId, ql[input.dataset.linkId]);
+		});
+	},
+
+	renderLocale() {
+		$('html').setAttribute('lang', this.get('language'));
+
+		// swap translate text content
+		$$('[i18n]').forEach(el => {
+			if (!el.hasAttribute('i18n-disabled')) {
+				el.textContent = t(el.getAttribute('i18n'));
+			}
+		});
+	},
+
+	subscribe(key, handler) {
+		// we'll make use of DOM events for our custom events
+		document.addEventListener('setting:' + key, handler);
+	},
+
+	get(key) {
+		return this._settings[key];
+	},
+
+	set(key, value) {
+		this._settings[key] = value;
+		this.render();
+		this.save(key);
+	},
+
+	save(key) {
+		Store.set({ settings: this._settings }).then(() => {
+			document._.fire('setting:' + key, { value: this._settings[key] });
+		});
+	},
+};
