@@ -174,6 +174,7 @@ $.shallowEqual = function(a, b) {
 				console.log('language settings changed', event.value);
 				nau.i18n.switchLocale(event.value);
 				this.renderLocale();
+				nau.greeting.update();
 			});
 
 			$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {

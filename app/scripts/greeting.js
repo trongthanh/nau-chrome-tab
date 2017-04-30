@@ -25,15 +25,15 @@
 
 			if (hour < 12) {
 				// morning
-				greetText = 'Good morning';
+				greetText = nau.t('good_morning');
 			} else if (hour < 18) {
 				// afternoon
-				greetText = 'Good afternoon';
+				greetText = nau.t('good_afternoon');
 			} else if (hour < 22) {
 				// evening
-				greetText = 'Good evening';
+				greetText = nau.t('good_evening');
 			} else {
-				greetText = 'Please go to bed early';
+				greetText = nau.t('good_night');
 			}
 
 			this.greetText = greetText;
@@ -138,3 +138,4 @@
 	});
 
 }());
+
