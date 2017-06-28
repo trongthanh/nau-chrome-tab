@@ -6,7 +6,7 @@
  * The clock component
  * @type {Object}
  */
-export default {
+const Clock = {
 	init(selector) {
 		this.clock = $(selector);
 
@@ -50,3 +50,5 @@ export default {
 			`<span class="clock__hour">${hours}</span>:<span class="clock__minute">${minutes}</span>`;
 	},
 };
+
+export default Clock;

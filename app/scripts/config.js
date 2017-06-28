@@ -20,9 +20,11 @@ $.shallowEqual = function(a, b) {
 
 	if (typeof a === 'object' && typeof b === 'object') {
 		const props = Object.keys(a).concat(Object.keys(b));
+
 		// let's not worry prop duplication for now
 		return props.every(prop => a[prop] == b[prop]);
 	}
+
 	return false;
 
 };
@@ -31,6 +33,7 @@ let chromeStorage = null;
 if ('chrome' in window) {
 	chromeStorage = chrome && chrome.storage && chrome.storage.local;
 }
+
 /**
  * Augment the global Lockr object or Chrome Storage object to our Store object
  * Since the Chrome Storage object is asynchronous, we'll standardize our Store
@@ -125,6 +128,7 @@ export const Settings = {
 			i18n.init(this._settings.language);
 
 			this.initUI();
+
 			// return whole settings object in resolve callback
 			return this._settings;
 		});

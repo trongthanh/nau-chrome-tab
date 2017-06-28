@@ -10,7 +10,12 @@ module.exports = {
 		'no-underscore-dangle': 'off',
 		'no-param-reassign': 'off',
 		'prefer-spread': 'off',
-		'max-len': ['error', 120]
+		'max-len': ['error', 120],
+		'vars-on-top': 'off',
+		'strict': 'off',
+		'prefer-arrow-callback': 'off',
+		'no-alert': 'off',
+		'global-require': 'off',
 	},
 	'globals': {
 		'chrome': false,

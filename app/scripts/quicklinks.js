@@ -3,7 +3,7 @@
  */
 import { Settings } from './config';
 
-export default {
+const QuickLinks = {
 	init(selector) {
 		this.quicklinks = $$('.quick-links__li', $(selector));
 		// console.log(this.quicklinks);
@@ -30,3 +30,4 @@ export default {
 	},
 };
 
+export default QuickLinks;

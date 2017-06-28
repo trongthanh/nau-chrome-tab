@@ -4,6 +4,7 @@
 
 import { Store } from './config';
 import { t } from './i18n';
+
 /**
  * Name component
  * Subcomponent of greeting
@@ -65,6 +66,7 @@ const nameComponent = {
 		});
 
 		const self = this;
+
 		function nameInputSubmit(/*event*/) {
 			const newName = nameInput.value.trim();
 
@@ -97,7 +99,7 @@ const nameComponent = {
 	},
 };
 
-export default {
+const Greetings = {
 	init(selector) {
 		this.greeting = $(selector);
 		this.greetingTextEl = $('#greeting-text', this.greeting);
@@ -136,3 +138,5 @@ export default {
 		this.greetingTextEl.textContent = this.greetText;
 	},
 };
+
+export default Greetings;

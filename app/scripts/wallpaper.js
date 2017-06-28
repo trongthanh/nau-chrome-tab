@@ -1,7 +1,6 @@
 /* © 2016 int3ractive.com
  * @author Thanh
  */
-
 import { Store, Settings } from './config';
 import { fetchUnsplash } from './fetch';
 
@@ -14,7 +13,7 @@ const defaultPhoto = {
 	authorUsername: '',
 };
 
-export default {
+const Wallpaper = {
 	init(selector) {
 		this.wallpaper = $(selector);
 		const wallpaperMode = this.currentMode = Settings.get('wallpaperMode');
@@ -210,3 +209,5 @@ export default {
 		});
 	},
 };
+
+export default Wallpaper;

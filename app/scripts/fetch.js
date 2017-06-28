@@ -16,6 +16,7 @@ function queryString(params) {
 			if (Array.isArray(val)) {
 				val = val.join(',');
 			}
+
 			return encodeURIComponent(k) + '=' + encodeURIComponent(val);
 		})
 		.join('&');
@@ -63,10 +64,12 @@ export function fetchUnsplash(options) {
 		if (response.ok) {
 			return response.json(); // result will be JSON object
 		}
+
 		return response.json(); // Even response is 4**, we still receive json object describe error
 
 	}).catch(err => {
 		console.log('Errors:', err);
+
 		return err;
 	});
 }

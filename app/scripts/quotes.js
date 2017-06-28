@@ -4,7 +4,7 @@
 /*eslint-disable no-use-before-define, max-len*/
 import { Settings } from './config';
 
-export default {
+const Quotes = {
 	init(selector) {
 		this.quotation = $(selector);
 		this.quoteEl = $('.quotes__text', this.quotation);
@@ -26,9 +26,12 @@ export default {
 		const quoteList = Settings.get('language') === 'vi' ? quotesVI : quotesEN;
 
 		const randomQuote = Math.floor(Math.random() * quoteList.length);
+
 		return quoteList[randomQuote];
 	},
 };
+
+export default Quotes;
 
 // Most of the quotations are from Momentum
 const quotesEN = [
