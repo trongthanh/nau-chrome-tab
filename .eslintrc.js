@@ -1,4 +1,5 @@
 // Nau standard eslint rules, save it as .eslintrc.js
+/* eslint-disable quote-props */
 module.exports = {
 	'root': true,
 	'extends': [
@@ -10,7 +11,7 @@ module.exports = {
 		'no-underscore-dangle': 'off',
 		'no-param-reassign': 'off',
 		'prefer-spread': 'off',
-		'max-len': ['error', 120],
+		'max-len': 'off',
 		'vars-on-top': 'off',
 		'strict': 'off',
 		'prefer-arrow-callback': 'off',
@@ -18,7 +19,7 @@ module.exports = {
 		'global-require': 'off',
 	},
 	'globals': {
-		'chrome': false,
+		'browser': false,
 		// bliss globals
 		'$': false,
 		'$$': false,
@@ -37,7 +38,7 @@ module.exports = {
 			'impliedStrict': false,
 			// 'jsx': true,
 			// 'classes': true,
-		}
+		},
 	},
 	'plugins': [
 		'import',
@@ -47,8 +48,8 @@ module.exports = {
 	'settings': {
 		'import/resolver': {
 			'webpack': {
-				'config': 'webpack.config.js'
-			}
-		}
-	}
+				'config': 'webpack.config.js',
+			},
+		},
+	},
 };

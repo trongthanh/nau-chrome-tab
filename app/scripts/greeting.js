@@ -2,7 +2,7 @@
  * @author Thanh
  */
 
-import { Store } from './config';
+import { Store, Settings } from './config';
 import { t } from './i18n';
 
 /**
@@ -107,6 +107,11 @@ const Greetings = {
 		// sub component
 		this.Name = nameComponent;
 		this.Name.init('#greeting-name', this.greeting);
+
+		// watch for language change
+		Settings.subscribe('language', () => {
+			this.update();
+		});
 
 		this.update();
 	},

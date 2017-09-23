@@ -33,6 +33,7 @@ const messages = {
 };
 
 let polyglot;
+
 /**
  * The i18n object for system to manage translations
  */

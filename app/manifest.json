@@ -1,8 +1,11 @@
 {
-	"name": "Nau Tab",
-	"version": "2.0.0",
 	"manifest_version": 2,
-	"description": "Beautiful new tab page for Chrome by Thanh Tran",
+
+	"name": "Nau Tab",
+	"author": "Thanh Tran <trongthanh@gmail.com>",
+	"version": "2.0.0",
+	"description": "Beautiful new tab page for modern browsers",
+
 	"icons": {
 		"16": "images/icon-16.png",
 		"48": "images/icon-48.png",
@@ -11,15 +14,14 @@
 	"default_locale": "en",
 	"background": {
 		"scripts": [
-			"scripts/chromereload.js",
-			"scripts/background.js"
+			"js/chromereload.js",
+			"js/background.js"
 		]
 	},
 	"permissions": [
 		"bookmarks",
 		"topSites",
 		"storage",
-		"unlimitedStorage",
 		"webNavigation",
 		"webRequest"
 	],

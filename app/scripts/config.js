@@ -3,7 +3,9 @@
  */
 import Lockr from 'lockr';
 import { i18n, t } from './i18n';
-import greeting from './greeting';
+
+// universal Web Extension API
+window.browser = window.msBrowser || window.browser || window.chrome;
 
 /**
  * Quick and dirty method to compare 2 objects, with implicit conversion
@@ -29,9 +31,9 @@ $.shallowEqual = function(a, b) {
 
 };
 
-let chromeStorage = null;
-if ('chrome' in window) {
-	chromeStorage = chrome && chrome.storage && chrome.storage.local;
+let webStorage = null;
+if ('browser' in window) {
+	webStorage = browser && browser.storage && browser.storage.local;
 }
 
 /**
@@ -50,8 +52,8 @@ export const Store = {
 	 */
 	set(obj) {
 		return new Promise((resolve/*, reject*/) => {
-			if (chromeStorage) {
-				chromeStorage.set(obj, () => {
+			if (webStorage) {
+				webStorage.set(obj, () => {
 					resolve(obj);
 				});
 			} else {
@@ -77,8 +79,8 @@ export const Store = {
 		}
 
 		return new Promise((resolve/*, reject*/) => {
-			if (chromeStorage) {
-				chromeStorage.get(keys, (result) => {
+			if (webStorage) {
+				webStorage.get(keys, (result) => {
 					resolve(result);
 				});
 			} else {
@@ -145,7 +147,6 @@ export const Settings = {
 			console.log('language settings changed', event.value);
 			i18n.switchLocale(event.value);
 			this.renderLocale();
-			greeting.update();
 		});
 
 		$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
@@ -208,6 +209,21 @@ export const Settings = {
 		});
 	},
 
+	/**
+	 * Subscribe to a change in settings
+	 * @param  {string} key     Name of settings / key in store
+	 * @param  {Function} handler Call back function
+	 * @return {void}
+	 * @example
+	 * ```js
+	 * import { Settings } from './config';
+	 *
+	 * Settings.subscribe('language', event => {
+	 * 	console.log('New language', event.value);
+	 * 	this.update();
+	 * });
+	 * ```
+	 */
 	subscribe(key, handler) {
 		// we'll make use of DOM events for our custom events
 		document.addEventListener('setting:' + key, handler);
