@@ -7,10 +7,10 @@ import { fetchUnsplash } from './fetch';
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
 const defaultPhoto = {
-	imgUrl: 'images/bg-default.jpg',
-	imgId: '',
-	authorName: 'ChromeOS',
-	authorUsername: '',
+	imgUrl: 'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
+	imgId: 'gzeUpbjoTUA',
+	authorName: 'Hoach Le Dinh',
+	authorUsername: '@hoachld',
 };
 
 const Wallpaper = {
