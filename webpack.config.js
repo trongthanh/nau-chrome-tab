@@ -1,6 +1,7 @@
 /* © 2017 int3ractive.com
  * @author Thanh Tran
  */
+/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const webpack = require('webpack');
 
@@ -43,6 +44,7 @@ const config = {
 if (TARGET === 'build') {
 	// production
 	Object.assign(config, {
+		devtool: 'source-map',
 	});
 } else {
 	// dev

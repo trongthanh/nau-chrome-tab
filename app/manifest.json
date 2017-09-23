@@ -2,9 +2,15 @@
 	"manifest_version": 2,
 
 	"name": "Nau Tab",
-	"author": "Thanh Tran <trongthanh@gmail.com>",
-	"version": "2.0.0",
+	"author": "Thanh Tran",
+	"version": "2.5.0",
 	"description": "Beautiful new tab page for modern browsers",
+	"applications": {
+		"gecko": {
+			"id": "nau-tab@int3ractive.com",
+			"strict_min_version": "45.0"
+		}
+	},
 
 	"icons": {
 		"16": "images/icon-16.png",
@@ -28,6 +34,9 @@
 	"options_ui": {
 		"page": "options.html",
 		"chrome_style": false
+	},
+	"chrome_settings_overrides" : {
+		"homepage": "index.html"
 	},
 	"chrome_url_overrides" : {
 		"newtab": "index.html"
