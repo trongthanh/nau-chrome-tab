@@ -23,11 +23,11 @@ No compilation process involved, so the browsers need to support basic ES6 synta
 
 ### Minimum supported browser:
 
-- Chrome 42
-- Opera 29
-- Edge 14 (as home page)
-- Firefox 40 (as home page)
-- Safari 10.1 (as home page)
+- Chrome 42 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
+- Opera 29 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
+- Firefox 45 (get the installable .xpi files [here](https://github.com/trongthanh/nau-chrome-tab/releases).)
+- Edge 14 (as home page, point to [here](https://naustud.io/start/))
+- Safari 10.1 (as home page, point to [here](https://naustud.io/start/))
 
 ### Build and Package
 

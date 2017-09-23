@@ -3,7 +3,7 @@
 
 	"name": "Nau Tab",
 	"author": "Thanh Tran",
-	"version": "2.5.0",
+	"version": "2.5.1",
 	"description": "Beautiful new tab page for modern browsers",
 	"applications": {
 		"gecko": {
