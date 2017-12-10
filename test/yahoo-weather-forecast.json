@@ -1,0 +1,176 @@
+{
+ "query": {
+  "count": 1,
+  "created": "2017-07-14T16:52:51Z",
+  "lang": "en-US",
+  "diagnostics": {
+   "publiclyCallable": "true",
+   "url": [
+    {
+     "execution-start-time": "1",
+     "execution-stop-time": "6",
+     "execution-time": "5",
+     "content": "http://unifiedgeo.geotech.yahoo.com:4080/geo/v1/geocode?q=%2810.836319999999999%2C%20106.6453224%29&start=0&size=10&optionalfields=woe.ancestors&minconfidence=0.0001"
+    },
+    {
+     "execution-start-time": "8",
+     "execution-stop-time": "13",
+     "execution-time": "5",
+     "content": "http://weather-ydn-yql.media.yahoo.com:4080/v3/public/weather/rss?u=c&w=12522956"
+    }
+   ],
+   "javascript": {
+    "execution-start-time": "0",
+    "execution-stop-time": "8",
+    "execution-time": "7",
+    "instructions-used": "16696",
+    "table-name": "geo.places"
+   },
+   "user-time": "14",
+   "service-time": "10",
+   "build-version": "2.0.149"
+  },
+  "results": {
+   "channel": {
+    "units": {
+     "distance": "km",
+     "pressure": "mb",
+     "speed": "km/h",
+     "temperature": "C"
+    },
+    "title": "Yahoo! Weather - Ho Chi Minh City, Ho Chi Minh, VN",
+    "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-12522956/",
+    "description": "Yahoo! Weather for Ho Chi Minh City, Ho Chi Minh, VN",
+    "language": "en-us",
+    "lastBuildDate": "Fri, 14 Jul 2017 11:52 PM ICT",
+    "ttl": "60",
+    "location": {
+     "city": "Ho Chi Minh City",
+     "country": "Vietnam",
+     "region": " Ho Chi Minh"
+    },
+    "wind": {
+     "chill": "79",
+     "direction": "248",
+     "speed": "17.70"
+    },
+    "atmosphere": {
+     "humidity": "82",
+     "pressure": "34202.54",
+     "rising": "0",
+     "visibility": "25.91"
+    },
+    "astronomy": {
+     "sunrise": "5:38 am",
+     "sunset": "6:20 pm"
+    },
+    "image": {
+     "title": "Yahoo! Weather",
+     "width": "142",
+     "height": "18",
+     "link": "http://weather.yahoo.com",
+     "url": "http://l.yimg.com/a/i/brand/purplelogo//uh/us/news-wea.gif"
+    },
+    "item": {
+     "title": "Conditions for Ho Chi Minh City, Ho Chi Minh, VN at 11:00 PM ICT",
+     "lat": "10.82155",
+     "long": "106.653381",
+     "link": "http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-12522956/",
+     "pubDate": "Fri, 14 Jul 2017 11:00 PM ICT",
+     "condition": {
+      "code": "26",
+      "date": "Fri, 14 Jul 2017 11:00 PM ICT",
+      "temp": "26",
+      "text": "Cloudy"
+     },
+     "forecast": [
+      {
+       "code": "4",
+       "date": "14 Jul 2017",
+       "day": "Fri",
+       "high": "30",
+       "low": "25",
+       "text": "Thunderstorms"
+      },
+      {
+       "code": "4",
+       "date": "15 Jul 2017",
+       "day": "Sat",
+       "high": "30",
+       "low": "25",
+       "text": "Thunderstorms"
+      },
+      {
+       "code": "47",
+       "date": "16 Jul 2017",
+       "day": "Sun",
+       "high": "29",
+       "low": "24",
+       "text": "Scattered Thunderstorms"
+      },
+      {
+       "code": "47",
+       "date": "17 Jul 2017",
+       "day": "Mon",
+       "high": "29",
+       "low": "24",
+       "text": "Scattered Thunderstorms"
+      },
+      {
+       "code": "4",
+       "date": "18 Jul 2017",
+       "day": "Tue",
+       "high": "27",
+       "low": "23",
+       "text": "Thunderstorms"
+      },
+      {
+       "code": "47",
+       "date": "19 Jul 2017",
+       "day": "Wed",
+       "high": "28",
+       "low": "23",
+       "text": "Scattered Thunderstorms"
+      },
+      {
+       "code": "47",
+       "date": "20 Jul 2017",
+       "day": "Thu",
+       "high": "27",
+       "low": "24",
+       "text": "Scattered Thunderstorms"
+      },
+      {
+       "code": "4",
+       "date": "21 Jul 2017",
+       "day": "Fri",
+       "high": "30",
+       "low": "24",
+       "text": "Thunderstorms"
+      },
+      {
+       "code": "4",
+       "date": "22 Jul 2017",
+       "day": "Sat",
+       "high": "30",
+       "low": "25",
+       "text": "Thunderstorms"
+      },
+      {
+       "code": "4",
+       "date": "23 Jul 2017",
+       "day": "Sun",
+       "high": "29",
+       "low": "25",
+       "text": "Thunderstorms"
+      }
+     ],
+     "description": "<![CDATA[<img src=\"http://l.yimg.com/a/i/us/we/52/26.gif\"/>\n<BR />\n<b>Current Conditions:</b>\n<BR />Cloudy\n<BR />\n<BR />\n<b>Forecast:</b>\n<BR /> Fri - Thunderstorms. High: 30Low: 25\n<BR /> Sat - Thunderstorms. High: 30Low: 25\n<BR /> Sun - Scattered Thunderstorms. High: 29Low: 24\n<BR /> Mon - Scattered Thunderstorms. High: 29Low: 24\n<BR /> Tue - Thunderstorms. High: 27Low: 23\n<BR />\n<BR />\n<a href=\"http://us.rd.yahoo.com/dailynews/rss/weather/Country__Country/*https://weather.yahoo.com/country/state/city-12522956/\">Full Forecast at Yahoo! Weather</a>\n<BR />\n<BR />\n(provided by <a href=\"http://www.weather.com\" >The Weather Channel</a>)\n<BR />\n]]>",
+     "guid": {
+      "isPermaLink": "false"
+     }
+    }
+   }
+  }
+ }
+}

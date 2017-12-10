@@ -1,0 +1,49 @@
+[<= 10h, first impression after 3h, last impression 1hr ago]
+Good morning
+
+[<= 18h, first impression after 12h, last impression 1hr ago]
+Good afternoon
+
+[<= 22h, first impression after 18h, last impression 1hr ago]
+Good evening
+
+
+
+[any time, change every 20 minutes]
+please take a moment to text back your friends
+please send a message to a friend
+take a quick break to respond to messages from your friends please
+
+# micro-exercises
+please remember to rest your eyes and look at the sky
+dont forget to move around and stretch please
+take a quick second to rest your eyes please
+please check your posture
+dont forget to breathe please
+please dont forget to take a quick moment to adjust your posture
+please remember to wiggle your fingers
+please dont forget to look at some nature and rest your eyes
+remember to let your eyes rest and look at the ceiling please
+dont forget to look away from your screen please
+
+# skin care
+remember to take a little bit of time to moisturize please
+
+# energy
+remember to eat something please
+please remember to eat something nutritious
+it's ok to drink soft drink sometimes if you need to boost energy
+eat
+
+# water
+go get a sip of water please
+please remember to take a little bit of time to have some water
+please remember to drink some water
+
+# mental
+play some of your favorite music please
+please remember to take a quick break to listen to some music that helps inspire you
+please take a quick moment to get some fresh air
+please dont forget to take a second to get some fresh air
+don't forget to say 'I Love You' to your loved ones
+take a quick moment and text 'I love you' to your loved ones

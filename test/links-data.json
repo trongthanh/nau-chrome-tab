@@ -1,0 +1,80 @@
+[
+	{
+		"url": "https://mail.google.com",
+		"className":"quick-links__link mdi mdi--gmail",
+		"title": "GMail"
+	},
+	{
+		"url": "https://calendar.google.com",
+		"className":"quick-links__link mdi mdi--calendar",
+		"title": "Google Calendar"
+	},
+	{
+		"url": "https://drive.google.com",
+		"className":"quick-links__link mdi mdi--google-drive",
+		"title": "Google Drive"
+	},
+	{
+		"url": "https://github.com/naustudio",
+		"className":"quick-links__link mdi mdi--github-circle",
+		"title": "Github"
+	},
+	{
+		"url": "https://bitbucket.org/naustudio",
+		"className":"quick-links__link mdi mdi--bitbucket",
+		"title": "Bitbucket"
+	},
+	{
+		"url": "https://trello.com/naustudio",
+		"className":"quick-links__link mdi mdi--trello",
+		"title": "Trello"
+	},
+	{
+		"url": "https://facebook.com",
+		"className":"quick-links__link mdi mdi--facebook",
+		"title": "Facebook"
+	},
+	{
+		"url": "https://twitter.com",
+		"className":"quick-links__link mdi mdi--twitter",
+		"title": "Twitter"
+	},
+	{
+		"url": "https://plus.google.com",
+		"className":"quick-links__link mdi mdi--google-plus",
+		"title": "Google +"
+	},
+	{
+		"url": "http://tuoitre.vn",
+		"className":"quick-links__link quick-links__link--fw",
+		"initials": "tt",
+		"title": "Tuoitre.vn"
+	},
+	{
+		"url": "http://vnexpress.net/",
+		"className":"quick-links__link quick-links__link--fw",
+		"initials": "vE",
+		"title": "VNExpress"
+	},
+	{
+		"url": "http://thanhnien.vn/",
+		"className":"quick-links__link quick-links__link--fw",
+		"initials": "Tn",
+		"title": "Thanhnien.vn"
+	},
+	{
+		"url": "https://photos.google.com",
+		"className":"quick-links__link mdi mdi--image",
+		"title": "Google Photos"
+	},
+	{
+		"url": "https://youtube.com",
+		"className":"quick-links__link mdi mdi--youtube-play",
+		"title": "Youtube"
+	},
+	{
+		"url": "https://jukebox.naustud.io",
+		"className":"quick-links__link mdi mdi--play",
+		"title": "Nau Jukebox"
+	}
+]
