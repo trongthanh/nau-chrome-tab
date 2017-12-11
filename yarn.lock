@@ -2393,6 +2393,13 @@ eslint-plugin-import@^2.7.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
+eslint-plugin-vue@^4.0.0-beta.2:
+  version "4.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.0.0-beta.2.tgz#f599dc6193c3fdaac314633b4eb777b4148cd787"
+  dependencies:
+    requireindex "^1.1.0"
+    vue-eslint-parser "^2.0.1-beta.1"
+
 eslint-scope@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
@@ -3811,6 +3818,10 @@ jest-jasmine2@^21.2.1:
     jest-snapshot "^21.2.1"
     p-cancelable "^0.3.0"
 
+jest-localstorage-mock@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.1.0.tgz#6626a570d6b47c155762dc05523616f7bcedeca2"
+
 jest-matcher-utils@^21.2.1:
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-21.2.1.tgz#72c826eaba41a093ac2b4565f865eb8475de0f64"
@@ -4156,6 +4167,10 @@ locate-path@^2.0.0:
   dependencies:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
+
+lockr@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/lockr/-/lockr-0.8.4.tgz#7614f9c7c98a60bc4ac45f44567d1d03d8fb493c"
 
 lodash._baseget@^3.0.0:
   version "3.7.2"
@@ -5808,6 +5823,10 @@ require-uncached@^1.0.3:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
+requireindex@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+
 requires-port@1.0.x, requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -6783,6 +6802,16 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vue-eslint-parser@^2.0.1-beta.1:
+  version "2.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.1-beta.2.tgz#82e5130ac18ae4b0c894a7c831b55ec92478fa2f"
+  dependencies:
+    debug "^3.1.0"
+    eslint-scope "^3.7.1"
+    espree "^3.5.1"
+    esquery "^1.0.0"
+    lodash "^4.17.4"
 
 vue-hot-reload-api@^2.2.0:
   version "2.2.4"

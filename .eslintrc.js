@@ -2,7 +2,7 @@
 /* eslint-disable quote-props */
 module.exports = {
 	root: true,
-	extends: ['nau'],
+	extends: ['nau', 'plugin:vue/recommended'],
 	rules: {
 		'prefer-template': 'off',
 		'spaced-comment': 'off',
@@ -15,6 +15,7 @@ module.exports = {
 		'prefer-arrow-callback': 'off',
 		'no-alert': 'off',
 		'global-require': 'off',
+		'import/prefer-default-export': 'off',
 		// don't require .vue extension when importing
 		'import/extensions': [
 			'error',
@@ -45,8 +46,8 @@ module.exports = {
 		es6: true,
 		mocha: true,
 	},
-	parser: 'babel-eslint',
 	parserOptions: {
+		parser: 'babel-eslint',
 		ecmaVersion: 6,
 		sourceType: 'module',
 		ecmaFeatures: {
@@ -55,12 +56,7 @@ module.exports = {
 			// 'classes': true,
 		},
 	},
-	plugins: [
-		'import',
-		'html',
-		// react (install eslint-plugin-react)
-		// babel (install eslint-plugin-babel)
-	],
+	plugins: ['import', 'html'],
 	settings: {
 		'import/resolver': {
 			webpack: {
