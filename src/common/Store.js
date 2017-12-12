@@ -32,10 +32,10 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		return PersistStorage.get(['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto']).then(result => {
-			console.log('setting resume', result);
+		return PersistStorage.get(['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto']).then(result => {
+			// console.log('setting resume', result);
 			this.states = Object.assign(this.states, result);
-			dispatchEvent('statechange:all', this.states);
+			this._dispatchEvent('statechange:all', this.states);
 
 			// return whole states object in resolve callback
 			return this.states;
@@ -52,7 +52,7 @@ const Store = {
 	 * import { Store } from './config';
 	 *
 	 * Store.subscribe('language', event => {
-	 * 	console.log('New language', event.value);
+	 * 	console.log('New language', event.language);
 	 * 	this.update();
 	 * });
 	 * ```
