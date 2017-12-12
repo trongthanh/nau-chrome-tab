@@ -16,19 +16,6 @@ import Store from '../common/Store';
 
 export default {
 	name: 'PhotoCredit',
-	data() {
-		return {
-			imgData: {
-				imgUrl: '',
-				imgId: '',
-				authorName: '',
-				authorUsername: '',
-			},
-		};
-	},
-
-	created() {
-		// this.imgData = { ...Store.get('currentPhoto') };
-	},
+	props: ['imgData'],
 };
 </script>

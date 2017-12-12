@@ -32,8 +32,16 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		return PersistStorage.get(['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto']).then(result => {
-			// console.log('setting resume', result);
+		const keys = ['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto'];
+
+		return PersistStorage.get(keys).then(result => {
+			console.log('rehydrate result', result);
+			keys.forEach(key => {
+				// remove undefined stored data
+				if (result[key] === undefined) {
+					delete result[key];
+				}
+			});
 			this.states = Object.assign(this.states, result);
 			this._dispatchEvent('statechange:all', this.states);
 
@@ -66,9 +74,25 @@ const Store = {
 		return this.states[key];
 	},
 
+	/**
+	 * Set the state
+	 *
+	 * Input can be key-value params pair or a state object
+	 *
+	 * @param {*} key
+	 * @param {*} value
+	 */
 	set(key, value) {
-		this.states[key] = value;
-		this.save(key);
+		let obj = key;
+
+		if (typeof key === 'string' && value != null) {
+			obj = { [key]: value };
+		}
+
+		Object.keys(obj).forEach(stateName => {
+			this.states[stateName] = obj[stateName];
+			this.save(stateName);
+		});
 	},
 
 	save(key) {
