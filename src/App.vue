@@ -25,7 +25,7 @@
 			<div>Weather info</div>
 		</div>
 		<div class="main__item main__item--center">
-			<div id="clock" class="clock">23:40</div>
+			<Clock />
 			<h1 id="greeting" class="greeting">
 				<span id="greeting-text">How's your day</span>,
 				<div id="greeting-name" class="greeting__name">
@@ -56,6 +56,7 @@ import Store from './common/Store';
 import Wallpaper from './components/Wallpaper';
 import PhotoCredit from './components/PhotoCredit';
 import Quote from './components/Quote';
+import Clock from './components/Clock';
 
 export default {
 	name: 'app',
@@ -64,6 +65,7 @@ export default {
 		Wallpaper,
 		PhotoCredit,
 		Quote,
+		Clock,
 	},
 	data() {
 		return {

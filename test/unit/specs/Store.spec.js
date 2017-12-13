@@ -30,6 +30,7 @@ const mockStates = {
 			gmail: true, gcalendar: true, gdrive: true, github: true, bitbucket: true, trello: true, facebook: true, twitter: false, gplus: false, tuoitre: true, vnexpress: false, thanhnien: false, gphotos: false, youtube: false, naujukebox: false,
 		},
 	},
+	currentTime: { hours: 0, minutes: 0 },
 };
 
 describe('Store defaults', () => {

@@ -26,7 +26,12 @@ const Store = {
 				gmail: true, gcalendar: false, gdrive: false, github: false, bitbucket: false, trello: false, facebook: true, twitter: false, gplus: false, tuoitre: false, vnexpress: true, thanhnien: false, gphotos: false, youtube: false, naujukebox: false,
 			},
 		},
+
+		// run-time state, won't be saved
+		currentTime: { hours: 0, minutes: 0 },
 	},
+
+	nosave: ['currentTime'],
 
 	/**
 	 * Rehydrate states from persist storage to running store
@@ -36,7 +41,7 @@ const Store = {
 		const keys = ['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto'];
 
 		return PersistStorage.get(keys).then(result => {
-			console.log('rehydrate result', result);
+			// console.log('rehydrate result', result);
 			keys.forEach(key => {
 				// remove undefined stored data
 				if (result[key] === undefined) {
@@ -97,9 +102,11 @@ const Store = {
 	},
 
 	save(key) {
-		PersistStorage.set({ [key]: this.states[key] }).then(() => {
-			this._dispatchEvent('statechange:' + key, { [key]: this.states[key] });
-		});
+		if (!this.nosave.includes(key)) {
+			PersistStorage.set({ [key]: this.states[key] }).then(() => {
+				this._dispatchEvent('statechange:' + key, { [key]: this.states[key] });
+			});
+		}
 	},
 
 	/**
