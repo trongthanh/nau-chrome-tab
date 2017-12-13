@@ -34,10 +34,7 @@
 				</div>
 			</h1>
 		</div>
-		<div id="quotation" class="main__item main__item--bottom quotes">
-			<p class="quotes__text">I dream, therefore, I become!</p>
-			<p class="quotes__author"></p>
-		</div>
+		<Quote :lang="lang" />
 		<div class="main__item main__item--bottom-left">
 			<button id="settings-btn" class="setting-btn icon-btn mdi mdi--settings" type="button"></button>
 			<PhotoCredit :imgData="currentPhoto" />
@@ -58,6 +55,7 @@ import Store from './common/Store';
 // import Settings from './components/Settings';
 import Wallpaper from './components/Wallpaper';
 import PhotoCredit from './components/PhotoCredit';
+import Quote from './components/Quote';
 
 export default {
 	name: 'app',
@@ -65,15 +63,22 @@ export default {
 		// Settings,
 		Wallpaper,
 		PhotoCredit,
+		Quote,
 	},
 	data() {
 		return {
 			currentPhoto: Store.get('currentPhoto'),
+			lang: Store.get('settings').language,
 		};
 	},
 	created() {
 		Store.subscribe('currentPhoto', event => {
-			this.currentPhoto = Store.get('currentPhoto');
+			this.currentPhoto = event.currentPhoto;
+		});
+		Store.subscribe('settings', event => {
+			if (this.lang !== event.settings.language) {
+				this.lang = event.settings.language;
+			}
 		});
 	},
 };

@@ -102,6 +102,7 @@ export default {
 	},
 };
 
+// Legacy code:
 const Wallpaper = {
 	init(selector) {
 		this.wallpaper = $(selector);

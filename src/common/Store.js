@@ -17,6 +17,7 @@ const Store = {
 		},
 		userPhoto: '',
 		settings: {
+			// these properties must be inside 'settings' due to legacy versions used them
 			language: navigator.language.includes('vi') ? 'vi' : 'en',
 			wallpaperMode: 'unsplash', // unsplash or user
 			userPhotoName: '', // file name to display at file selector
