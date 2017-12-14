@@ -34,7 +34,7 @@
 				</div>
 			</h1>
 		</div>
-		<Quote :lang="lang" />
+		<Quote :quote="quote" />
 		<div class="main__item main__item--bottom-left">
 			<button id="settings-btn" class="setting-btn icon-btn mdi mdi--settings" type="button"></button>
 			<PhotoCredit :imgData="currentPhoto" />
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { enQuotes, viQuotes } from './common/quotes';
 import Store from './common/Store';
 // import Settings from './components/Settings';
 import Wallpaper from './components/Wallpaper';
@@ -71,7 +72,21 @@ export default {
 		return {
 			currentPhoto: Store.get('currentPhoto'),
 			lang: Store.get('settings').language,
+			quote: Store.get('quote'),
 		};
+	},
+	methods: {
+		getQuote() {
+			const quoteList = this.lang === 'vi' ? viQuotes : enQuotes;
+			const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+			if (randomQuote) {
+				Store.set('quote', {
+					text: randomQuote[0],
+					author: randomQuote[1],
+				});
+				this.quote = Store.get('quote');
+			}
+		},
 	},
 	created() {
 		Store.subscribe('currentPhoto', event => {
@@ -82,6 +97,8 @@ export default {
 				this.lang = event.settings.language;
 			}
 		});
+
+		this.getQuote();
 	},
 };
 </script>

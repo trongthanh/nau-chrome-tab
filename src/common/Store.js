@@ -29,9 +29,13 @@ const Store = {
 
 		// run-time state, won't be saved
 		currentTime: { hours: 0, minutes: 0 },
+		quote: {
+			text: 'I dream, therefore, I become!',
+			author: 'Cheryl Grossman',
+		},
 	},
 
-	nosave: ['currentTime'],
+	nosave: ['currentTime', 'quote'],
 
 	/**
 	 * Rehydrate states from persist storage to running store

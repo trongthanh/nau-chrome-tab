@@ -31,6 +31,10 @@ const mockStates = {
 		},
 	},
 	currentTime: { hours: 0, minutes: 0 },
+	quote: {
+		text: 'I dream, therefore, I become!',
+		author: 'Cheryl Grossman',
+	},
 };
 
 describe('Store defaults', () => {
