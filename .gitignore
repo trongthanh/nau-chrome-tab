@@ -8,3 +8,4 @@ test/bower_components
 package
 *.bundle.js
 *.js.map
+test/unit/coverage/

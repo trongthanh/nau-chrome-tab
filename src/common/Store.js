@@ -26,6 +26,7 @@ const Store = {
 				gmail: true, gcalendar: false, gdrive: false, github: false, bitbucket: false, trello: false, facebook: true, twitter: false, gplus: false, tuoitre: false, vnexpress: true, thanhnien: false, gphotos: false, youtube: false, naujukebox: false,
 			},
 		},
+		greetingName: '',
 
 		// run-time state, won't be saved
 		currentTime: { hours: 0, minutes: 0 },

@@ -26,13 +26,7 @@
 		</div>
 		<div class="main__item main__item--center">
 			<Clock />
-			<h1 id="greeting" class="greeting">
-				<span id="greeting-text">How's your day</span>,
-				<div id="greeting-name" class="greeting__name">
-					<input class="greeting__name__input" value="" placeholder="gorgeous">
-					<span class="greeting__name__output"></span>
-				</div>
-			</h1>
+			<Greeting :lang="lang" />
 		</div>
 		<Quote :quote="quote" />
 		<div class="main__item main__item--bottom-left">
@@ -58,6 +52,7 @@ import Wallpaper from './components/Wallpaper';
 import PhotoCredit from './components/PhotoCredit';
 import Quote from './components/Quote';
 import Clock from './components/Clock';
+import Greeting from './components/Greeting';
 
 export default {
 	name: 'app',
@@ -67,6 +62,7 @@ export default {
 		PhotoCredit,
 		Quote,
 		Clock,
+		Greeting,
 	},
 	data() {
 		return {

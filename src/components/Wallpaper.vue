@@ -1,5 +1,6 @@
 <template>
-<div id="wallpaper" :class="classes" :style="'background-image:url(' + imgUrl + ')'"></div>
+<div id="wallpaper" :class="{wallpaper: true, 'wallpaper--ready': wallpaperReady }"
+	:style="'background-image:url(' + imgUrl + ')'"></div>
 </template>
 
 <script>
@@ -15,7 +16,7 @@ export default {
 	name: 'Wallpaper',
 	data() {
 		return {
-			classes: 'wallpaper',
+			wallpaperReady: false,
 			imgUrl: '',
 			wallpaperMode: 'unsplash',
 		};
@@ -24,7 +25,7 @@ export default {
 		this.imgUrl = Store.get('currentPhoto').imgUrl;
 
 		setTimeout(() => {
-			this.classes = 'wallpaper wallpaper--ready';
+			this.wallpaperReady = true;
 		}, 100);
 
 		const wallpaperMode = (this.wallpaperMode = Store.get('settings').wallpaperMode);
