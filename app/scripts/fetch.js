@@ -34,12 +34,7 @@ export function fetchUnsplash(options) {
 	const defaults = {
 		orientation: 'landscape',
 		w: 1920,
-		collections: [
-			410546, // THE ROAD LESS TRAVELLED
-			279087, // weather & sky
-			327760, // Nature Collection
-			147437, //Natural wonders
-		],
+		collections: [1507483], // collection will be overwritten from external options
 	};
 
 	// get override param

@@ -1,6 +1,7 @@
 /* © 2016 int3ractive.com
  * @author Thanh
  */
+// eslint-disable-next-line
 import Lockr from 'lockr';
 import { i18n, t } from './i18n';
 
@@ -96,13 +97,14 @@ export const Store = {
 };
 
 export const Settings = {
-
+	defaultCollectionId: '1507483',
 	init() {
 		// default
 		this._settings = {
 			language: navigator.language.includes('vi') ? 'vi' : 'en',
 			wallpaperMode: 'unsplash', // unsplash or user
 			userPhotoName: '', // file name to display at file selector
+			collectionId: '1507483',
 			activeQuicklinks: {
 				gmail: true,
 				gcalendar: false,
@@ -111,13 +113,13 @@ export const Settings = {
 				bitbucket: false,
 				trello: false,
 				facebook: true,
-				twitter: false,
+				twitter: true,
 				gplus: false,
 				tuoitre: false,
 				vnexpress: true,
 				thanhnien: false,
 				gphotos: false,
-				youtube: false,
+				youtube: true,
 				naujukebox: false,
 			},
 		};
@@ -152,6 +154,12 @@ export const Settings = {
 		$$('[name="setting-wallpaper-mode"]')._.addEventListener('change', event => {
 			console.log('event.target.value', event.target.value);
 			this.set('wallpaperMode', event.target.value);
+		});
+
+		$('#unsplash-collection-id').addEventListener('change', event => {
+			if (event.target.value.trim().length >= 6) {
+				this.set('collectionId', event.target.value.trim());
+			}
 		});
 
 		// file selector
@@ -189,6 +197,8 @@ export const Settings = {
 		} else {
 			$('#setting-photo-selector-label').textContent = t('choose_file');
 		}
+
+		$('#unsplash-collection-id').value = this.get('collectionId');
 
 		const ql = this.get('activeQuicklinks');
 		// console.log(ql);

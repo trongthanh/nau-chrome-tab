@@ -50,6 +50,8 @@ a:hover {
 	-webkit-text-decoration-color: #977857;
 	-moz-text-decoration-color: #977857;
 	text-decoration-color: #977857;
+	-webkit-text-decoration-skip: ink;
+	text-decoration-skip: ink;
 }
 
 [type='radio'],
@@ -159,11 +161,22 @@ fieldset {
 }
 
 /* Brand logo */
-.logo {
+.brand-logo {
 	display: inline-block;
-	/* compensate padding hit */
-	margin-right: -1rem;
-	margin-bottom: -1rem;
+}
+
+.brand-logo svg {
+	height: 30px;
+	width: auto;
+}
+
+.brand-logo__link {
+	opacity: 0.5;
+	transition: all 0.5s ease;
+}
+
+.brand-logo__link:hover {
+	opacity: 1;
 }
 
 .quick-links__list {
@@ -488,8 +501,13 @@ conflicting with the frosty glass effect*/
  */
 .settings__label {
 	display: inline-block;
-	margin-right: 1rem;
+	margin-right: 0.5rem;
 	padding: 1rem 0.5rem;
+}
+
+.settings__text-input {
+	display: inline-block;
+	margin: 0.5rem;
 }
 
 [id='setting-wallpaper-mode-user']:checked ~ [id='setting-photo-selector'] {

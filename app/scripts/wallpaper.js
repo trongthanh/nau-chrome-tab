@@ -7,7 +7,8 @@ import { fetchUnsplash } from './fetch';
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
 const defaultPhoto = {
-	imgUrl: 'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
+	imgUrl:
+		'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
 	imgId: 'gzeUpbjoTUA',
 	authorName: 'Hoach Le Dinh',
 	authorUsername: 'hoachld',
@@ -16,7 +17,7 @@ const defaultPhoto = {
 const Wallpaper = {
 	init(selector) {
 		this.wallpaper = $(selector);
-		const wallpaperMode = this.currentMode = Settings.get('wallpaperMode');
+		const wallpaperMode = (this.currentMode = Settings.get('wallpaperMode'));
 
 		if (wallpaperMode === 'user') {
 			this._initUserMode();
@@ -68,8 +69,16 @@ const Wallpaper = {
 	},
 
 	_fetchNewPhoto(now) {
-		fetchUnsplash().then(json => {
+		fetchUnsplash({ collections: [Settings.get('collectionId')] }).then(json => {
 			console.log('fetch result', json);
+			if (json.errors) {
+				alert(`No photos found with collection ID: ${Settings.get('collectionId')}. Reverting to default collection.`);
+				// fetch error
+				Settings.set('collectionId', Settings.defaultCollectionId);
+
+				return;
+			}
+
 			const url = json.urls.custom || json.urls.full;
 			const user = json.user || { name: '', username: '' };
 
@@ -90,7 +99,7 @@ const Wallpaper = {
 			};
 
 			imgEl.onerror = () => {
-				console.log('Image load errors, we\'ll try again next open tab');
+				console.log("Image load errors, we'll try again next open tab");
 				Store.set({ nextPhoto: null });
 			};
 			imgEl.src = url;
@@ -117,12 +126,12 @@ const Wallpaper = {
 
 	initDragDrop() {
 		this.wallpaper._.events({
-			dragover: (event) => {
+			dragover: event => {
 				event.stopPropagation();
 				event.preventDefault();
 				event.dataTransfer.dropEffect = 'link'; // Explicitly show this is a copy.
 			},
-			drop: (event) => {
+			drop: event => {
 				event.stopPropagation();
 				event.preventDefault();
 
@@ -131,6 +140,7 @@ const Wallpaper = {
 				// files is a FileList of File objects. List some properties.
 				for (let i = 0, f; i < files.length; i++) {
 					f = files[i];
+					// prettier-ignore
 					console.log(escape(f.name), ' (type ', f.type || 'n/a', ') - ',
 						f.size, ' bytes, last modified: ',
 						f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a');
@@ -183,7 +193,7 @@ const Wallpaper = {
 		const URL = window.URL;
 		const canvas = document.createElement('CANVAS');
 		// match canvasWidth with full screen width
-		const canvasWidth = canvas.width = window.screen.width;
+		const canvasWidth = (canvas.width = window.screen.width);
 
 		return new Promise((resolve, reject) => {
 			const ctx = canvas.getContext('2d');
