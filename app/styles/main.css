@@ -186,6 +186,7 @@ fieldset {
 	line-height: 1;
 	text-decoration: none;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+	opacity: 0.5;
 
 	-webkit-transition: all 200ms;
 	-o-transition: all 200ms;
@@ -194,6 +195,7 @@ fieldset {
 
 .quick-links__link:hover {
 	color: white;
+	opacity: 1;
 	-webkit-transform: translateY(-5px);
 	-ms-transform: translateY(-5px);
 	-o-transform: translateY(-5px);
@@ -314,11 +316,11 @@ fieldset {
 }
 
 .greeting__name--active > .greeting__name__input {
-	display: inline;
+	display: inline-block;
 }
 
 .greeting__name--active > .greeting__name__output {
-	visibility: hidden;
+	display: none;
 }
 
 .greeting__name__input {
@@ -335,7 +337,7 @@ fieldset {
 	padding: 0;
 	margin: 0;
 	width: 20rem;
-	position: absolute;
+	position: relative;
 	display: none;
 	top: 0;
 }

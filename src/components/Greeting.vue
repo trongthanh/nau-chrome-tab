@@ -4,8 +4,12 @@
 	<div id="greeting-name" :class="{ greeting__name: true, 'greeting__name--active': inputActive}"
 		@click.stop="onNameClick"
 	>
-		<input :class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty}" v-model="inputValue" placeholder="gorgeous"
-			@focus="$event.target.select()" @blur="commitInput" @keyup.enter="commitInput"
+		<input :class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty}"
+			v-model="inputValue"
+			placeholder="gorgeous"
+			@focus="$event.target.select()"
+			@blur="commitInput"
+			@keyup.enter="commitInput"
 		>
 		<span class="greeting__name__output">{{ currentName }}</span>
 	</div>
@@ -13,6 +17,9 @@
 </template>
 
 <script>
+/* © 2019 int3ractive.com
+ * @author Thanh
+ */
 import Store from '../common/Store';
 
 export default {
@@ -78,6 +85,17 @@ export default {
 		},
 	},
 	created() {
+		const greetingName = Store.get('greetingName');
+		if (greetingName) {
+			this.currentName = greetingName;
+			this.inputValue = greetingName;
+			this.inputActive = false;
+		}
+
+		Store.subscribe('all', states => {
+			console.log('resume greeting name', states);
+		});
+
 		Store.subscribe('currentTime', () => {
 			this.update();
 		});
