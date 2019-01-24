@@ -16,7 +16,7 @@ function queryString(params) {
 				val = val.join(',');
 			}
 
-			return encodeURIComponent(k) + '=' + encodeURIComponent(val);
+			return `${encodeURIComponent(k)}=${encodeURIComponent(val)}`;
 		})
 		.join('&');
 }
@@ -33,12 +33,8 @@ export function fetchUnsplash(options) {
 	const defaults = {
 		orientation: 'landscape',
 		w: 1920,
-		collections: [
-			410546, // THE ROAD LESS TRAVELLED
-			279087, // weather & sky
-			327760, // Nature Collection
-			147437, //Natural wonders
-		],
+		// my own colletion with curated photos
+		collections: [1507483],
 	};
 
 	// get override param
@@ -51,7 +47,7 @@ export function fetchUnsplash(options) {
 		Authorization: 'Client-ID 01334b1872fbd0bda3f4f3ba44f0693213cf06f682b81079f8adf802fb89993b',
 	});
 
-	const url = unsplashAPI + '?' + queryString(params);
+	const url = `${unsplashAPI}?${queryString(params)}`;
 	console.log('fetch url:', url);
 	const req = new Request(url, {
 		method: 'GET',
