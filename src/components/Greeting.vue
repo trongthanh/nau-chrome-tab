@@ -6,10 +6,12 @@
 	>
 		<input :class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty}"
 			v-model="inputValue"
+			v-click-outside="commitInput"
 			placeholder="gorgeous"
 			@focus="$event.target.select()"
 			@blur="commitInput"
 			@keyup.enter="commitInput"
+			@keyup.esc="cancelInput"
 		>
 		<span class="greeting__name__output">{{ currentName }}</span>
 	</div>
@@ -20,11 +22,15 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
+import vClickOutside from 'v-click-outside';
 import Store from '../common/Store';
 
 export default {
 	name: 'Greeting',
 	props: ['lang'],
+	directives: {
+		clickOutside: vClickOutside.directive,
+	},
 	data() {
 		return {
 			greetText: '',
@@ -79,9 +85,15 @@ export default {
 			if (this.currentName) {
 				this.inputActive = false;
 			}
+		},
 
-			// TODO: what is vue's way for click outside?
-			// document.removeEventListener('click', nameInputSubmit);
+		cancelInput() {
+			const greetingName = Store.get('greetingName') || '';
+			this.currentName = greetingName;
+			this.inputValue = greetingName;
+			if (greetingName) {
+				this.inputActive = false;
+			}
 		},
 	},
 	created() {
