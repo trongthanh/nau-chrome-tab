@@ -1,7 +1,6 @@
-/* © 2016 int3ractive.com
+/* © 2019 int3ractive.com
  * @author Thanh
  */
-/* eslint-disable import/prefer-default-export */
 
 /**
  * Get query string from param object

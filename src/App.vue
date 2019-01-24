@@ -45,6 +45,9 @@
 </template>
 
 <script>
+/* © 2019 int3ractive.com
+ * @author Thanh
+ */
 import { enQuotes, viQuotes } from './common/quotes';
 import Store from './common/Store';
 // import Settings from './components/Settings';

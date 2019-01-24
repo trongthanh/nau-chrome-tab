@@ -4,7 +4,7 @@
 </template>
 
 <script>
-/* © 2017 int3ractive.com
+/* © 2019 int3ractive.com
  * @author Thanh
  */
 import Store from '../common/Store';
@@ -49,7 +49,8 @@ export default {
 			let currentPhoto = Store.get('currentPhoto');
 
 			const now = Date.now();
-			const DEBUG = true;
+			// NOTE: set true to load new photo every refresh
+			const DEBUG = false;
 			// the first hour after install, user will see default background,
 			// then we'll fetch new image in the next hour
 			if (DEBUG || now > lastCheck + RENEW_DURATION) {
@@ -231,4 +232,3 @@ const Wallpaper = {
 	},
 };
 </script>
-

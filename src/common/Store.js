@@ -5,6 +5,7 @@ import PersistStorage from './PersistStorage';
 
 const Store = {
 	// default
+	// prettier-ignore
 	states: {
 		lastPhotoFetch: 0, // timestamp
 		nextPhoto: '',
@@ -21,9 +22,22 @@ const Store = {
 			language: navigator.language.includes('vi') ? 'vi' : 'en',
 			wallpaperMode: 'unsplash', // unsplash or user
 			userPhotoName: '', // file name to display at file selector
-			// prettier-ignore
 			activeQuicklinks: {
-				gmail: true, gcalendar: false, gdrive: false, github: false, bitbucket: false, trello: false, facebook: true, twitter: false, gplus: false, tuoitre: false, vnexpress: true, thanhnien: false, gphotos: false, youtube: false, naujukebox: false,
+				gmail: true,
+				gcalendar: false,
+				gdrive: false,
+				github: false,
+				bitbucket: false,
+				trello: false,
+				facebook: true,
+				twitter: false,
+				gplus: false,
+				tuoitre: false,
+				vnexpress: true,
+				thanhnien: false,
+				gphotos: false,
+				youtube: false,
+				naujukebox: false,
 			},
 		},
 		greetingName: '',
@@ -43,7 +57,7 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		const keys = ['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto'];
+		const keys = ['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto', 'greetingName'];
 
 		return PersistStorage.get(keys).then(result => {
 			// console.log('rehydrate result', result);
