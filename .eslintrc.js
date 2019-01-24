@@ -3,6 +3,7 @@ module.exports = {
 	root: true,
 	extends: ['plugin:vue/essential', 'nau'],
 	rules: {
+		'no-param-reassign': 'off',
 		'import/prefer-default-export': 'off',
 		// don't require .vue extension when importing
 		'import/extensions': [

@@ -5,6 +5,9 @@
 </template>
 
 <script>
+/* © 2019 int3ractive.com
+ * @author Thanh
+ */
 import { shallowEqual } from '../common/utils';
 import Store from '../common/Store';
 

@@ -1,4 +1,4 @@
-/* © 2017 int3ractive.com
+/* © 2019 int3ractive.com
  * @author Thanh
  */
 import PersistStorage from './PersistStorage';
@@ -92,7 +92,7 @@ const Store = {
 	 */
 	subscribe(key, handler) {
 		// we'll make use of DOM events for our custom events
-		document.addEventListener('statechange:' + key, handler);
+		document.addEventListener(`statechange:${key}`, handler);
 	},
 
 	get(key) {
@@ -123,7 +123,7 @@ const Store = {
 	save(key) {
 		if (!this.nosave.includes(key)) {
 			PersistStorage.set({ [key]: this.states[key] }).then(() => {
-				this._dispatchEvent('statechange:' + key, { [key]: this.states[key] });
+				this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
 			});
 		}
 	},

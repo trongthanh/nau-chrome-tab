@@ -6,6 +6,9 @@
 </template>
 
 <script>
+/* © 2019 int3ractive.com
+ * @author Thanh
+ */
 export default {
 	name: 'Quote',
 	props: ['quote'],
