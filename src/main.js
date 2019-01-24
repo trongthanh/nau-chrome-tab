@@ -11,9 +11,13 @@ window.browser = window.msBrowser || window.browser || window.chrome;
 
 /* eslint-disable no-new */
 Store.rehydrate().then(() => {
+	// new Vue({
+	// 	el: '#app',
+	// 	components: { App },
+	// 	template: '<App/>',
+	// });
+
 	new Vue({
-		el: '#app',
-		components: { App },
-		template: '<App/>',
-	});
+		render: h => h(App),
+	}).$mount('#app');
 });

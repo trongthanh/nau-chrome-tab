@@ -57,6 +57,10 @@ import Quote from './components/Quote';
 import Clock from './components/Clock';
 import Greeting from './components/Greeting';
 
+import './styles/normalize.css';
+import './styles/materialdesignicons.css';
+import './styles/main.css';
+
 export default {
 	name: 'app',
 	components: {
