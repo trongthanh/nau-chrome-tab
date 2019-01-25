@@ -371,17 +371,37 @@ fieldset {
 /**
  * Modal popup
  * Shamelessly copied from: http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/;
+ * Note: .modal-overlay is now parent of .modal
  */
-.modal {
+.modal-overlay {
 	position: fixed;
+	width: 100%;
+	height: 100%;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	opacity: 0;
+	background: rgba(0, 0, 0, 0.3);
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.modal-overlay--active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal {
+	position: absolute;
 	top: 50%;
 	left: 50%;
-	width: 50%;
-	max-width: 630px;
+	width: 70%;
+	max-width: 1024px;
 	min-width: 320px;
 	max-height: 80%;
 	overflow: hidden;
-	z-index: 1001;
 	visibility: hidden;
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
@@ -393,7 +413,7 @@ fieldset {
 	padding-top: 4.5rem; /*space for heading*/
 }
 
-.modal--show {
+.modal-overlay--active .modal {
 	visibility: visible;
 }
 
@@ -444,26 +464,6 @@ fieldset {
 	padding: 2rem;
 }
 
-.modal-overlay {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	visibility: hidden;
-	top: 0;
-	left: 0;
-	z-index: 1000;
-	opacity: 0;
-	background: rgba(0, 0, 0, 0.3);
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-}
-
-.modal--show ~ .modal-overlay {
-	opacity: 1;
-	visibility: visible;
-}
-
 /* Effect 3: Slide from the bottom, change from origin: apply to container, to avoid
 conflicting with the frosty glass effect*/
 .modal--slide-up {
@@ -477,7 +477,7 @@ conflicting with the frosty glass effect*/
 	transition: all 0.3s;
 }
 
-.modal--show.modal--slide-up {
+.modal-overlay--active .modal--slide-up {
 	-webkit-transform: translateX(-50%) translateY(-50%);
 	-moz-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);

@@ -43,6 +43,7 @@ const Store = {
 		greetingName: '',
 
 		// run-time state, won't be saved
+		settingsActive: false,
 		currentTime: { hours: 0, minutes: 0 },
 		quote: {
 			text: 'I dream, therefore, I become!',
@@ -50,7 +51,7 @@ const Store = {
 		},
 	},
 
-	nosave: ['currentTime', 'quote'],
+	nosave: ['currentTime', 'quote', 'settingsActive'],
 
 	/**
 	 * Rehydrate states from persist storage to running store
@@ -115,17 +116,27 @@ const Store = {
 		}
 
 		Object.keys(obj).forEach(stateName => {
-			this.states[stateName] = obj[stateName];
-			this.save(stateName);
+			this.save(stateName, obj[stateName]);
 		});
 	},
 
-	save(key) {
-		if (!this.nosave.includes(key)) {
-			PersistStorage.set({ [key]: this.states[key] }).then(() => {
-				this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
-			});
+	/**
+	 * Save state of each key and persist data if needed
+	 * @param {string} key
+	 * @param {*} value
+	 */
+	save(key, value) {
+		this.states[key] = value;
+		if (this.nosave.includes(key)) {
+			// just dispatch change event, won't persist the state
+			this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
+
+			return;
 		}
+
+		PersistStorage.set({ [key]: this.states[key] }).then(() => {
+			this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
+		});
 	},
 
 	/**
@@ -135,13 +146,13 @@ const Store = {
 	 * @return {void}
 	 */
 	_dispatchEvent(type, payload) {
-		const evt = document.createEvent('HTMLEvents');
+		const event = document.createEvent('HTMLEvents');
 
-		evt.initEvent(type, true, true);
+		event.initEvent(type, true, true);
 
 		// Return the result of dispatching the event, so we
 		// can know if `e.preventDefault` was called inside it
-		return document.dispatchEvent(Object.assign(evt, payload));
+		return document.dispatchEvent(Object.assign(event, payload));
 	},
 };
 

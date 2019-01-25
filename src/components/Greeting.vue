@@ -6,7 +6,7 @@
 	>
 		<input :class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty}"
 			v-model="inputValue"
-			v-click-outside="commitInput"
+			v-click-outside="onInputClickOutside"
 			placeholder="gorgeous"
 			@focus="$event.target.select()"
 			@blur="commitInput"
@@ -47,7 +47,12 @@ export default {
 	methods: {
 		onNameClick() {
 			this.inputActive = true;
-			console.log('Name click');
+			// console.log('Name click');
+		},
+		onInputClickOutside() {
+			if (this.inputActive) {
+				this.commitInput();
+			}
 		},
 
 		update() {

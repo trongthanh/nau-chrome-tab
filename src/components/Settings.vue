@@ -1,10 +1,10 @@
 <template>
 <!-- modal settings popup -->
-<div class="modal-overlay">
-	<div class="modal modal--slide-up" id="settings-modal">
-		<div class="modal__background"></div>
+<div :class="{'modal-overlay': true, 'modal-overlay--active': active}">
+	<div class="modal__background" :style="{backgroundImage: `url(${currentPhoto.imgUrl})`}"></div>
+	<div class="modal modal--slide-up" v-click-outside="onModalClose">
 		<h3 class="modal__title" i18n="settings">Settings</h3>
-		<button id="settings-close-btn" class="modal__close icon-btn mdi mdi--close"></button>
+		<button class="modal__close icon-btn mdi mdi--close" @click="onModalClose"></button>
 		<div class="modal__content">
 			<form id="settings-panel" class="modal__body settings">
 				<fieldset>
@@ -70,12 +70,38 @@
 </template>
 
 <script>
+/* © 2019 int3ractive.com
+ * @author Thanh
+ */
+import vClickOutside from 'v-click-outside';
+import Store from '../common/Store';
+
 export default {
 	name: 'HelloWorld',
+	directives: {
+		clickOutside: vClickOutside.directive,
+	},
 	data() {
 		return {
-			msg: 'Welcome to Your Vue.js App',
+			active: false,
+			currentPhoto: Store.get('currentPhoto'),
 		};
+	},
+	methods: {
+		onModalClose() {
+			// console.log('onModalClose');
+			if (this.active) {
+				Store.set('settingsActive', !this.active);
+			}
+		},
+	},
+	created() {
+		Store.subscribe('settingsActive', event => {
+			this.active = event.settingsActive;
+		});
+		Store.subscribe('currentPhoto', event => {
+			this.currentPhoto = event.currentPhoto;
+		});
 	},
 };
 </script>
