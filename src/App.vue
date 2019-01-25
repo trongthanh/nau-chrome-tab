@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</main>
-	<Settings />
+	<SettingsOverlay />
 </div>
 </template>
 
@@ -50,8 +50,8 @@
  * @author Thanh
  */
 import { enQuotes, viQuotes } from './common/quotes';
-import Store from './common/Store'
-import Settings from './components/Settings';
+import Store from './common/Store';
+import SettingsOverlay from './components/SettingsOverlay';
 import Wallpaper from './components/Wallpaper';
 import PhotoCredit from './components/PhotoCredit';
 import Quote from './components/Quote';
@@ -65,7 +65,7 @@ import './styles/main.css';
 export default {
 	name: 'app',
 	components: {
-		Settings,
+		SettingsOverlay,
 		Wallpaper,
 		PhotoCredit,
 		Quote,
