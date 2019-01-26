@@ -82,12 +82,31 @@ export default {
 		return {
 			language: settings.language,
 			wallpaperMode: settings.wallpaperMode,
+			userPhotoName: settings.userPhotoName,
 			quicklinks,
 		};
 	},
 	methods: {},
 	updated() {
 		console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
+		const { language, wallpaperMode, userPhotoName, quicklinks } = this;
+		// prettier-ignore
+		const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
+			.reduce((obj, linkName) => {
+				obj[linkName] = quicklinks.includes(linkName);
+
+				return obj;
+			}, {});
+
+		const newSettings = {
+			// these properties must be inside 'settings' due to legacy versions used them
+			language,
+			wallpaperMode,
+			userPhotoName,
+			activeQuicklinks,
+		};
+
+		Store.set('settings', newSettings);
 	},
 	created() {},
 };
