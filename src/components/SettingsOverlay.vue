@@ -1,6 +1,9 @@
 <template>
 <!-- modal settings popup -->
-<div :class="{'modal-overlay': true, 'modal-overlay--active': active}">
+<div :class="{'modal-overlay': true, 'modal-overlay--active': active}"
+	@keyup.esc="onModalClose"
+	tabindex="0"
+	>
 	<div class="modal__background" :style="{backgroundImage: `url(${currentPhoto.imgUrl})`}"></div>
 	<SettingsModal v-click-outside="onModalClose" @close="onModalClose" />
 </div><!-- /.modal-overlay -->
@@ -39,6 +42,12 @@ export default {
 	created() {
 		Store.subscribe('settingsActive', event => {
 			this.active = event.settingsActive;
+			if (this.active) {
+				setTimeout(() => {
+					// the tabindex attr and next line make the overlay focusable and can trigger keyboard event
+					this.$el.focus();
+				}, 100);
+			}
 		});
 		Store.subscribe('currentPhoto', event => {
 			this.currentPhoto = event.currentPhoto;
