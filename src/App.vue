@@ -3,23 +3,7 @@
 	<Wallpaper />
 	<main class="main">
 		<div class="main__item main__item--top-left quick-links">
-			<ul id="quicklinks" class="quick-links__list">
-				<li class="quick-links__li" id="gmail"><a href="https://mail.google.com" class="quick-links__link mdi mdi--gmail" title="GMail"></a></li>
-				<li class="quick-links__li" id="gcalendar"><a href="https://calendar.google.com" class="quick-links__link mdi mdi--calendar" title="Google Calendar"></a></li>
-				<li class="quick-links__li" id="gdrive"><a href="https://drive.google.com" class="quick-links__link mdi mdi--google-drive" title="Google Drive"></a></li>
-				<li class="quick-links__li" id="github"><a href="https://github.com" class="quick-links__link mdi mdi--github-circle" title="Github"></a></li>
-				<li class="quick-links__li" id="bitbucket"><a href="https://bitbucket.org" class="quick-links__link mdi mdi--bitbucket" title="Bitbucket"></a></li>
-				<li class="quick-links__li" id="trello"><a href="https://trello.com" class="quick-links__link mdi mdi--trello" title="Trello"></a></li>
-				<li class="quick-links__li" id="facebook"><a href="https://facebook.com" class="quick-links__link mdi mdi--facebook" title="Facebook"></a></li>
-				<li class="quick-links__li" id="twitter"><a href="https://twitter.com" class="quick-links__link mdi mdi--twitter" title="Twitter"></a></li>
-				<li class="quick-links__li" id="gplus"><a href="https://plus.google.com" class="quick-links__link mdi mdi--google-plus" title="Google +"></a></li>
-				<li class="quick-links__li" id="tuoitre"><a href="http://tuoitre.vn" class="quick-links__link quick-links__link--fw" title="Tuoitre.vn"><span class="u-serif-text">tt</span></a></li>
-				<li class="quick-links__li" id="vnexpress"><a href="http://vnexpress.net/" class="quick-links__link quick-links__link--fw" title="VNExpress"><span class="u-serif-text">vE</span></a></li>
-				<li class="quick-links__li" id="thanhnien"><a href="http://thanhnien.vn/" class="quick-links__link quick-links__link--fw" title="Thanhnien.vn"><span class="u-serif-text">Tn</span></a></li>
-				<li class="quick-links__li" id="gphotos"><a href="https://photos.google.com" class="quick-links__link mdi mdi--image" title="Google Photos"></a></li>
-				<li class="quick-links__li" id="youtube"><a href="https://youtube.com" class="quick-links__link mdi mdi--youtube-play" title="Youtube"></a></li>
-				<li class="quick-links__li" id="naujukebox"><a href="https://jukebox.naustud.io" class="quick-links__link mdi mdi--play" title="Nau Jukebox"></a></li>
-			</ul>
+			<Quicklinks />
 		</div>
 		<div class="main__item main__item--top-right">
 			<div>Weather info</div>
@@ -57,6 +41,7 @@ import PhotoCredit from './components/PhotoCredit';
 import Quote from './components/Quote';
 import Clock from './components/Clock';
 import Greeting from './components/Greeting';
+import Quicklinks from './components/Quicklinks';
 
 import './styles/normalize.css';
 import './styles/materialdesignicons.css';
@@ -65,12 +50,13 @@ import './styles/main.css';
 export default {
 	name: 'app',
 	components: {
-		SettingsOverlay,
-		Wallpaper,
-		PhotoCredit,
-		Quote,
 		Clock,
 		Greeting,
+		PhotoCredit,
+		Quicklinks,
+		Quote,
+		SettingsOverlay,
+		Wallpaper,
 	},
 	data() {
 		return {

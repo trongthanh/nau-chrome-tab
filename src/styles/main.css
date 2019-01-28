@@ -154,16 +154,28 @@ fieldset {
 	-o-transition: opacity 200ms;
 	transition: opacity 200ms;
 }
+
 .quick-links:hover {
 	opacity: 1;
 }
 
 /* Brand logo */
-.logo {
+.logo {
 	display: inline-block;
 	/* compensate padding hit */
 	margin-right: -1rem;
 	margin-bottom: -1rem;
+}
+
+.typeicon {
+	word-break: break-all;
+	width: 24px;
+	height: 22px;
+	display: inline-block;
+	font-weight: bold;
+	overflow: hidden;
+	letter-spacing: -1px;
+	text-align: center;
 }
 
 .quick-links__list {

@@ -88,13 +88,12 @@ export default {
 	},
 	methods: {},
 	updated() {
-		console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
+		// console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
 		const { language, wallpaperMode, userPhotoName, quicklinks } = this;
 		// prettier-ignore
 		const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
 			.reduce((obj, linkName) => {
 				obj[linkName] = quicklinks.includes(linkName);
-
 				return obj;
 			}, {});
 

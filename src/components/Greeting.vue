@@ -109,10 +109,6 @@ export default {
 			this.inputActive = false;
 		}
 
-		Store.subscribe('all', states => {
-			console.log('resume greeting name', states);
-		});
-
 		Store.subscribe('currentTime', () => {
 			this.update();
 		});
