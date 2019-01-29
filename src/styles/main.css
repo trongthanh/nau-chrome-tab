@@ -168,14 +168,16 @@ fieldset {
 }
 
 .typeicon {
-	word-break: break-all;
-	width: 24px;
-	height: 22px;
 	display: inline-block;
+	font-size: 2.2rem;
 	font-weight: bold;
-	overflow: hidden;
+	height: 2.4rem;
 	letter-spacing: -1px;
+	overflow: hidden;
 	text-align: center;
+	vertical-align: middle;
+	width: 2.6rem;
+	word-break: break-all;
 }
 
 .quick-links__list {
@@ -239,9 +241,10 @@ fieldset {
 }
 
 /*Fixed width for text link*/
-.quick-links__link--fw {
+.link--typeicon {
 	width: 4rem;
 	text-align: center;
+	padding: 0.8rem 0.7rem;
 }
 
 /* apply drop shadow for any shape icon */
