@@ -1,7 +1,7 @@
 import PersistStorage from '@/common/PersistStorage';
 import Store from '@/common/Store';
 
-const mockStates = {
+const mockState = {
 	lastPhotoFetch: Date.now(), // timestamp
 	nextPhoto: {
 		imgUrl: 'https://images.unsplash.com/photo-2',
@@ -28,7 +28,7 @@ const mockStates = {
 		// prettier-ignore
 		activeQuicklinks: {
 			gmail: true, gcalendar: true, gdrive: true, github: true, bitbucket: true, trello: true, facebook: true, twitter: false, gplus: false, tuoitre: true, vnexpress: false, thanhnien: false, gphotos: false, youtube: false, naujukebox: false,
-		},
+		}
 	},
 	currentTime: { hours: 0, minutes: 0 },
 	quote: {
@@ -38,14 +38,14 @@ const mockStates = {
 };
 
 describe('Store defaults', () => {
-	it('Store.states', () => {
+	it('Store.state', () => {
 		// store should has these default toplevel state
 
-		expect(Store.states.lastPhotoFetch).toBeDefined();
-		expect(Store.states.nextPhoto).toBeDefined();
-		expect(Store.states.currentPhoto).toBeDefined();
-		expect(Store.states.userPhoto).toBeDefined();
-		expect(Store.states.settings).toBeDefined();
+		expect(Store.state.lastPhotoFetch).toBeDefined();
+		expect(Store.state.nextPhoto).toBeDefined();
+		expect(Store.state.currentPhoto).toBeDefined();
+		expect(Store.state.userPhoto).toBeDefined();
+		expect(Store.state.settings).toBeDefined();
 	});
 
 	it('Store.rehydrate', () => {
@@ -54,14 +54,14 @@ describe('Store defaults', () => {
 		return PersistStorage.set(mockStates).then(() =>
 			Store.rehydrate().then(states => {
 				expect(states).toEqual(mockStates);
-			}),
+			})
 		);
 	});
 });
 
 describe('Store operations', () => {
 	// setup
-	beforeEach(() => PersistStorage.set(mockStates).then(() => Store.rehydrate()));
+	beforeEach(() => PersistStorage.set(mockState).then(() => Store.rehydrate()));
 
 	it('Store.get', () => {
 		// store should has these default toplevel state
@@ -77,7 +77,7 @@ describe('Store operations', () => {
 		expect(settings.language).toEqual('vi');
 		expect(settings.wallpaperMode).toEqual('unsplash');
 		expect(settings.userPhotoName).toEqual('DSC_IMG0001.jpg');
-		expect(settings.activeQuicklinks).toEqual(mockStates.settings.activeQuicklinks);
+		expect(settings.activeQuicklinks).toEqual(mockState.settings.activeQuicklinks);
 	});
 
 	it('Store.set', () => {

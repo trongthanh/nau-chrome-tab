@@ -6,7 +6,7 @@ import PersistStorage from './PersistStorage';
 const Store = {
 	// default
 	// prettier-ignore
-	states: {
+	state: {
 		lastPhotoFetch: 0, // timestamp
 		nextPhoto: null,
 		currentPhoto: {
@@ -69,11 +69,11 @@ const Store = {
 					delete result[key];
 				}
 			});
-			this.states = Object.assign(this.states, result);
-			this._dispatchEvent('statechange:all', this.states);
+			this.state = Object.assign(this.state, result);
+			this._dispatchEvent('statechange:all', this.state);
 
 			// return whole states object in resolve callback
-			return this.states;
+			return this.state;
 		});
 	},
 
@@ -98,7 +98,7 @@ const Store = {
 	},
 
 	get(key) {
-		return this.states[key];
+		return this.state[key];
 	},
 
 	/**
@@ -127,16 +127,16 @@ const Store = {
 	 * @param {*} value
 	 */
 	save(key, value) {
-		this.states[key] = value;
+		this.state[key] = value;
 		if (this.nosave.includes(key)) {
 			// just dispatch change event, won't persist the state
-			this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
+			this._dispatchEvent(`statechange:${key}`, { [key]: this.state[key] });
 
 			return;
 		}
 
-		PersistStorage.set({ [key]: this.states[key] }).then(() => {
-			this._dispatchEvent(`statechange:${key}`, { [key]: this.states[key] });
+		PersistStorage.set({ [key]: this.state[key] }).then(() => {
+			this._dispatchEvent(`statechange:${key}`, { [key]: this.state[key] });
 		});
 	},
 

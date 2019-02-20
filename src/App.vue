@@ -19,8 +19,8 @@
 		</div>
 		<div class="main__item main__item--bottom-right">
 			<div class="brand-logo">
-				<a href="https://int3ractive.com" class="quick-links__link quick-links__link--svg" title="Int3ractive">
-					T3
+				<a href="https://int3ractive.com" class="quick-links__link" title="Int3ractive">
+					<i class="mdi mdi--power-plug" />
 				</a>
 			</div>
 		</div>
