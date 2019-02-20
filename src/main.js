@@ -3,21 +3,23 @@
 import Vue from 'vue';
 import App from './App';
 import Store from './common/Store';
+import { register } from './common/Dispatcher';
 
 Vue.config.productionTip = false;
 
 // universal Web Extension API
 window.browser = window.msBrowser || window.browser || window.chrome;
 
-/* eslint-disable no-new */
-Store.rehydrate().then(() => {
-	// new Vue({
-	// 	el: '#app',
-	// 	components: { App },
-	// 	template: '<App/>',
-	// });
+Store.init(register)
+	.rehydrate()
+	.then(() => {
+		// new Vue({
+		// 	el: '#app',
+		// 	components: { App },
+		// 	template: '<App/>',
+		// });
 
-	new Vue({
-		render: h => h(App),
-	}).$mount('#app');
-});
+		new Vue({
+			render: h => h(App),
+		}).$mount('#app');
+	});

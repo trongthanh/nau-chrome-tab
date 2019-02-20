@@ -35,6 +35,7 @@
  */
 import { enQuotes, viQuotes } from './common/quotes';
 import Store from './common/Store';
+import { dispatch } from './common/Dispatcher';
 import SettingsOverlay from './components/SettingsOverlay';
 import Wallpaper from './components/Wallpaper';
 import PhotoCredit from './components/PhotoCredit';
@@ -49,6 +50,10 @@ import './styles/main.css';
 
 export default {
 	name: 'app',
+	provide: {
+		dispatch,
+		store: Store,
+	},
 	components: {
 		Clock,
 		Greeting,

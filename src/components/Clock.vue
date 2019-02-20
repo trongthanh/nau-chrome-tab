@@ -13,6 +13,7 @@ import Store from '../common/Store';
 
 export default {
 	name: 'Clock',
+	inject: ['dispatch'],
 	data() {
 		return {
 			time: null,
@@ -37,14 +38,22 @@ export default {
 	created() {
 		// update time immediately
 		this.time = this.getCurrentTime();
-		Store.set('currentTime', this.time);
+		// Store.set('currentTime', this.time);
+		this.dispatch({
+			type: 'UPDATE_CURRENT_TIME',
+			currentTime: this.time,
+		});
 
 		// check every second but only render when text is different
 		this.tickId = setInterval(() => {
 			const time = this.getCurrentTime();
 			if (!shallowEqual(time, this.currentTime)) {
 				this.time = time;
-				Store.set('currentTime', this.time); // notify other components about time change
+				// Store.set('currentTime', this.time); // notify other components about time change
+				this.dispatch({
+					type: 'UPDATE_CURRENT_TIME',
+					currentTime: this.time,
+				});
 			}
 		}, 1000);
 	},

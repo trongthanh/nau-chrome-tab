@@ -4,6 +4,10 @@
 import PersistStorage from './PersistStorage';
 
 const Store = {
+	init(register) {
+		register(this._handleEvent.bind(this));
+		return this;
+	},
 	// default
 	// prettier-ignore
 	state: {
@@ -77,21 +81,36 @@ const Store = {
 		});
 	},
 
-	/**
-	 * Subscribe to a change in settings
-	 * @param  {string} key     Name of settings / key in store
-	 * @param  {Function} handler Call back function
-	 * @return {void}
-	 * @example
-	 * ```js
-	 * import { Store } from './config';
-	 *
-	 * Store.subscribe('language', event => {
-	 * 	console.log('New language', event.language);
-	 * 	this.update();
-	 * });
-	 * ```
-	 */
+	_handleEvent(event) {
+		const action = event.action;
+		const state = this.state;
+		// console.log('_handleEvent', action);
+
+		switch (action.type) {
+			case 'SET_CURRENT_TIME':
+				state.currentTime = action.currentTime;
+				break;
+			default:
+				break;
+		}
+	},
+
+	// TODO: REMOVE LEGACY CODE ONCE DONE
+	// /**
+	//  * Subscribe to a change in settings
+	//  * @param  {string} key     Name of settings / key in store
+	//  * @param  {Function} handler Call back function
+	//  * @return {void}
+	//  * @example
+	//  * ```js
+	//  * import { Store } from './config';
+	//  *
+	//  * Store.subscribe('language', event => {
+	//  * 	console.log('New language', event.language);
+	//  * 	this.update();
+	//  * });
+	//  * ```
+	//  */
 	subscribe(key, handler) {
 		// we'll make use of DOM events for our custom events
 		document.addEventListener(`statechange:${key}`, handler);
@@ -101,14 +120,14 @@ const Store = {
 		return this.state[key];
 	},
 
-	/**
-	 * Set the state
-	 *
-	 * Input can be key-value params pair or a state object
-	 *
-	 * @param {*} key
-	 * @param {*} value
-	 */
+	// /**
+	//  * Set the state
+	//  *
+	//  * Input can be key-value params pair or a state object
+	//  *
+	//  * @param {*} key
+	//  * @param {*} value
+	//  */
 	set(key, value) {
 		let obj = key;
 
@@ -121,11 +140,11 @@ const Store = {
 		});
 	},
 
-	/**
-	 * Save state of each key and persist data if needed
-	 * @param {string} key
-	 * @param {*} value
-	 */
+	// /**
+	//  * Save state of each key and persist data if needed
+	//  * @param {string} key
+	//  * @param {*} value
+	//  */
 	save(key, value) {
 		this.state[key] = value;
 		if (this.nosave.includes(key)) {
@@ -140,12 +159,12 @@ const Store = {
 		});
 	},
 
-	/**
-	 * simple event dispatcher using HTML Events and DOM inspired by Bliss
-	 * @param {string} type
-	 * @param {any} payload
-	 * @return {void}
-	 */
+	// /**
+	//  * simple event dispatcher using HTML Events and DOM inspired by Bliss
+	//  * @param {string} type
+	//  * @param {any} payload
+	//  * @return {void}
+	//  */
 	_dispatchEvent(type, payload) {
 		const event = document.createEvent('HTMLEvents');
 
