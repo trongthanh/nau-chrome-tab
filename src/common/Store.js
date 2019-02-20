@@ -8,7 +8,7 @@ const Store = {
 	// prettier-ignore
 	states: {
 		lastPhotoFetch: 0, // timestamp
-		nextPhoto: '',
+		nextPhoto: null,
 		currentPhoto: {
 			imgUrl:
 				'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
@@ -16,7 +16,8 @@ const Store = {
 			authorName: 'Hoach Le Dinh',
 			authorUsername: 'hoachld',
 		},
-		userPhoto: '',
+		userPhoto: null, // user photo data, with structure similar to currentPhoto
+		wallpaper: null, // current wallpaper
 		settings: {
 			// these properties must be inside 'settings' due to legacy versions used them
 			language: navigator.language.includes('vi') ? 'vi' : 'en',

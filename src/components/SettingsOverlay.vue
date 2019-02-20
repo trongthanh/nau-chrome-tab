@@ -1,12 +1,10 @@
 <template>
-<!-- modal settings popup -->
-<div :class="{'modal-overlay': true, 'modal-overlay--active': active}"
-	@keyup.esc="onModalClose"
-	tabindex="0"
-	>
-	<div class="modal__background" :style="{backgroundImage: `url(${currentPhoto.imgUrl})`}"></div>
-	<SettingsModal v-click-outside="onModalClose" @close="onModalClose" />
-</div><!-- /.modal-overlay -->
+	<!-- modal settings popup -->
+	<div :class="{ 'modal-overlay': true, 'modal-overlay--active': active }" @keyup.esc="onModalClose" tabindex="0">
+		<div class="modal__background" :style="{ backgroundImage: `url(${wallpaper.imgUrl})` }"></div>
+		<SettingsModal v-click-outside="onModalClose" @close="onModalClose" />
+	</div>
+	<!-- /.modal-overlay -->
 </template>
 
 <script>
@@ -28,7 +26,7 @@ export default {
 	data() {
 		return {
 			active: false,
-			currentPhoto: Store.get('currentPhoto'),
+			wallpaper: Store.state.wallpaper,
 		};
 	},
 	methods: {
@@ -48,9 +46,6 @@ export default {
 					this.$el.focus();
 				}, 100);
 			}
-		});
-		Store.subscribe('currentPhoto', event => {
-			this.currentPhoto = event.currentPhoto;
 		});
 	},
 };

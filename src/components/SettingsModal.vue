@@ -29,9 +29,9 @@
 				</label>
 
 				<label id="setting-photo-selector" class="u-hidden file-input settings__label">
-					<input id="setting-photo-selector-input" type="file" class="u-hidden">
+					<input id="setting-photo-selector-input" type="file" class="u-hidden" @change="onUserPhotoFileChange">
 					<i class="mdi mdi--file-image"></i>
-					<span id="setting-photo-selector-label" class="file-input__label">Choose a file</span>
+					<span id="setting-photo-selector-label" class="file-input__label">{{ userPhotoName }}</span>
 				</label>
 
 				<span id="selected-photo"></span>
@@ -70,6 +70,7 @@
  * @author Thanh
  */
 import Store from '../common/Store';
+import { readAndResizeImage } from '../common/utils';
 
 export default {
 	name: 'SettingsModal',
@@ -77,18 +78,45 @@ export default {
 		const settings = Store.get('settings');
 		const quicklinks = Object.keys(settings.activeQuicklinks).filter(linkName => settings.activeQuicklinks[linkName]);
 
-		console.log('quicklinks', quicklinks);
+		// console.log('quicklinks', quicklinks);
 
 		return {
 			language: settings.language,
 			wallpaperMode: settings.wallpaperMode,
-			userPhotoName: settings.userPhotoName,
+			userPhotoName: settings.userPhotoName || 'Choose a file',
+			userPhoto: Store.get('userPhoto'),
 			quicklinks,
 		};
 	},
-	methods: {},
+	methods: {
+		onUserPhotoFileChange(event) {
+			console.log('file selector change:', event.target.files);
+			const file = event.target.files[0];
+			if (file.type.includes('image')) {
+				this.userPhotoName = file.name;
+				this.storeUserPhoto(file);
+			} else {
+				/* eslint-disable-next-line no-alert */
+				alert('Please select only file of type image (JPG, PNG)');
+			}
+		},
+
+		storeUserPhoto(file) {
+			readAndResizeImage(file).then(imgDataUrl => {
+				this.userPhoto = {
+					imgUrl: imgDataUrl,
+					imgId: file.name,
+					authorName: 'You',
+					authorUsername: '',
+				};
+				Store.set('userPhoto', this.userPhoto);
+				this.wallpaperMode = 'user';
+				console.log('readAndResizeImage DONE');
+			});
+		},
+	},
 	updated() {
-		// console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
+		console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
 		const { language, wallpaperMode, userPhotoName, quicklinks } = this;
 		// prettier-ignore
 		const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']

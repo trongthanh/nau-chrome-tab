@@ -1,6 +1,9 @@
 <template>
-<div id="wallpaper" :class="{wallpaper: true, 'wallpaper--ready': wallpaperReady }"
-	:style="'background-image:url(' + imgUrl + ')'"></div>
+	<div
+		id="wallpaper"
+		:class="{ wallpaper: true, 'wallpaper--ready': wallpaperReady }"
+		:style="'background-image:url(' + imgUrl + ')'"
+	></div>
 </template>
 
 <script>
@@ -19,26 +22,43 @@ export default {
 			wallpaperReady: false,
 			imgUrl: '',
 			wallpaperMode: 'unsplash',
+			userPhotoName: '',
 		};
 	},
 	created() {
-		this.imgUrl = Store.get('currentPhoto').imgUrl;
+		this.wallpaperMode = Store.get('settings').wallpaperMode;
+		this.init();
 
-		setTimeout(() => {
-			this.wallpaperReady = true;
-		}, 100);
+		Store.subscribe('userPhoto', () => {
+			this.init();
+		});
 
-		const wallpaperMode = (this.wallpaperMode = Store.get('settings').wallpaperMode);
+		Store.subscribe('settings', ({ settings }) => {
+			if (this.wallpaperMode !== settings.wallpaperMode) {
+				// change wallpapermode, reinit
+				this.wallpaperMode = settings.wallpaperMode;
+				this.init();
+			}
 
-		if (wallpaperMode === 'user') {
-			this._initUserMode();
-		} else {
-			// unsplash
-			this._initUnsplashMode();
-		}
+			if (settings.wallpaperMode === 'user' && this.userPhotoName !== settings.userPhotoName) {
+				// user upload new user photo
+				// console.log('user photo changed');
+				this.init();
+			}
+		});
 	},
 
 	methods: {
+		init() {
+			if (this.wallpaperMode === 'user') {
+				this._initUserMode();
+			} else {
+				// unsplash
+				this._initUnsplashMode();
+			}
+
+			this.wallpaperReady = true;
+		},
 		_initUserMode() {
 			const imgData = Store.get('userPhoto');
 			this.imgUrl = imgData.imgUrl;
