@@ -9,11 +9,10 @@
 			v-click-outside="onInputClickOutside"
 			placeholder="gorgeous"
 			@focus="$event.target.select()"
-			@blur="commitInput"
 			@keyup.enter="commitInput"
 			@keyup.esc="cancelInput"
 		>
-		<span class="greeting__name__output">{{ currentName }}</span>
+		<span class="greeting__name__output">{{ greetingName }}</span>
 	</div>
 </h1>
 </template>
@@ -23,25 +22,28 @@
  * @author Thanh
  */
 import vClickOutside from 'v-click-outside';
-import Store from '../common/Store';
 
 export default {
 	name: 'Greeting',
+	inject: ['dispatch', 'store'],
 	props: ['lang'],
 	directives: {
 		clickOutside: vClickOutside.directive,
 	},
 	data() {
 		return {
+			appState: this.store.state, // point to global Store to observe for changes
 			greetText: '',
 			inputActive: true,
 			inputValue: '',
-			currentName: '',
 		};
 	},
 	computed: {
 		isInputEmpty() {
 			return !this.inputValue.trim();
+		},
+		greetingName() {
+			return this.appState.greetingName;
 		},
 	},
 	methods: {
@@ -81,20 +83,19 @@ export default {
 			const newName = this.inputValue.trim();
 			console.log('commit input:', newName);
 			if (newName) {
-				this.currentName = newName;
-				Store.set('greetingName', newName);
-			} else {
-				this.currentName = Store.get('greetingName');
+				this.dispatch({
+					greetingName: newName,
+					type: 'UPDATE_GREETING_NAME',
+				});
 			}
 
-			if (this.currentName) {
+			if (this.greetingName) {
 				this.inputActive = false;
 			}
 		},
 
 		cancelInput() {
-			const greetingName = Store.get('greetingName') || '';
-			this.currentName = greetingName;
+			const greetingName = this.greetingName;
 			this.inputValue = greetingName;
 			if (greetingName) {
 				this.inputActive = false;
@@ -102,18 +103,17 @@ export default {
 		},
 	},
 	created() {
-		const greetingName = Store.get('greetingName');
-		if (greetingName) {
-			this.currentName = greetingName;
-			this.inputValue = greetingName;
+		if (this.greetingName) {
+			this.inputValue = this.greetingName;
 			this.inputActive = false;
 		}
 
-		Store.subscribe('currentTime', () => {
-			this.update();
-		});
-
 		this.update();
 	},
+
+	// FIXME: debug if global state change make this component always re-render
+	// beforeUpdate() {
+	// 	console.log('Greeting updated');
+	// },
 };
 </script>

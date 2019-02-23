@@ -12,11 +12,11 @@
  * @author Thanh
  */
 import vClickOutside from 'v-click-outside';
-import Store from '../common/Store';
 import SettingsModal from './SettingsModal';
 
 export default {
 	name: 'SettingsOverlay',
+	inject: ['dispatch', 'store'],
 	components: {
 		SettingsModal,
 	},
@@ -25,28 +25,34 @@ export default {
 	},
 	data() {
 		return {
-			active: false,
-			wallpaper: Store.state.wallpaper,
+			appState: this.store.state,
 		};
+	},
+	computed: {
+		active() {
+			return this.appState.settingsActive;
+		},
+		wallpaper() {
+			return this.appState.currentPhoto;
+		},
 	},
 	methods: {
 		onModalClose() {
-			// console.log('onModalClose');
 			if (this.active) {
-				Store.set('settingsActive', !this.active);
+				this.dispatch({
+					type: 'SET_SETTING_ACTIVE',
+					settingsActive: false,
+				});
 			}
 		},
 	},
-	created() {
-		Store.subscribe('settingsActive', event => {
-			this.active = event.settingsActive;
-			if (this.active) {
-				setTimeout(() => {
-					// the tabindex attr and next line make the overlay focusable and can trigger keyboard event
-					this.$el.focus();
-				}, 100);
-			}
-		});
+	updated() {
+		if (this.active) {
+			setTimeout(() => {
+				// the tabindex attr and next line make the overlay focusable and can trigger keyboard event
+				this.$el.focus();
+			}, 100);
+		}
 	},
 };
 </script>

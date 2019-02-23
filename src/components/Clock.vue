@@ -8,8 +8,7 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import { shallowEqual } from '../common/utils';
-import Store from '../common/Store';
+import { compareTimeObj } from '../common/utils';
 
 export default {
 	name: 'Clock',
@@ -47,7 +46,7 @@ export default {
 		// check every second but only render when text is different
 		this.tickId = setInterval(() => {
 			const time = this.getCurrentTime();
-			if (!shallowEqual(time, this.currentTime)) {
+			if (!compareTimeObj(time, this.time)) {
 				this.time = time;
 				// Store.set('currentTime', this.time); // notify other components about time change
 				this.dispatch({

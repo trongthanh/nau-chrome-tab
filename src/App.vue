@@ -33,7 +33,6 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import { enQuotes, viQuotes } from './common/quotes';
 import Store from './common/Store';
 import { dispatch } from './common/Dispatcher';
 import SettingsOverlay from './components/SettingsOverlay';
@@ -65,40 +64,31 @@ export default {
 	},
 	data() {
 		return {
-			currentPhoto: Store.get('currentPhoto'),
-			lang: Store.get('settings').language,
-			quote: Store.get('quote'),
+			appState: Store.state,
 		};
+	},
+	computed: {
+		lang() {
+			return this.appState.settings.language;
+		},
+		currentPhoto() {
+			return this.appState.currentPhoto;
+		},
+		quote() {
+			return this.appState.quote;
+		},
 	},
 	methods: {
 		onSettingBtnClick() {
 			// console.log('settings btn clicked');
-			const settingsActive = Store.get('settingsActive');
-			Store.set('settingsActive', !settingsActive);
-		},
-		getQuote() {
-			const quoteList = this.lang === 'vi' ? viQuotes : enQuotes;
-			const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
-			if (randomQuote) {
-				Store.set('quote', {
-					text: randomQuote[0],
-					author: randomQuote[1],
-				});
-				this.quote = Store.get('quote');
-			}
+			dispatch({
+				type: 'SET_SETTING_ACTIVE',
+				settingsActive: !this.appState.settingsActive,
+			});
 		},
 	},
 	created() {
-		Store.subscribe('currentPhoto', event => {
-			this.currentPhoto = event.currentPhoto;
-		});
-		Store.subscribe('settings', event => {
-			if (this.lang !== event.settings.language) {
-				this.lang = event.settings.language;
-			}
-		});
-
-		this.getQuote();
+		dispatch({ type: 'RANDOMIZE_QUOTE' });
 	},
 };
 </script>

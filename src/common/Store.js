@@ -2,6 +2,7 @@
  * @author Thanh
  */
 import PersistStorage from './PersistStorage';
+import { enQuotes, viQuotes } from './quotes';
 
 const Store = {
 	init(register) {
@@ -84,12 +85,29 @@ const Store = {
 	_handleEvent(event) {
 		const action = event.action;
 		const state = this.state;
-		// console.log('_handleEvent', action);
+		console.log('_handleEvent', action);
 
 		switch (action.type) {
 			case 'SET_CURRENT_TIME':
-				state.currentTime = action.currentTime;
+				this.save('currentTime', action.currentTime);
 				break;
+			case 'UPDATE_GREETING_NAME':
+				this.save('greetingName', action.greetingName);
+				break;
+			case 'SET_SETTING_ACTIVE':
+				this.set('settingsActive', action.settingsActive);
+				break;
+			case 'RANDOMIZE_QUOTE': {
+				const quoteList = state.settings.language === 'vi' ? viQuotes : enQuotes;
+				const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+				if (randomQuote) {
+					this.set('quote', {
+						text: randomQuote[0],
+						author: randomQuote[1],
+					});
+				}
+				break;
+			}
 			default:
 				break;
 		}
@@ -136,7 +154,7 @@ const Store = {
 		}
 
 		Object.keys(obj).forEach(stateName => {
-			this.save(stateName, obj[stateName]);
+			this.state[stateName] = obj[stateName];
 		});
 	},
 

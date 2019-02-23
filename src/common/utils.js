@@ -2,6 +2,16 @@
  * @author Thanh
  */
 
+/**
+ * Specialized function to compare 2 time objects created in Clock
+ * @param {object} a
+ * @param {object} b
+ */
+export function compareTimeObj(a, b) {
+	// note: naive comparison, to be enhanced
+	return `${a.hours}${a.minutes}` === `${b.hours}${b.minutes}`;
+}
+
 /* eslint-disable eqeqeq */
 export function shallowEqual(a, b) {
 	const isEqual = a == b;

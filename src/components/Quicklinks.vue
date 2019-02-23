@@ -12,7 +12,6 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import Store from '../common/Store';
 /* eslint no-multi-spaces: off */
 // prettier-ignore
 const quicklinkInfo = [
@@ -35,27 +34,17 @@ const quicklinkInfo = [
 
 export default {
 	name: 'Quote',
+	inject: ['dispatch', 'store'],
 	data() {
 		return {
-			quicklinkStatus: Store.get('settings').activeQuicklinks,
+			appState: this.store.state,
 		};
 	},
 	computed: {
 		quicklinks() {
-			const quicklinkStatus = this.quicklinkStatus;
-			return quicklinkInfo.filter(link => {
-				return quicklinkStatus[link.id];
-			});
+			const quicklinkStatus = this.appState.settings.activeQuicklinks;
+			return quicklinkInfo.filter(link => quicklinkStatus[link.id]);
 		},
-	},
-	created() {
-		Store.subscribe('settings', ({ settings }) => {
-			// console.log('settings changed');
-			this.quicklinkStatus = { ...settings.activeQuicklinks };
-		});
-	},
-	methods: {
-		update() {},
 	},
 };
 </script>
