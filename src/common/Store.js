@@ -108,7 +108,14 @@ const Store = {
 				}
 				break;
 			}
+			case 'UPDATE_SETTINGS':
+				this.save('settings', action.settings);
+				break;
+			case 'UPDATE_USER_PHOTO':
+				this.save('userPhoto', action.userPhoto);
+				break;
 			default:
+				console.log('Unknown action:', this.type);
 				break;
 		}
 	},

@@ -69,24 +69,34 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import Store from '../common/Store';
 import { readAndResizeImage } from '../common/utils';
 
 export default {
 	name: 'SettingsModal',
+	inject: ['dispatch', 'store'],
 	data() {
-		const settings = Store.get('settings');
+		const appState = this.store.state;
+		const settings = appState.settings;
 		const quicklinks = Object.keys(settings.activeQuicklinks).filter(linkName => settings.activeQuicklinks[linkName]);
-
-		// console.log('quicklinks', quicklinks);
-
 		return {
-			language: settings.language,
-			wallpaperMode: settings.wallpaperMode,
-			userPhotoName: settings.userPhotoName || 'Choose a file',
-			userPhoto: Store.get('userPhoto'),
+			appState,
+			settings,
 			quicklinks,
 		};
+	},
+	computed: {
+		userPhoto() {
+			return this.appState.userPhoto;
+		},
+		language() {
+			return this.settings.language;
+		},
+		wallpaperMode() {
+			return this.settings.wallpaperMode;
+		},
+		userPhotoName() {
+			return this.settings.userPhotoName || 'Choose a file';
+		},
 	},
 	methods: {
 		onUserPhotoFileChange(event) {
@@ -103,14 +113,16 @@ export default {
 
 		storeUserPhoto(file) {
 			readAndResizeImage(file).then(imgDataUrl => {
-				this.userPhoto = {
-					imgUrl: imgDataUrl,
-					imgId: file.name,
-					authorName: 'You',
-					authorUsername: '',
-				};
-				Store.set('userPhoto', this.userPhoto);
-				this.wallpaperMode = 'user';
+				this.dispatch({
+					type: 'UPDATE_USER_PHOTO',
+					userPhoto: {
+						imgUrl: imgDataUrl,
+						imgId: file.name,
+						authorName: 'You',
+						authorUsername: '',
+					},
+				});
+				// this.wallpaperMode = 'user';
 				console.log('readAndResizeImage DONE');
 			});
 		},
@@ -125,15 +137,16 @@ export default {
 				return obj;
 			}, {});
 
-		const newSettings = {
-			// these properties must be inside 'settings' due to legacy versions used them
-			language,
-			wallpaperMode,
-			userPhotoName,
-			activeQuicklinks,
-		};
-
-		Store.set('settings', newSettings);
+		this.dispatch({
+			type: 'UPDATE_SETTINGS',
+			settings: {
+				// these properties must be inside 'settings' due to legacy versions used them
+				language,
+				wallpaperMode,
+				userPhotoName,
+				activeQuicklinks,
+			},
+		});
 	},
 	created() {},
 };

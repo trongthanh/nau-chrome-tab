@@ -34,7 +34,7 @@ const quicklinkInfo = [
 
 export default {
 	name: 'Quote',
-	inject: ['dispatch', 'store'],
+	inject: ['store'],
 	data() {
 		return {
 			appState: this.store.state,
