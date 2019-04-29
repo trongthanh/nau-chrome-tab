@@ -115,7 +115,7 @@ const Store = {
 				this.save('userPhoto', action.userPhoto);
 				break;
 			default:
-				console.log('Unknown action:', this.type);
+				console.warn('Unknown action:', action.type);
 				break;
 		}
 	},

@@ -1,7 +1,8 @@
 <template>
-<div id="clock" class="clock">
-	<span class="clock__hour">{{ time.hours }}</span>:<span class="clock__minute">{{ time.minutes }}</span>
-</div>
+	<div id="clock" class="clock">
+		<span class="clock__hour">{{ time.hours }}</span
+		>:<span class="clock__minute">{{ time.minutes }}</span>
+	</div>
 </template>
 
 <script>
@@ -19,6 +20,7 @@ export default {
 		};
 	},
 	methods: {
+		// TODO: refactor to move to time Model
 		getCurrentTime() {
 			const now = new Date();
 			const hours = String(now.getHours()).padStart(2, '0');
@@ -39,7 +41,7 @@ export default {
 		this.time = this.getCurrentTime();
 		// Store.set('currentTime', this.time);
 		this.dispatch({
-			type: 'UPDATE_CURRENT_TIME',
+			type: 'SET_CURRENT_TIME',
 			currentTime: this.time,
 		});
 
@@ -50,7 +52,7 @@ export default {
 				this.time = time;
 				// Store.set('currentTime', this.time); // notify other components about time change
 				this.dispatch({
-					type: 'UPDATE_CURRENT_TIME',
+					type: 'SET_CURRENT_TIME',
 					currentTime: this.time,
 				});
 			}

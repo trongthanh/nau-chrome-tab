@@ -1,20 +1,24 @@
 <template>
-<h1 id="greeting" class="greeting">
-	<span id="greeting-text">{{ greetText }}</span>,
-	<div id="greeting-name" :class="{ greeting__name: true, 'greeting__name--active': inputActive}"
-		@click.stop="onNameClick"
-	>
-		<input :class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty}"
-			v-model="inputValue"
-			v-click-outside="onInputClickOutside"
-			placeholder="gorgeous"
-			@focus="$event.target.select()"
-			@keyup.enter="commitInput"
-			@keyup.esc="cancelInput"
+	<h1 id="greeting" class="greeting">
+		<span id="greeting-text">{{ greetText }}</span
+		>,
+		<div
+			id="greeting-name"
+			:class="{ greeting__name: true, 'greeting__name--active': inputActive }"
+			@click.stop="onNameClick"
 		>
-		<span class="greeting__name__output">{{ greetingName }}</span>
-	</div>
-</h1>
+			<input
+				:class="{ greeting__name__input: true, 'greeting__name__input--empty': isInputEmpty }"
+				v-model="inputValue"
+				v-click-outside="onInputClickOutside"
+				placeholder="gorgeous"
+				@focus="$event.target.select()"
+				@keyup.enter="commitInput"
+				@keyup.esc="cancelInput"
+			/>
+			<span class="greeting__name__output">{{ greetingName }}</span>
+		</div>
+	</h1>
 </template>
 
 <script>
@@ -33,7 +37,6 @@ export default {
 	data() {
 		return {
 			appState: this.store.state, // point to global Store to observe for changes
-			greetText: '',
 			inputActive: true,
 			inputValue: '',
 		};
@@ -45,6 +48,28 @@ export default {
 		greetingName() {
 			return this.appState.greetingName;
 		},
+		greetText() {
+			// greeting
+			const time = this.appState.currentTime;
+			console.log('greeting rerender', time);
+			const hours = time.hours;
+			let greetText = '';
+
+			if (hours < 12) {
+				// morning
+				greetText = 'Good morning';
+			} else if (hours < 18) {
+				// afternoon
+				greetText = 'Good afternoon';
+			} else if (hours < 22) {
+				// evening
+				greetText = 'Good evening';
+			} else {
+				greetText = 'Good night';
+			}
+
+			return greetText;
+		},
 	},
 	methods: {
 		onNameClick() {
@@ -55,28 +80,6 @@ export default {
 			if (this.inputActive) {
 				this.commitInput();
 			}
-		},
-
-		update() {
-			// greeting
-			const today = new Date();
-			const hour = today.getHours();
-			let greetText = '';
-
-			if (hour < 12) {
-				// morning
-				greetText = 'Good morning';
-			} else if (hour < 18) {
-				// afternoon
-				greetText = 'Good afternoon';
-			} else if (hour < 22) {
-				// evening
-				greetText = 'Good evening';
-			} else {
-				greetText = 'Good night';
-			}
-
-			this.greetText = greetText;
 		},
 
 		commitInput(/*event*/) {
@@ -107,13 +110,6 @@ export default {
 			this.inputValue = this.greetingName;
 			this.inputActive = false;
 		}
-
-		this.update();
 	},
-
-	// FIXME: debug if global state change make this component always re-render
-	// beforeUpdate() {
-	// 	console.log('Greeting updated');
-	// },
 };
 </script>
