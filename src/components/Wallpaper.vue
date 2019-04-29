@@ -2,7 +2,7 @@
 	<div
 		id="wallpaper"
 		:class="{ wallpaper: true, 'wallpaper--ready': wallpaperReady }"
-		:style="'background-image:url(' + imgUrl + ')'"
+		:style="'background-image:url(' + wallpaper.imgUrl + ')'"
 	></div>
 </template>
 
@@ -10,83 +10,70 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import Store from '../common/Store';
 import { fetchUnsplash } from '../common/services';
 
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
 export default {
 	name: 'Wallpaper',
+	inject: ['store', 'dispatch'],
 	data() {
 		return {
+			appState: this.store.state,
+
 			wallpaperReady: false,
-			imgUrl: '',
-			wallpaperMode: 'unsplash',
-			userPhotoName: '',
 		};
 	},
+	computed: {
+		wallpaperMode() {
+			return this.appState.settings.wallpaperMode;
+		},
+		wallpaper() {
+			return this.appState.wallpaper;
+		},
+		lastPhotoFetch() {
+			return this.appState.lastPhotoFetch;
+		},
+	},
 	created() {
-		this.wallpaperMode = Store.get('settings').wallpaperMode;
 		this.init();
-
-		Store.subscribe('userPhoto', () => {
-			this.init();
-		});
-
-		Store.subscribe('settings', ({ settings }) => {
-			if (this.wallpaperMode !== settings.wallpaperMode) {
-				// change wallpapermode, reinit
-				this.wallpaperMode = settings.wallpaperMode;
-				this.init();
-			}
-
-			if (settings.wallpaperMode === 'user' && this.userPhotoName !== settings.userPhotoName) {
-				// user upload new user photo
-				// console.log('user photo changed');
-				this.init();
-			}
-		});
 	},
 
 	methods: {
 		init() {
-			if (this.wallpaperMode === 'user') {
-				this._initUserMode();
-			} else {
-				// unsplash
+			if (this.wallpaperMode === 'unsplash') {
 				this._initUnsplashMode();
 			}
+			// nothing todo for user mode
 
 			this.wallpaperReady = true;
 		},
-		_initUserMode() {
-			const imgData = Store.get('userPhoto');
-			this.imgUrl = imgData.imgUrl;
-		},
 
 		_initUnsplashMode() {
-			const lastCheck = Store.get('lastPhotoFetch') || 0;
-			let currentPhoto = Store.get('currentPhoto');
+			const lastCheck = this.lastPhotoFetch;
+			let currentPhoto = this.wallpaper;
 
 			const now = Date.now();
 			// NOTE: set true to load new photo every refresh
-			const DEBUG = false;
+			const DEBUG = true;
 			// the first hour after install, user will see default background,
 			// then we'll fetch new image in the next hour
 			if (DEBUG || now > lastCheck + RENEW_DURATION) {
-				const nextPhoto = Store.get('nextPhoto');
+				const nextPhoto = this.appState.nextPhoto;
 				if (nextPhoto) {
 					currentPhoto = nextPhoto;
-					Store.set({
+
+					console.log('currentPhoto', currentPhoto);
+					this.dispatch({
+						type: 'UPDATE_CURRENT_PHOTO',
 						currentPhoto,
 					});
+					this.dispatch({
+						type: 'UPDATE_WALLPAPER',
+						wallpaper: currentPhoto,
+					});
 				}
-				// use next photo
-				this.imgUrl = currentPhoto.imgUrl;
 				this._fetchNewPhoto(now);
-			} else {
-				// for this hour
-				this.imgUrl = currentPhoto.imgUrl;
 			}
 		},
 
@@ -102,7 +89,8 @@ export default {
 				const imgEl = document.createElement('IMG');
 				imgEl.onload = () => {
 					console.log('Image is loaded, ready for view in next hour');
-					Store.set({
+					this.dispatch({
+						type: 'UPDATE_NEXT_PHOTO',
 						lastPhotoFetch: now,
 						nextPhoto: {
 							location,
@@ -115,9 +103,9 @@ export default {
 				};
 
 				imgEl.onerror = () => {
-					console.log("Image load errors, we'll try again next open tab");
-					Store.set({ nextPhoto: null });
+					console.log('Image load errors, we will try again next open tab');
 				};
+				// load the image
 				imgEl.src = url;
 			});
 		},

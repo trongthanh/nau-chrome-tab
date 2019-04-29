@@ -13,16 +13,17 @@ const Store = {
 	// prettier-ignore
 	state: {
 		lastPhotoFetch: 0, // timestamp
-		nextPhoto: null,
-		currentPhoto: {
+		// current wallpaper
+		wallpaper: {
 			imgUrl:
 				'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
 			imgId: 'gzeUpbjoTUA',
 			authorName: 'Hoach Le Dinh',
 			authorUsername: 'hoachld',
 		},
-		userPhoto: null, // user photo data, with structure similar to currentPhoto
-		wallpaper: null, // current wallpaper
+		nextPhoto: null,
+		currentPhoto: null, // unsplash photo data, with structure similar to wallpaper
+		userPhoto: null, // user photo data, with structure similar to wallpaper
 		settings: {
 			// these properties must be inside 'settings' due to legacy versions used them
 			language: navigator.language.includes('vi') ? 'vi' : 'en',
@@ -114,6 +115,17 @@ const Store = {
 			case 'UPDATE_USER_PHOTO':
 				this.save('userPhoto', action.userPhoto);
 				break;
+			case 'UPDATE_CURRENT_PHOTO':
+				this.save('currentPhoto', action.currentPhoto);
+				break;
+			case 'UPDATE_WALLPAPER':
+				// set this wallpaper state to force rerender Wallpaper component
+				this.save('wallpaper', action.wallpaper);
+				break;
+			case 'UPDATE_NEXT_PHOTO':
+				this.save('nextPhoto', action.nextPhoto);
+				this.save('lastPhotoFetch', action.lastPhotoFetch);
+				break;
 			default:
 				console.warn('Unknown action:', action.type);
 				break;
@@ -200,5 +212,8 @@ const Store = {
 		return document.dispatchEvent(Object.assign(event, payload));
 	},
 };
+
+// FIXME: debug
+window.store = Store;
 
 export default Store;

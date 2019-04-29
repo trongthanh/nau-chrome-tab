@@ -15,7 +15,7 @@
 			<Quote :quote="quote" />
 			<div class="main__item main__item--bottom-left">
 				<button class="setting-btn icon-btn mdi mdi--settings" type="button" @click.stop="onSettingBtnClick"></button>
-				<PhotoCredit :imgData="currentPhoto" />
+				<PhotoCredit :imgData="wallpaper" />
 			</div>
 			<div class="main__item main__item--bottom-right">
 				<div class="brand-logo">
@@ -71,8 +71,8 @@ export default {
 		lang() {
 			return this.appState.settings.language;
 		},
-		currentPhoto() {
-			return this.appState.currentPhoto;
+		wallpaper() {
+			return this.appState.wallpaper;
 		},
 		quote() {
 			return this.appState.quote;

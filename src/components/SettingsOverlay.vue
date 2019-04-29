@@ -33,7 +33,7 @@ export default {
 			return this.appState.settingsActive;
 		},
 		wallpaper() {
-			return this.appState.currentPhoto;
+			return this.appState.wallpaper;
 		},
 	},
 	methods: {
