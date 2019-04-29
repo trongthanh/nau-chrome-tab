@@ -50,9 +50,7 @@ export default {
 		},
 		greetText() {
 			// greeting
-			const time = this.appState.currentTime;
-			console.log('greeting rerender', time);
-			const hours = time.hours;
+			const { hours } = this.appState.currentTime;
 			let greetText = '';
 
 			if (hours < 12) {

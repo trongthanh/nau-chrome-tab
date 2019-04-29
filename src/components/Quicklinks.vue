@@ -1,7 +1,7 @@
 <template>
 	<ul id="quicklinks" class="quick-links__list">
 		<li v-for="link in quicklinks" :key="link.id" class="quick-links__li" :id="link.id">
-			<a :href="link.url" :class="{'quick-links__link': true, 'mdi': true, [link.icon]: true}" :title="link.title">
+			<a :href="link.url" :class="{ 'quick-links__link': true, mdi: true, [link.icon]: true }" :title="link.title">
 				<span v-if="link.typeicon" class="typeicon">{{ link.typeicon }}</span>
 			</a>
 		</li>
