@@ -161,7 +161,6 @@ fieldset {
 
 /* Brand logo */
 .logo {
-	display: inline-block;
 	/* compensate padding hit */
 	margin-right: -1rem;
 	margin-bottom: -1rem;
@@ -238,6 +237,14 @@ fieldset {
 .quick-links__link:hover::after {
 	visibility: visible;
 	opacity: 1;
+}
+
+/* brand logo has text on the left */
+.logo::after {
+	bottom: 1em;
+	left: auto;
+	right: 35px;
+	transform: translateX(0);
 }
 
 /*Fixed width for text link*/
@@ -447,7 +454,7 @@ fieldset {
 	left: 0;
 	bottom: 0;
 	background-position: center;
-	background-size: 100vw auto;
+	background-size: cover;
 	filter: blur(5px);
 	z-index: 0;
 }
