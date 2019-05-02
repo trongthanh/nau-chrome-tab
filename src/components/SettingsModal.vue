@@ -5,18 +5,18 @@
 		<button class="modal__close icon-btn mdi mdi--close" @click="$emit('close')"></button>
 		<div class="modal__content">
 			<form id="settings-panel" class="modal__body settings">
+				<!-- temporary hide this setting, will come back later when I have full quote translation
 				<fieldset>
 					<legend>Choose language / Chọn ngôn ngữ</legend>
-					<input id="setting-lang-en" type="radio" name="setting-language" value="en" v-model="language"><!--
-				--><label class="settings__label" for="setting-lang-en">
+					<input id="setting-lang-en" type="radio" name="setting-language" value="en" v-model="language"><label class="settings__label" for="setting-lang-en">
 						English
 					</label>
 
-					<input id="setting-lang-vi" type="radio" name="setting-language" value="vi" v-model="language"><!--
-				--><label class="settings__label" for="setting-lang-vi">
+					<input id="setting-lang-vi" type="radio" name="setting-language" value="vi" v-model="language"><label class="settings__label" for="setting-lang-vi">
 						Tiếng Việt
 					</label>
 				</fieldset>
+				-->
 				<fieldset>
 					<legend i18n="wallpaper_mode">Wallpaper Mode</legend>
 					<input id="setting-wallpaper-mode-unsplash" type="radio" name="setting-wallpaper-mode" value="unsplash" v-model="wallpaperMode"><!--
@@ -29,7 +29,7 @@
 						Your Photo
 					</label>
 
-					<label id="setting-photo-selector" class="u-hidden file-input settings__label">
+					<label id="setting-photo-selector" class="u-hidden file-input settings__label" title="Click to select you photo">
 						<input id="setting-photo-selector-input" type="file" class="u-hidden" @change="onUserPhotoFileChange">
 						<i class="mdi mdi--file-image"></i>
 						<span id="setting-photo-selector-label" class="file-input__label">{{ userPhotoName }}</span>

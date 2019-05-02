@@ -26,8 +26,8 @@
 	},
 	"dependencies": {
 		"lockr": "^0.8.4",
-		"v-click-outside": "^2.0.2",
-		"vue": "^2.5.21"
+		"v-click-outside": "^2.1.1",
+		"vue": "^2.6.10"
 	},
 	"browserslist": [
 		"> 1%",

@@ -11,7 +11,7 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import vClickOutside from 'v-click-outside';
+import vClickOutside from 'v-click-outside/lib';
 import SettingsModal from './SettingsModal';
 
 export default {

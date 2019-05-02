@@ -25,7 +25,7 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-import vClickOutside from 'v-click-outside';
+import vClickOutside from 'v-click-outside/lib';
 
 export default {
 	name: 'Greeting',
