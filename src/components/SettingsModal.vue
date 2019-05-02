@@ -1,5 +1,5 @@
-<!-- prettier-ignore -->
 <template>
+	<!-- prettier-ignore -->
 	<div class="modal modal--slide-up">
 		<h3 class="modal__title" i18n="settings">Settings</h3>
 		<button class="modal__close icon-btn mdi mdi--close" @click="$emit('close')"></button>
@@ -63,7 +63,8 @@
 				</div>
 			</form>
 		</div>
-	</div><!-- /.modal -->
+	</div>
+	<!-- /.modal -->
 </template>
 
 <script>
@@ -81,39 +82,15 @@ export default {
 		const quicklinks = Object.keys(settings.activeQuicklinks).filter(linkName => settings.activeQuicklinks[linkName]);
 		return {
 			appState,
-			settings,
+			// data binding for local settings UI
 			quicklinks,
+			wallpaperMode: settings.wallpaperMode,
 			language: settings.language,
 			userPhotoName: settings.userPhotoName || 'Choose a file',
 			userPhoto: appState.userPhoto,
 		};
 	},
-	computed: {
-		wallpaperMode: {
-			get() {
-				return this.settings.wallpaperMode;
-			},
-
-			set(newMode) {
-				const appState = this.appState;
-				if (newMode !== this.settings.wallpaperMode) {
-					if (newMode === 'user' && appState.userPhoto) {
-						this.dispatch({
-							type: 'UPDATE_WALLPAPER',
-							wallpaper: appState.userPhoto,
-						});
-					} else {
-						this.dispatch({
-							type: 'UPDATE_WALLPAPER',
-							wallpaper: appState.currentPhoto,
-						});
-					}
-
-					this.updateSettings();
-				}
-			},
-		},
-	},
+	computed: {},
 	methods: {
 		onUserPhotoFileChange(event) {
 			console.log('file selector change:', event.target.files);
@@ -143,8 +120,8 @@ export default {
 			});
 		},
 		updateSettings() {
-			console.log('settings updated', this.language, this.wallpaperMode, this.quicklinks);
-			const { language, wallpaperMode, userPhotoName, quicklinks } = this;
+			// console.log('settings updated', this.language, this.wallpaperMode, this.appState.settings.wallpaperMode);
+			const { language, wallpaperMode, userPhotoName, quicklinks, appState } = this;
 			// prettier-ignore
 			const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
 				.reduce((obj, linkName) => {
@@ -152,20 +129,33 @@ export default {
 					return obj;
 				}, {});
 
+			if (wallpaperMode !== this.appState.settings.wallpaperMode) {
+				if (wallpaperMode === 'user' && appState.userPhoto) {
+					this.dispatch({
+						type: 'UPDATE_WALLPAPER',
+						wallpaper: appState.userPhoto,
+					});
+				} else {
+					this.dispatch({
+						type: 'UPDATE_WALLPAPER',
+						wallpaper: appState.currentPhoto,
+					});
+				}
+			}
+
 			this.dispatch({
 				type: 'UPDATE_SETTINGS',
 				settings: {
 					// these properties must be inside 'settings' due to legacy versions used them
 					language,
-					wallpaperMode,
 					userPhotoName,
 					activeQuicklinks,
+					wallpaperMode,
 				},
 			});
 		},
 	},
 	updated() {
-		console.log('SettingsModal updated');
 		this.updateSettings();
 	},
 	created() {},

@@ -14,6 +14,8 @@ import { fetchUnsplash } from '../common/services';
 
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
+// TODO: implement drag and drop user image
+
 export default {
 	name: 'Wallpaper',
 	inject: ['store', 'dispatch'],
@@ -55,7 +57,7 @@ export default {
 
 			const now = Date.now();
 			// NOTE: set true to load new photo every refresh
-			const DEBUG = true;
+			const DEBUG = false;
 			// the first hour after install, user will see default background,
 			// then we'll fetch new image in the next hour
 			if (DEBUG || now > lastCheck + RENEW_DURATION) {

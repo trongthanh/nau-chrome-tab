@@ -65,7 +65,7 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		const keys = ['settings', 'lastPhotoFetch', 'currentPhoto', 'nextPhoto', 'userPhoto', 'greetingName'];
+		const keys = Object.keys(this.state).filter(key => !this.nosave.includes(key));
 
 		return PersistStorage.get(keys).then(result => {
 			// console.log('rehydrate result', result);
