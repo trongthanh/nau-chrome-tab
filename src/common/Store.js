@@ -3,10 +3,12 @@
  */
 import PersistStorage from './PersistStorage';
 import { enQuotes, viQuotes } from './quotes';
+import Timer from './Timer';
 
 const Store = {
 	init(register) {
 		register(this._handleEvent.bind(this));
+		Timer.start();
 		return this;
 	},
 	// default
