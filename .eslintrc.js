@@ -6,6 +6,7 @@ module.exports = {
 		'no-param-reassign': 'off',
 		'padding-line-between-statements': ['off'],
 		'import/prefer-default-export': 'off',
+		'no-mixed-operators': 'off',
 		// don't require .vue extension when importing
 		'import/extensions': [
 			'error',

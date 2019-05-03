@@ -8,7 +8,7 @@
 			<div class="main__item main__item--top-right">
 				<!-- <div>Weather info</div> -->
 			</div>
-			<div class="main__item main__item--center">
+			<div class="main__item main__item--center clock-group clock-group--center clock-group--blend">
 				<Clock />
 				<Greeting :lang="lang" />
 			</div>

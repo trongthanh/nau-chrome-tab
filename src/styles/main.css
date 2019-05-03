@@ -1,28 +1,27 @@
 html {
 	height: 100%;
 	box-sizing: border-box;
-	font-size: 10px; /*for easily calculate up rem*/
+	font-size: 10px; /* for easily calculate up rem */
 }
 
 /* new approach to global box-sizing */
 *,
-*:before,
-*:after {
+*::before,
+s *::after {
 	box-sizing: inherit;
 }
 
 body {
-	text-rendering: geometricPrecision; /*this will make thin font not being bolden by subpixel-antialias Chrome*/
+	text-rendering: geometricPrecision; /* this will make thin font not being bolden by subpixel-antialias Chrome */
 	-webkit-font-smoothing: antialiased;
 	margin: 0;
 	padding: 0;
 	height: 100%;
 	color: white;
 	font-size: 1.8rem;
-	/*use native font-family for fastest rendering*/
+	/* use native font-family for fastest rendering */
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
 		'Droid Sans', 'Helvetica Neue', sans-serif;
-
 	background-position: center center;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -92,14 +91,6 @@ fieldset {
 
 .main__item--center {
 	grid-area: mc;
-
-	text-align: center;
-	text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-	/* recipe to vertical align center */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-flow: column;
 }
 
 .main__item--bottom {
@@ -204,7 +195,6 @@ fieldset {
 	text-decoration: none;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 	opacity: 0.5;
-
 	-webkit-transition: all 200ms;
 	-o-transition: all 200ms;
 	transition: all 200ms;
@@ -251,7 +241,7 @@ fieldset {
 	transform: translateX(0);
 }
 
-/*Fixed width for text link*/
+/* Fixed width for text link */
 .link--typeicon {
 	width: 4rem;
 	text-align: center;
@@ -292,11 +282,6 @@ fieldset {
 	transform: translateY(-1.3em);
 }
 
-.quotes:hover > .quotes__author {
-	visibility: visible;
-	opacity: 1;
-}
-
 .quotes__text::before {
 	content: '“';
 }
@@ -317,6 +302,35 @@ fieldset {
 	white-space: nowrap;
 }
 
+.quotes:hover > .quotes__author {
+	visibility: visible;
+	opacity: 1;
+}
+
+/**
+ * Clock group
+ */
+.clock-group {
+	/* empty */
+}
+
+.clock-group--center {
+	text-align: center;
+	/* recipe to vertical align center */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-flow: column;
+}
+
+.clock-group--mini {
+}
+
+.clock-group--blend {
+	color: #444;
+	mix-blend-mode: color-dodge;
+}
+
 /**
  * The big clock
  */
@@ -324,6 +338,13 @@ fieldset {
 	font-size: 14.5rem;
 	font-weight: 100;
 	letter-spacing: -3px;
+	text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.clock-group--blend .clock {
+	font-size: 25rem;
+	font-weight: normal;
+	text-shadow: none;
 }
 
 /**
@@ -333,16 +354,17 @@ fieldset {
 	font-size: 4rem;
 	margin: 0;
 	white-space: nowrap;
+	text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+}
+
+.clock-group--blend .greeting {
+	text-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
 }
 
 .greeting__name {
 	display: inline-block;
 	cursor: pointer;
 	position: relative;
-}
-
-.greeting__name--active > .greeting__name__input {
-	display: inline-block;
 }
 
 .greeting__name--active > .greeting__name__output {
@@ -367,7 +389,8 @@ fieldset {
 	display: none;
 	top: 0;
 }
-/*need this for empty greeting name*/
+
+/* need this for empty greeting name */
 .greeting__name__input--empty {
 	position: relative;
 }
@@ -375,9 +398,11 @@ fieldset {
 .greeting__name__input::-webkit-input-placeholder {
 	color: rgba(255, 255, 255, 0.8);
 }
+
 .greeting__name__input::-moz-placeholder {
 	color: rgba(255, 255, 255, 0.8);
 }
+
 .greeting__name__input::-ms-input-placeholder {
 	color: rgba(255, 255, 255, 0.8);
 }
@@ -386,12 +411,17 @@ fieldset {
 	outline: 0;
 }
 
+.greeting__name--active > .greeting__name__input {
+	display: inline-block;
+}
+
 /**
  * Photo credit
  */
 .photo-credit {
 	font-size: 0.8em;
 	display: inline-block;
+	margin-bottom: 0.2em;
 }
 
 /**
@@ -436,7 +466,7 @@ fieldset {
 	-moz-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
-	padding-top: 4.5rem; /*space for heading*/
+	padding-top: 4.5rem; /* space for heading */
 }
 
 .modal-overlay--active .modal {
@@ -489,7 +519,7 @@ fieldset {
 }
 
 /* Effect 3: Slide from the bottom, change from origin: apply to container, to avoid
-conflicting with the frosty glass effect*/
+conflicting with the frosty glass effect */
 .modal--slide-up {
 	-webkit-transform: translateX(-50%) translateY(-40%);
 	-moz-transform: translateX(-50%) translateY(-40%);
@@ -522,10 +552,6 @@ conflicting with the frosty glass effect*/
 	display: inline-block;
 }
 
-.copyright .icon-btn {
-	padding: 0.5rem;
-}
-
 /**
  * File input
  */
@@ -543,7 +569,7 @@ conflicting with the frosty glass effect*/
 }
 
 .file-input > [type='file'] {
-	/*hide native input UI*/
+	/* hide native input UI */
 	width: 0.1px;
 	height: 0.1px;
 	opacity: 0;
@@ -570,6 +596,10 @@ conflicting with the frosty glass effect*/
 
 .icon-btn:hover {
 	color: #977857;
+}
+
+.copyright .icon-btn {
+	padding: 0.5rem;
 }
 
 .u-serif-text {

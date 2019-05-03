@@ -6,8 +6,9 @@
 			"ignoreAtRules": ["if", "else"]
 		}],
 		"block-closing-brace-space-before": null,
-		"color-named": "never",
-		"color-no-hex": true,
+		"color-named": null,
+		"color-no-hex": null,
+		"comment-empty-line-before": null,
 		"declaration-block-no-duplicate-properties": true,
 		"declaration-block-semicolon-space-after": null,
 		"declaration-block-single-line-max-declarations": 3,
@@ -20,7 +21,8 @@
 		"selector-list-comma-newline-after": null,
 		"shorthand-property-no-redundant-values": null,
 		"string-quotes": "single",
-		"selector-max-id": 0
+		"selector-max-id": 0,
+		"value-list-comma-newline-after": null
 	},
 	"ignoreFiles": ["app/styles/normalize.css"]
 }
