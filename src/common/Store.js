@@ -20,6 +20,7 @@ const Store = {
 			imgId: 'gzeUpbjoTUA',
 			authorName: 'Hoach Le Dinh',
 			authorUsername: 'hoachld',
+			color: '#888888', // median color of the photo
 		},
 		nextPhoto: null,
 		currentPhoto: null, // unsplash photo data, with structure similar to wallpaper

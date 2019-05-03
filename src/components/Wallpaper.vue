@@ -82,12 +82,11 @@ export default {
 
 		_fetchNewPhoto(now) {
 			// const period = getDayPeriod(1549029600000); // this value to test night time
-			const period = getDayPeriod(now);
+			const period = getDayPeriod(now + RENEW_DURATION); // add one hour for next hour
 			fetchUnsplash(period).then(json => {
 				console.log('fetch result', json);
 				const url = json.urls.custom || json.urls.full;
 				const user = json.user || { name: '', username: '' };
-				const location = json.location;
 
 				// cache the image via normal browser cache in the background
 				// but don't show it immediately after load, user will see new image in next open tab
@@ -98,11 +97,12 @@ export default {
 						type: 'UPDATE_NEXT_PHOTO',
 						lastPhotoFetch: now,
 						nextPhoto: {
-							location,
+							location: json.location,
 							imgUrl: imgEl.src,
 							imgId: json.id,
 							authorName: user.name,
 							authorUsername: user.username,
+							color: json.color,
 						},
 					});
 				};

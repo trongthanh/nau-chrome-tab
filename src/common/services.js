@@ -24,9 +24,9 @@ function queryString(params) {
 const unsplashAPI = 'https://api.unsplash.com/photos/random';
 const collectionsByPeriod = {
 	day: [1507483],
-	dawn: [1507483], // no separate collection for now
 	night: [4747434],
-	dusk: [4747434], // no separate collection for now
+	dawn: [4748158],
+	dusk: [4748158],
 };
 /**
  * Fetch Unplash random image
