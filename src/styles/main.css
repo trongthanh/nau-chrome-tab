@@ -23,7 +23,6 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
 		'Droid Sans', 'Helvetica Neue', sans-serif;
 	background-position: center center;
-	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: #eee;
 }
@@ -39,15 +38,11 @@ button:focus {
 a,
 a:visited {
 	color: white;
-	-webkit-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
 
 a:hover {
 	color: #eee;
-	-webkit-text-decoration-color: #977857;
-	-moz-text-decoration-color: #977857;
 	text-decoration-color: #977857;
 }
 
@@ -132,7 +127,6 @@ fieldset {
 	width: 100%;
 	height: 100%;
 	background-position: center center;
-	-webkit-background-size: cover;
 	background-size: cover;
 	transition: opacity 500ms;
 	opacity: 0;
@@ -153,8 +147,6 @@ fieldset {
 .quick-links {
 	margin: -1rem; /* compensate buttons padding */
 	opacity: 0.5;
-	-webkit-transition: opacity 200ms;
-	-o-transition: opacity 200ms;
 	transition: opacity 200ms;
 }
 
@@ -203,17 +195,13 @@ fieldset {
 	text-decoration: none;
 	text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 	opacity: 0.5;
-	-webkit-transition: all 200ms;
-	-o-transition: all 200ms;
 	transition: all 200ms;
 }
 
 .quick-links__link:hover {
 	color: white;
 	opacity: 1;
-	-webkit-transform: translateY(-5px);
 	-ms-transform: translateY(-5px);
-	-o-transform: translateY(-5px);
 	transform: translateY(-5px);
 }
 
@@ -226,13 +214,9 @@ fieldset {
 	font-size: 0.7em;
 	font-weight: normal;
 	white-space: nowrap;
-	-webkit-transition: all 200ms;
-	-o-transition: all 200ms;
 	transition: all 200ms;
 	visibility: hidden;
 	opacity: 0;
-	-webkit-filter: none;
-	-o-filter: none;
 	filter: none;
 }
 
@@ -259,8 +243,6 @@ fieldset {
 /* apply drop shadow for any shape icon */
 .quick-links__link--svg {
 	text-shadow: none;
-	-webkit-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3)) blur(0);
-	-o-filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3)) blur(0);
 	filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.3)) blur(0);
 }
 
@@ -385,8 +367,6 @@ fieldset {
 }
 
 .greeting__name__input {
-	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 	border: 0;
 	border-bottom: solid 1px white;
@@ -408,15 +388,7 @@ fieldset {
 	position: relative;
 }
 
-.greeting__name__input::-webkit-input-placeholder {
-	color: rgba(255, 255, 255, 0.8);
-}
-
-.greeting__name__input::-moz-placeholder {
-	color: rgba(255, 255, 255, 0.8);
-}
-
-.greeting__name__input::-ms-input-placeholder {
+.greeting__name__input::placeholder {
 	color: rgba(255, 255, 255, 0.8);
 }
 
@@ -452,8 +424,6 @@ fieldset {
 	z-index: 1000;
 	opacity: 0;
 	background: rgba(0, 0, 0, 0.3);
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
 	transition: all 0.3s;
 }
 
@@ -472,11 +442,7 @@ fieldset {
 	max-height: 80%;
 	overflow: hidden;
 	visibility: hidden;
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	-moz-transform: translateX(-50%) translateY(-50%);
 	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 	padding-top: 4.5rem; /* space for heading */
@@ -491,17 +457,6 @@ fieldset {
 	right: 0;
 	top: 0;
 	font-size: 2.2rem;
-}
-
-/* simulate frosted glass effect, image url will be set dynamically */
-.modal__background {
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
-	z-index: 0;
-	background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* modal content styles */
@@ -534,20 +489,12 @@ fieldset {
 /* Effect 3: Slide from the bottom, change from origin: apply to container, to avoid
 conflicting with the frosty glass effect */
 .modal--slide-up {
-	-webkit-transform: translateX(-50%) translateY(-40%);
-	-moz-transform: translateX(-50%) translateY(-40%);
-	-ms-transform: translateX(-50%) translateY(-40%);
 	transform: translateX(-50%) translateY(-40%);
 	opacity: 0;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
+	transition: all 0.3s 0.3s; /* delay to avoid overheating rendering and make framerate drop */
 }
 
 .modal-overlay--active .modal--slide-up {
-	-webkit-transform: translateX(-50%) translateY(-50%);
-	-moz-transform: translateX(-50%) translateY(-50%);
-	-ms-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 	opacity: 1;
 }
@@ -595,15 +542,11 @@ conflicting with the frosty glass effect */
  * Utilities
  */
 .icon-btn {
-	-webkit-appearance: none;
-	-moz-appearance: none;
 	appearance: none;
 	border: 0;
 	background: none;
 	color: white;
 	padding: 1rem;
-	-webkit-transition: color 200ms ease;
-	-o-transition: color 200ms ease;
 	transition: color 200ms ease;
 }
 

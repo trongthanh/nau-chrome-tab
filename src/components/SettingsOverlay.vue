@@ -1,7 +1,6 @@
 <template>
 	<!-- modal settings popup -->
 	<div :class="{ 'modal-overlay': true, 'modal-overlay--active': active }" @keyup.esc="onModalClose" tabindex="0">
-		<div class="modal__background"></div>
 		<SettingsModal v-click-outside="onModalClose" @close="onModalClose" />
 	</div>
 	<!-- /.modal-overlay -->
