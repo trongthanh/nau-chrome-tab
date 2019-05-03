@@ -83,7 +83,6 @@ const Store = {
 			const settings = Object.assign({}, this.state.settings, result.settings);
 			delete result.settings;
 			this.state = Object.assign(this.state, result, { settings });
-			this._dispatchEvent('statechange:all', this.state);
 
 			// return whole states object in resolve callback
 			return this.state;
@@ -139,84 +138,26 @@ const Store = {
 		}
 	},
 
-	// TODO: REMOVE LEGACY CODE ONCE DONE
-	// /**
-	//  * Subscribe to a change in settings
-	//  * @param  {string} key     Name of settings / key in store
-	//  * @param  {Function} handler Call back function
-	//  * @return {void}
-	//  * @example
-	//  * ```js
-	//  * import { Store } from './config';
-	//  *
-	//  * Store.subscribe('language', event => {
-	//  * 	console.log('New language', event.language);
-	//  * 	this.update();
-	//  * });
-	//  * ```
-	//  */
-	subscribe(key, handler) {
-		// we'll make use of DOM events for our custom events
-		document.addEventListener(`statechange:${key}`, handler);
-	},
-
-	get(key) {
-		return this.state[key];
-	},
-
-	// /**
-	//  * Set the state
-	//  *
-	//  * Input can be key-value params pair or a state object
-	//  *
-	//  * @param {*} key
-	//  * @param {*} value
-	//  */
+	/**
+	 * Set the state
+	 *
+	 * Input can be key-value params pair or a state object
+	 *
+	 * @param {*} key
+	 * @param {*} value
+	 */
 	set(key, value) {
-		let obj = key;
-
-		if (typeof key === 'string' && value != null) {
-			obj = { [key]: value };
-		}
-
-		Object.keys(obj).forEach((stateName) => {
-			this.state[stateName] = obj[stateName];
-		});
+		this.state[key] = value;
 	},
-
-	// /**
-	//  * Save state of each key and persist data if needed
-	//  * @param {string} key
-	//  * @param {*} value
-	//  */
+	/**
+	 * Save state of each key and persist data if needed
+	 * @param {string} key
+	 * @param {*} value
+	 */
 	save(key, value) {
 		this.state[key] = value;
-		if (this.nosave.includes(key)) {
-			// just dispatch change event, won't persist the state
-			this._dispatchEvent(`statechange:${key}`, { [key]: this.state[key] });
 
-			return;
-		}
-
-		PersistStorage.set({ [key]: this.state[key] }).then(() => {
-			this._dispatchEvent(`statechange:${key}`, { [key]: this.state[key] });
-		});
-	},
-
-	// /**
-	//  * simple event dispatcher using HTML Events and DOM inspired by Bliss
-	//  * @param {string} type
-	//  * @param {any} payload
-	//  * @return {void}
-	//  */
-	_dispatchEvent(type, payload) {
-		const event = document.createEvent('HTMLEvents');
-
-		event.initEvent(type, true, true);
-
-		// Return the result of dispatching the event, so we
-		// can know if `e.preventDefault` was called inside it
-		return document.dispatchEvent(Object.assign(event, payload));
+		PersistStorage.set({ [key]: this.state[key] });
 	},
 };
 

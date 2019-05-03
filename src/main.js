@@ -13,13 +13,7 @@ window.browser = window.msBrowser || window.browser || window.chrome;
 Store.init(register)
 	.rehydrate()
 	.then(() => {
-		// new Vue({
-		// 	el: '#app',
-		// 	components: { App },
-		// 	template: '<App/>',
-		// });
-
 		new Vue({
-			render: h => h(App),
+			render: (h) => h(App),
 		}).$mount('#app');
 	});
