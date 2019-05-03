@@ -84,9 +84,10 @@ export default {
 		},
 
 		_fetchNewPhoto(now) {
+			// TODO: move these to Wallpaper model
 			// const period = getDayPeriod(1549029600000); // this value to test night time
 			const period = getDayPeriod(now + RENEW_DURATION); // add one hour for next hour
-			fetchUnsplash(period).then(json => {
+			fetchUnsplash(period).then((json) => {
 				console.log('fetch result', json);
 				const url = json.urls.custom || json.urls.full;
 				const user = json.user || { name: '', username: '' };

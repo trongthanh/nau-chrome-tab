@@ -33,9 +33,7 @@
 			</div>
 			<div class="main__item main__item--bottom-right">
 				<div class="brand-logo">
-					<a href="https://int3ractive.com" class="quick-links__link logo" title="Made in Saigon with">
-						<i class="mdi mdi--heart" />
-					</a>
+					<a href="https://int3ractive.com" class="quick-links__link logo" title="Made in Saigon"> </a>
 				</div>
 			</div>
 		</main>

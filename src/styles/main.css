@@ -160,6 +160,14 @@ fieldset {
 	margin-right: -1rem;
 	margin-bottom: -1rem;
 }
+/* square icon */
+.logo::before {
+	display: block;
+	content: '';
+	width: 1.5rem;
+	height: 2rem;
+	border: solid 3px white;
+}
 
 .typeicon {
 	display: inline-block;
