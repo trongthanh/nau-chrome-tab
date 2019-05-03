@@ -1,7 +1,7 @@
 <template>
 	<!-- modal settings popup -->
 	<div :class="{ 'modal-overlay': true, 'modal-overlay--active': active }" @keyup.esc="onModalClose" tabindex="0">
-		<div class="modal__background" :style="{ backgroundImage: `url(${wallpaper.imgUrl})` }"></div>
+		<div class="modal__background"></div>
 		<SettingsModal v-click-outside="onModalClose" @close="onModalClose" />
 	</div>
 	<!-- /.modal-overlay -->
@@ -31,9 +31,6 @@ export default {
 	computed: {
 		active() {
 			return this.appState.settingsActive;
-		},
-		wallpaper() {
-			return this.appState.wallpaper;
 		},
 	},
 	methods: {

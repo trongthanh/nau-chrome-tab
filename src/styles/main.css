@@ -144,6 +144,10 @@ fieldset {
 	opacity: 1;
 }
 
+.wallpaper--blur {
+	filter: blur(5px);
+}
+
 /**
  * Quick links
  */
@@ -453,10 +457,8 @@ fieldset {
 	right: 0;
 	left: 0;
 	bottom: 0;
-	background-position: center;
-	background-size: cover;
-	filter: blur(5px);
 	z-index: 0;
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* modal content styles */

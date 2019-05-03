@@ -1,7 +1,7 @@
 <template>
 	<div
 		id="wallpaper"
-		:class="{ wallpaper: true, 'wallpaper--ready': wallpaperReady }"
+		:class="{ wallpaper: true, 'wallpaper--ready': wallpaperReady, 'wallpaper--blur': settingsActive }"
 		:style="'background-image:url(' + wallpaper.imgUrl + ')'"
 	></div>
 </template>
@@ -36,6 +36,9 @@ export default {
 		},
 		lastPhotoFetch() {
 			return this.appState.lastPhotoFetch;
+		},
+		settingsActive() {
+			return this.appState.settingsActive;
 		},
 	},
 	created() {
