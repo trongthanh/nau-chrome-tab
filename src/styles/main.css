@@ -71,7 +71,10 @@ fieldset {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr 3fr 1fr;
-	grid-template-areas: 'tl tc tc tr' 'ml mc mc mr' 'bl bc bc br';
+	grid-template-areas:
+		'tl tc tc tr'
+		'ml mc mc mr'
+		'bl bc bc br';
 }
 
 .main__item {
@@ -87,6 +90,11 @@ fieldset {
 	grid-area: tr;
 	align-items: flex-start;
 	justify-content: flex-end;
+}
+
+.main__item--top-center {
+	grid-area: tc;
+	justify-content: center;
 }
 
 .main__item--center {
@@ -311,19 +319,12 @@ fieldset {
  * Clock group
  */
 .clock-group {
-	/* empty */
-}
-
-.clock-group--center {
 	text-align: center;
 	/* recipe to vertical align center */
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-flow: column;
-}
-
-.clock-group--mini {
+	flex-direction: column;
 }
 
 .clock-group--blend {
@@ -335,6 +336,11 @@ fieldset {
  * The big clock
  */
 .clock {
+	font-size: 1.8rem;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.clock-group .clock {
 	font-size: 14.5rem;
 	font-weight: 100;
 	letter-spacing: -3px;
@@ -351,9 +357,16 @@ fieldset {
  * Greeting text
  */
 .greeting {
-	font-size: 4rem;
 	margin: 0;
+	font-size: 1.8rem;
+	font-weight: normal;
 	white-space: nowrap;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.clock-group .greeting {
+	font-size: 4rem;
+	font-weight: bold;
 	text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
 }
 

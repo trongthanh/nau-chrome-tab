@@ -61,7 +61,7 @@ export default {
 
 			const now = Date.now();
 			// NOTE: set true to load new photo every refresh
-			const DEBUG = true;
+			const DEBUG = false;
 			// the first hour after install, user will see default background,
 			// then we'll fetch new image in the next hour
 			if (DEBUG || now > lastCheck + RENEW_DURATION) {

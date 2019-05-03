@@ -29,6 +29,7 @@ const Store = {
 			// these properties must be inside 'settings' due to legacy versions used them
 			language: navigator.language.includes('vi') ? 'vi' : 'en',
 			wallpaperMode: 'unsplash', // unsplash or user
+			clockDisplay: 'center', // center, blend or mini
 			userPhotoName: '', // file name to display at file selector
 			activeQuicklinks: {
 				gmail: true,

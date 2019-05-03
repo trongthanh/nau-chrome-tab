@@ -5,13 +5,27 @@
 			<div class="main__item main__item--top-left quick-links">
 				<Quicklinks />
 			</div>
-			<div class="main__item main__item--top-right">
-				<!-- <div>Weather info</div> -->
+
+			<div v-if="clockMini" class="main__item main__item--top-center">
+				<Clock />
 			</div>
-			<div class="main__item main__item--center clock-group clock-group--center clock-group--blend">
+			<div v-if="clockMini" class="main__item main__item--top-right">
+				<Greeting :lang="lang" />
+			</div>
+
+			<div
+				v-if="clockCenter"
+				:class="{
+					main__item: true,
+					'main__item--center': true,
+					'clock-group': true,
+					'clock-group--blend': clockDisplayBlend,
+				}"
+			>
 				<Clock />
 				<Greeting :lang="lang" />
 			</div>
+
 			<Quote :quote="quote" />
 			<div class="main__item main__item--bottom-left">
 				<button class="setting-btn icon-btn mdi mdi--settings" type="button" @click.stop="onSettingBtnClick"></button>
@@ -76,6 +90,15 @@ export default {
 		},
 		quote() {
 			return this.appState.quote;
+		},
+		clockMini() {
+			return this.appState.settings.clockDisplay === 'mini';
+		},
+		clockCenter() {
+			return this.appState.settings.clockDisplay === 'center' || this.appState.settings.clockDisplay === 'blend';
+		},
+		clockDisplayBlend() {
+			return this.appState.settings.clockDisplay === 'blend';
 		},
 	},
 	methods: {

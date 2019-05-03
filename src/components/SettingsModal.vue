@@ -38,6 +38,24 @@
 					<span id="selected-photo"></span>
 
 				</fieldset>
+				<fieldset>
+					<legend i18n="clock_display">Clock Display</legend>
+					<input id="setting-clock-display-center" type="radio" name="setting-clock-display" value="center" v-model="clockDisplay">
+					<label class="settings__label" for="setting-clock-display-center">
+						Center
+					</label>
+
+					<input id="setting-clock-display-blend" type="radio" name="setting-clock-display" value="blend" v-model="clockDisplay">
+					<label class="settings__label" for="setting-clock-display-blend">
+						Color blend (experiment)
+					</label>
+
+					<input id="setting-clock-display-mini" type="radio" name="setting-clock-display" value="mini" v-model="clockDisplay">
+					<label class="settings__label" for="setting-clock-display-mini">
+						Mini
+					</label>
+
+				</fieldset>
 				<fieldset id="setting-quicklinks">
 					<legend i18n="quick_links">Quick Links</legend>
 					<label title="https://mail.google.com" class="settings__label" ><input type="checkbox" value="gmail" v-model="quicklinks"> <i class="mdi mdi--gmail"></i> GMail</label>
@@ -85,6 +103,7 @@ export default {
 			// data binding for local settings UI
 			quicklinks,
 			wallpaperMode: settings.wallpaperMode,
+			clockDisplay: settings.clockDisplay,
 			language: settings.language,
 			userPhotoName: settings.userPhotoName || 'Choose a file',
 			userPhoto: appState.userPhoto,
@@ -120,8 +139,7 @@ export default {
 			});
 		},
 		updateSettings() {
-			// console.log('settings updated', this.language, this.wallpaperMode, this.appState.settings.wallpaperMode);
-			const { language, wallpaperMode, userPhotoName, quicklinks, appState } = this;
+			const { language, wallpaperMode, clockDisplay, userPhotoName, quicklinks, appState } = this;
 			// prettier-ignore
 			const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
 				.reduce((obj, linkName) => {
@@ -151,8 +169,11 @@ export default {
 					userPhotoName,
 					activeQuicklinks,
 					wallpaperMode,
+					clockDisplay,
 				},
 			});
+
+			console.log('settings updated', { language, userPhotoName, activeQuicklinks, wallpaperMode, clockDisplay });
 		},
 	},
 	updated() {
