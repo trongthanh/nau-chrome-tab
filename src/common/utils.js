@@ -63,3 +63,29 @@ export function readAndResizeImage(file) {
 		img.src = url;
 	});
 }
+
+/**
+ * Helper to get day's period,
+ * @param  {Date} timeValue	Time of the day
+ * @return {string}			Period of the input time, either: day, night, dawn, dusk
+ */
+export function getDayPeriod(timeValue) {
+	let time = timeValue;
+	if (!(time instanceof Date)) {
+		time = new Date(time);
+	}
+	const hours = time.getHours();
+
+	if (hours < 5) {
+		return 'night';
+	} else if (hours < 7) {
+		return 'dawn';
+	} else if (hours < 18) {
+		return 'day';
+	} else if (hours < 20) {
+		return 'dusk';
+	}
+
+	// else
+	return 'night';
+}

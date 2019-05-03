@@ -21,24 +21,26 @@ function queryString(params) {
 		.join('&');
 }
 
+const unsplashAPI = 'https://api.unsplash.com/photos/random';
+const collectionsByPeriod = {
+	day: [1507483],
+	dawn: [1507483], // no separate collection for now
+	night: [4747434],
+	dusk: [4747434], // no separate collection for now
+};
 /**
  * Fetch Unplash random image
  *
- * @param {Object} options Additional options to pass to the unsplash GET API
+ * @param {string} period Period of the day to change appropriate collection (day, night, dawn, dusk)
  * @return {Promise}        the request resolving promise object
  */
-export function fetchUnsplash(options) {
-	const unsplashAPI = 'https://api.unsplash.com/photos/random';
-
-	const defaults = {
+export function fetchUnsplash(period = 'day') {
+	const params = {
 		orientation: 'landscape',
 		w: 1920,
-		// my own colletion with curated photos
-		collections: [1507483],
+		// my collection with curated photos, refer to https://unsplash.com/@trongthanh/collections
+		collections: collectionsByPeriod[period] || collectionsByPeriod.day,
 	};
-
-	// get override param
-	const params = Object.assign({}, defaults, options);
 
 	// NOTE: the client id belongs to Nau-Tab only, please request your own Application at Unsplash
 	const requiredHeaders = new Headers({

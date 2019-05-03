@@ -11,6 +11,7 @@
  * @author Thanh
  */
 import { fetchUnsplash } from '../common/services';
+import { getDayPeriod } from '../common/utils';
 
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
@@ -57,7 +58,7 @@ export default {
 
 			const now = Date.now();
 			// NOTE: set true to load new photo every refresh
-			const DEBUG = false;
+			const DEBUG = true;
 			// the first hour after install, user will see default background,
 			// then we'll fetch new image in the next hour
 			if (DEBUG || now > lastCheck + RENEW_DURATION) {
@@ -80,7 +81,9 @@ export default {
 		},
 
 		_fetchNewPhoto(now) {
-			fetchUnsplash().then(json => {
+			// const period = getDayPeriod(1549029600000); // this value to test night time
+			const period = getDayPeriod(now);
+			fetchUnsplash(period).then(json => {
 				console.log('fetch result', json);
 				const url = json.urls.custom || json.urls.full;
 				const user = json.user || { name: '', username: '' };
