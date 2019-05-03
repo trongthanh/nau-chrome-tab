@@ -67,17 +67,20 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		const keys = Object.keys(this.state).filter(key => !this.nosave.includes(key));
+		const keys = Object.keys(this.state).filter((key) => !this.nosave.includes(key));
 
-		return PersistStorage.get(keys).then(result => {
+		return PersistStorage.get(keys).then((result) => {
 			// console.log('rehydrate result', result);
-			keys.forEach(key => {
+			keys.forEach((key) => {
 				// remove undefined stored data
 				if (result[key] === undefined) {
 					delete result[key];
 				}
 			});
-			this.state = Object.assign(this.state, result);
+			// make sure new default settings are kept instead of being omitted
+			const settings = Object.assign({}, this.state.settings, result.settings);
+			delete result.settings;
+			this.state = Object.assign(this.state, result, { settings });
 			this._dispatchEvent('statechange:all', this.state);
 
 			// return whole states object in resolve callback
@@ -174,7 +177,7 @@ const Store = {
 			obj = { [key]: value };
 		}
 
-		Object.keys(obj).forEach(stateName => {
+		Object.keys(obj).forEach((stateName) => {
 			this.state[stateName] = obj[stateName];
 		});
 	},
