@@ -3,8 +3,8 @@
 
 	"name": "Nau Tab",
 	"author": "Thanh Tran",
-	"version": "2.5.1",
-	"description": "Beautiful new tab page for modern browsers",
+	"version": "3.0.0",
+	"description": "Beautiful new tab page for modern browsers. A browser extension that will not track you.",
 	"applications": {
 		"gecko": {
 			"id": "nau-tab@int3ractive.com",
