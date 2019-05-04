@@ -5,7 +5,7 @@
 	"author": "Thanh Tran <trongthanh@gmail.com> (https://int3ractive.com)",
 	"scripts": {
 		"start": "vue-cli-service serve",
-		"build": "vue-cli-service build",
+		"build": "vue-cli-service build --dest app",
 		"eslint": "eslint --ext .js,.vue ."
 	},
 	"engines": {

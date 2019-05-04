@@ -125,6 +125,7 @@ export default {
 
 		storeUserPhoto(file) {
 			readAndResizeImage(file).then(imgDataUrl => {
+				// TODO: update wallpaper once userPhoto is ready
 				this.dispatch({
 					type: 'UPDATE_USER_PHOTO',
 					userPhoto: {
@@ -134,7 +135,6 @@ export default {
 						authorUsername: '',
 					},
 				});
-				// this.wallpaperMode = 'user';
 				console.log('readAndResizeImage DONE');
 			});
 		},
@@ -147,6 +147,7 @@ export default {
 					return obj;
 				}, {});
 
+			// TODO: move below to reducer
 			if (wallpaperMode !== this.appState.settings.wallpaperMode) {
 				if (wallpaperMode === 'user' && appState.userPhoto) {
 					this.dispatch({
