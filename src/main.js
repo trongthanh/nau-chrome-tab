@@ -14,6 +14,6 @@ Store.init(register)
 	.rehydrate()
 	.then(() => {
 		new Vue({
-			render: (h) => h(App),
+			render: h => h(App),
 		}).$mount('#app');
 	});

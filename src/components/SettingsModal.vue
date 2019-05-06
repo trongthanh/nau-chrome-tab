@@ -125,7 +125,6 @@ export default {
 
 		storeUserPhoto(file) {
 			readAndResizeImage(file).then(imgDataUrl => {
-				// TODO: update wallpaper once userPhoto is ready
 				this.dispatch({
 					type: 'UPDATE_USER_PHOTO',
 					userPhoto: {
@@ -139,28 +138,13 @@ export default {
 			});
 		},
 		updateSettings() {
-			const { language, wallpaperMode, clockDisplay, userPhotoName, quicklinks, appState } = this;
+			const { language, wallpaperMode, clockDisplay, userPhotoName, quicklinks } = this;
 			// prettier-ignore
 			const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
 				.reduce((obj, linkName) => {
 					obj[linkName] = quicklinks.includes(linkName);
 					return obj;
 				}, {});
-
-			// TODO: move below to reducer
-			if (wallpaperMode !== this.appState.settings.wallpaperMode) {
-				if (wallpaperMode === 'user' && appState.userPhoto) {
-					this.dispatch({
-						type: 'UPDATE_WALLPAPER',
-						wallpaper: appState.userPhoto,
-					});
-				} else {
-					this.dispatch({
-						type: 'UPDATE_WALLPAPER',
-						wallpaper: appState.currentPhoto,
-					});
-				}
-			}
 
 			this.dispatch({
 				type: 'UPDATE_SETTINGS',

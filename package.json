@@ -26,7 +26,7 @@
 	},
 	"dependencies": {
 		"lockr": "^0.8.4",
-		"v-click-outside": "^2.1.1",
+		"v-click-outside": "2.1.2-0",
 		"vue": "^2.6.10"
 	},
 	"browserslist": [

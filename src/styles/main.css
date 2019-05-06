@@ -324,7 +324,7 @@ fieldset {
 }
 
 /**
- * The big clock
+ * The clock
  */
 .clock {
 	font-size: 1.8rem;
@@ -339,7 +339,7 @@ fieldset {
 }
 
 .clock-group--blend .clock {
-	font-size: 25rem;
+	font-size: 20rem;
 	font-weight: normal;
 	text-shadow: none;
 }

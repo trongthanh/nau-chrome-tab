@@ -8,9 +8,24 @@ import Timer from './Timer';
 const Store = {
 	init(register) {
 		register(this._handleEvent.bind(this));
+
 		Timer.start();
 		return this;
 	},
+
+	// internal dispatch method for store, should not be used outside
+	_dispatch(action) {
+		if (this._stateSaving) {
+			setTimeout(() => {
+				this._handleEvent({ action });
+			}, 16);
+			return;
+		}
+
+		// handle event immediately
+		this._handleEvent({ action });
+	},
+
 	// default
 	// prettier-ignore
 	state: {
@@ -69,11 +84,11 @@ const Store = {
 	 * @return {Promise} resolve when all
 	 */
 	rehydrate() {
-		const keys = Object.keys(this.state).filter((key) => !this.nosave.includes(key));
+		const keys = Object.keys(this.state).filter(key => !this.nosave.includes(key));
 
-		return PersistStorage.get(keys).then((result) => {
+		return PersistStorage.get(keys).then(result => {
 			// console.log('rehydrate result', result);
-			keys.forEach((key) => {
+			keys.forEach(key => {
 				// remove undefined stored data
 				if (result[key] === undefined) {
 					delete result[key];
@@ -93,6 +108,7 @@ const Store = {
 		const action = event.action;
 		const state = this.state;
 		console.log('_handleEvent', action);
+		this._stateSaving = true;
 
 		switch (action.type) {
 			case 'SET_CURRENT_TIME':
@@ -115,11 +131,37 @@ const Store = {
 				}
 				break;
 			}
-			case 'UPDATE_SETTINGS':
-				this.save('settings', action.settings);
+			case 'UPDATE_SETTINGS': {
+				const newWallpaperMode = action.settings.wallpaperMode;
+				const currentWallpaperMode = state.settings.wallpaperMode;
+
+				this.save('settings', action.settings).then(() => {
+					if (newWallpaperMode !== currentWallpaperMode) {
+						if (newWallpaperMode === 'user' && state.userPhoto) {
+							this._dispatch({
+								type: 'UPDATE_WALLPAPER',
+								wallpaper: state.userPhoto,
+							});
+						} else {
+							this._dispatch({
+								type: 'UPDATE_WALLPAPER',
+								wallpaper: state.currentPhoto,
+							});
+						}
+					}
+				});
 				break;
+			}
 			case 'UPDATE_USER_PHOTO':
-				this.save('userPhoto', action.userPhoto);
+				this.save('userPhoto', action.userPhoto).then(() => {
+					if (state.settings.wallpaperMode === 'user') {
+						this._dispatch({
+							type: 'UPDATE_WALLPAPER',
+							wallpaper: action.userPhoto,
+						});
+					}
+				});
+
 				break;
 			case 'UPDATE_CURRENT_PHOTO':
 				this.save('currentPhoto', action.currentPhoto);
@@ -148,6 +190,7 @@ const Store = {
 	 */
 	set(key, value) {
 		this.state[key] = value;
+		this._stateSaving = false;
 	},
 	/**
 	 * Save state of each key and persist data if needed
@@ -157,7 +200,9 @@ const Store = {
 	save(key, value) {
 		this.state[key] = value;
 
-		PersistStorage.set({ [key]: this.state[key] });
+		return PersistStorage.set({ [key]: this.state[key] }).then(() => {
+			this._stateSaving = false;
+		});
 	},
 };
 
