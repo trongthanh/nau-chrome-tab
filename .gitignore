@@ -9,3 +9,4 @@ package
 *.bundle.js
 *.js.map
 test/unit/coverage/
+.DS_Store

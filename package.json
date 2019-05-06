@@ -4,30 +4,38 @@
 	"license": "Apache-2.0",
 	"author": "Thanh Tran <trongthanh@gmail.com> (https://int3ractive.com)",
 	"scripts": {
-		"start": "vue-cli-service serve",
-		"build": "vue-cli-service build --dest app",
-		"eslint": "eslint --ext .js,.vue ."
+		"build": "rollup -c",
+		"autobuild": "rollup -c -w",
+		"dev": "run-p start:dev autobuild",
+		"start": "sirv public",
+		"start:dev": "sirv public --dev",
+		"eslint": "eslint --ext .js,.svelte ."
 	},
 	"engines": {
 		"node": ">=6.0.0",
 		"npm": ">= 3.0.0"
 	},
 	"devDependencies": {
-		"@vue/cli-plugin-babel": "^3.3.0",
-		"@vue/cli-service": "^3.3.0",
 		"babel-eslint": "^10.0.1",
 		"eslint": "^5.8.0",
 		"eslint-config-nau": "^13.2.0",
 		"eslint-plugin-import": "^2.15.0",
-		"eslint-plugin-vue": "^5.0.0",
+		"eslint-plugin-svelte3": "^1.1.0",
+		"npm-run-all": "^4.1.5",
+		"prettier-plugin-svelte": "^0.4.2",
+		"rollup": "^1.10.1",
+		"rollup-plugin-commonjs": "^9.3.4",
+		"rollup-plugin-livereload": "^1.0.0",
+		"rollup-plugin-node-resolve": "^4.2.3",
+		"rollup-plugin-svelte": "^5.0.3",
+		"rollup-plugin-terser": "^4.0.4",
+		"sirv-cli": "^0.4.0",
 		"stylelint": "^9.10.1",
 		"stylelint-config-standard": "^18.2.0",
-		"vue-template-compiler": "^2.5.21"
+		"svelte": "^3.0.0"
 	},
 	"dependencies": {
-		"lockr": "^0.8.4",
-		"v-click-outside": "2.1.2-0",
-		"vue": "^2.6.10"
+		"lockr": "^0.8.4"
 	},
 	"browserslist": [
 		"> 1%",

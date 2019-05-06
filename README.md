@@ -8,17 +8,36 @@ Follow these steps to run NauTab in Google Chrome as a developer.
 - Browse to the location where iChrome repo is installed, and select the sub-directory `app` as the extension source.
 - When you make change to the code for the tab page, just reload the tab.
 
-## The Code
+## svelte app
 
-This is a side project that I want to experience again the beauty of Vanilla JS, HTML & CSS. I decided to write everything using pure JS (with some ES6 syntax), HTML and CSS without any kind of processor, compiler or bundler.
+This app used project template for [Svelte 3](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
 
-No compilation process involved, so the browsers need to support basic ES6 syntax and new API. Some noteworthy ES6 API used in the code:
+To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
-- Arrow functions
-- Template strings
-- New block scope variable keywords (let, const)
-- ES6 Array & String API
-- **Fetch API**
+```bash
+npx degit sveltejs/template svelte-app
+cd svelte-app
+```
+
+*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+
+
+## Get started
+
+Install the dependencies...
+
+```bash
+cd svelte-app
+npm install
+```
+
+...then start [Rollup](https://rollupjs.org):
+
+```bash
+npm run dev
+```
+
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
 ### Minimum supported browser:
 

@@ -1,7 +1,8 @@
 /* eslint-disable quote-props */
 module.exports = {
 	root: true,
-	extends: ['plugin:vue/essential', 'nau'],
+	extends: ['nau'],
+	plugins: ['svelte3'],
 	rules: {
 		'no-param-reassign': 'off',
 		'padding-line-between-statements': ['off'],
@@ -37,7 +38,7 @@ module.exports = {
 	settings: {
 		'import/resolver': {
 			node: {
-				extensions: ['.js', '.vue'],
+				extensions: ['.js', '.svelte'],
 			},
 		},
 	},
