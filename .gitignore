@@ -7,6 +7,7 @@ app/bower_components
 test/bower_components
 package
 *.bundle.js
+bundle.*
 *.js.map
 test/unit/coverage/
 .DS_Store
