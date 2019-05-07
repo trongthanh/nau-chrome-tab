@@ -30,4 +30,16 @@
 	style="background-image:url('{wallpaper.imgUrl}')"
 ></div>
 
-<script></script>
+<script>
+	let wallpaperReady = true;
+	let settingsActive = false;
+
+	let wallpaper = {
+		imgUrl:
+			'https://images.unsplash.com/photo-1522988796650-2cc783a2a4b3?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
+		imgId: 'MINzDVNWOWU',
+		authorName: 'Lê Tân',
+		authorUsername: 'ktsfish',
+		color: '#888888', // median color of the photo
+	};
+</script>

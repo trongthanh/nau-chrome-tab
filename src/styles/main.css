@@ -112,58 +112,6 @@
 }
 
 /**
- * Quotes
- */
-.quotes {
-	text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-	mix-blend-mode: hard-light;
-}
-
-.quotes > p {
-	margin: 0;
-}
-
-.quotes__text {
-	width: 100%;
-	text-align: center;
-}
-
-.quotes__text,
-.quotes__author {
-	transition: all 500ms;
-	transform: translateY(0);
-}
-
-.quotes:hover > .quotes__text {
-	transform: translateY(-1.3em);
-}
-
-.quotes__text::before {
-	content: '“';
-}
-
-.quotes__text::after {
-	content: '”';
-}
-
-/* hidden by default */
-.quotes__author {
-	visibility: hidden;
-	opacity: 0;
-	position: absolute;
-	left: 50%;
-	bottom: 0;
-	transform: translateX(-50%);
-	transition-duration: 500ms;
-	white-space: nowrap;
-}
-
-.quotes:hover > .quotes__author {
-	visibility: visible;
-	opacity: 1;
-}
-
-/**
  * Clock group
  */
 .clock-group {
@@ -404,30 +352,4 @@ conflicting with the frosty glass effect */
 	z-index: -1;
 }
 
-/**
- * Utilities
- */
-.icon-btn {
-	appearance: none;
-	border: 0;
-	background: none;
-	color: white;
-	padding: 1rem;
-	transition: color 200ms ease;
-}
 
-.icon-btn:hover {
-	color: #977857;
-}
-
-.copyright .icon-btn {
-	padding: 0.5rem;
-}
-
-.u-serif-text {
-	font-family: serif;
-}
-
-.u-hidden {
-	display: none;
-}

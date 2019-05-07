@@ -59,42 +59,42 @@
 			'bl bc bc br';
 	}
 
-	.main__item {
+	:global(.main__item) {
 		transform: translateZ(0);
 		display: flex;
 	}
 
-	.main__item--top-left {
+	:global(.main__item--top-left) {
 		grid-area: tl / tl / tc / tc;
 	}
 
-	.main__item--top-right {
+	:global(.main__item--top-right) {
 		grid-area: tr;
 		align-items: flex-start;
 		justify-content: flex-end;
 	}
 
-	.main__item--top-center {
+	:global(.main__item--top-center) {
 		grid-area: tc;
 		justify-content: center;
 	}
 
-	.main__item--center {
+	:global(.main__item--center) {
 		grid-area: mc;
 	}
 
-	.main__item--bottom {
+	:global(.main__item--bottom) {
 		grid-area: bc;
 		max-width: 100%;
 		align-items: flex-end;
 	}
 
-	.main__item--bottom-left {
+	:global(.main__item--bottom-left) {
 		grid-area: bl;
 		align-items: flex-end;
 	}
 
-	.main__item--bottom-right {
+	:global(.main__item--bottom-right) {
 		grid-area: br;
 		align-items: flex-end;
 		justify-content: flex-end;
@@ -105,39 +105,57 @@
 		margin-left: -1rem;
 		margin-bottom: -1rem;
 	}
+
+	/**
+	 * Utilities
+	 */
+	:global(.icon-btn) {
+		appearance: none;
+		border: 0;
+		background: none;
+		color: white;
+		padding: 1rem;
+		transition: color 200ms ease;
+	}
+
+	:global(.icon-btn:hover) {
+		color: #977857;
+	}
+
+	:global(.copyright .icon-btn) {
+		padding: 0.5rem;
+	}
+
+	:global(.u-hidden) {
+		display: none;
+	}
 </style>
 
 <Wallpaper />
 
 <main class="main">
 	<div class="main__item main__item--top-left quick-links">
-		<Quicklinks />
+		<!-- <Quicklinks /> -->
 	</div>
 
-	<div v-if="clockMini" class="main__item main__item--top-center">
+	{#if clockMini}
+	<div class="main__item main__item--top-center">
 		<Clock />
 	</div>
-	<div v-if="clockMini" class="main__item main__item--top-right">
-		<Greeting :lang="lang" />
+	<div class="main__item main__item--top-right">
+		<!-- <Greeting :lang="lang" /> -->
 	</div>
-
-	<div
-		v-if="clockCenter"
-		:class="{
-			main__item: true,
-			'main__item--center': true,
-			'clock-group': true,
-			'clock-group--blend': clockDisplayBlend,
-		}"
-	>
+	{:else if clockCenter}
+	<div class="main__item main__item--center clock-group" class:clock-group--blend="{clockDisplayBlend}">
 		<Clock />
-		<Greeting :lang="lang" />
+		<!-- <Greeting :lang="lang" /> -->
 	</div>
+	{/if}
 
-	<Quote :quote="quote" />
+	<Quote />
 	<div class="main__item main__item--bottom-left">
 		<button class="setting-btn icon-btn mdi mdi--settings" type="button" @click.stop="onSettingBtnClick"></button>
-		<PhotoCredit :imgData="wallpaper" />
+		<!-- <PhotoCredit :imgData="wallpaper" /> -->
 	</div>
 	<div class="main__item main__item--bottom-right">
 		<div class="brand-logo">
@@ -145,8 +163,17 @@
 		</div>
 	</div>
 </main>
-<SettingsOverlay />
+<!-- <SettingsOverlay /> -->
 
 <script>
-	export let name;
+	/* © 2019 int3ractive.com
+	 * @author Thanh Tran
+	 */
+	import Wallpaper from './components/Wallpaper.svelte';
+	import Quote from './components/Quote.svelte';
+	import Clock from './components/Clock.svelte';
+
+	let clockMini = true;
+	let clockCenter = false;
+	let clockDisplayBlend = false;
 </script>
