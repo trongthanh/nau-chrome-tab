@@ -1,6 +1,6 @@
 /* © 2019 int3ractive.com
  * @author Thanh
- *
+ * TODO: TO REMOVE
  */
 import { compareTimeObj } from './utils';
 import { dispatch } from './Dispatcher';
