@@ -21,7 +21,7 @@
 	}
 </style>
 
-<div id="clock" class="clock">
+<div class="clock" class:clock--center="{center}" class:clock--blend="{blend}">
 	<span class="clock__hour">{ $timer.hours }</span>:<span class="clock__minute">{ $timer.minutes }</span>
 </div>
 
@@ -30,4 +30,7 @@
 	 * @author Thanh Tran
 	 */
 	import timer from '../stores/timer';
+
+	export let center = false;
+	export let blend = false;
 </script>

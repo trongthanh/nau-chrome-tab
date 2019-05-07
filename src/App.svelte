@@ -107,6 +107,23 @@
 	}
 
 	/**
+	 * Clock group center
+	 */
+	.clock-group {
+		text-align: center;
+		/* recipe to vertical align center */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	.clock-group--blend {
+		color: #444;
+		mix-blend-mode: color-dodge;
+	}
+
+	/**
 	 * Utilities
 	 */
 	:global(.icon-btn) {
@@ -143,12 +160,12 @@
 		<Clock />
 	</div>
 	<div class="main__item main__item--top-right">
-		<!-- <Greeting :lang="lang" /> -->
+		<Greeting {lang} />
 	</div>
 	{:else if clockCenter}
 	<div class="main__item main__item--center clock-group" class:clock-group--blend="{clockDisplayBlend}">
-		<Clock />
-		<!-- <Greeting :lang="lang" /> -->
+		<Clock center blend="{clockDisplayBlend}" />
+		<Greeting {lang} center blend="{clockDisplayBlend}" />
 	</div>
 	{/if}
 
@@ -172,8 +189,10 @@
 	import Wallpaper from './components/Wallpaper.svelte';
 	import Quote from './components/Quote.svelte';
 	import Clock from './components/Clock.svelte';
+	import Greeting from './components/Greeting.svelte';
 
-	let clockMini = true;
-	let clockCenter = false;
+	let clockMini = false;
+	let clockCenter = true;
 	let clockDisplayBlend = false;
+	let lang = 'en';
 </script>
