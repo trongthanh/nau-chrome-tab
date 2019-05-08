@@ -8,8 +8,8 @@
 		color: white;
 		font-size: 1.8rem;
 		/* use native font-family for fastest rendering */
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-			'Droid Sans', 'Helvetica Neue', sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+			'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 		background-position: center center;
 		background-size: cover;
 		background-color: #eee;
@@ -148,7 +148,7 @@
 	}
 </style>
 
-<Wallpaper />
+<Wallpaper settingsActive="{settingsPanelVisible}" />
 
 <main class="main">
 	<div class="main__item main__item--top-left quick-links">
@@ -160,19 +160,26 @@
 		<Clock />
 	</div>
 	<div class="main__item main__item--top-right">
-		<Greeting {lang} />
+		<Greeting lang="{$language}" />
 	</div>
-	{:else if clockCenter}
-	<div class="main__item main__item--center clock-group" class:clock-group--blend="{clockDisplayBlend}">
+	{:else}
+	<div
+		class="main__item main__item--center clock-group"
+		class:clock-group--blend="{clockDisplayBlend}"
+	>
 		<Clock center blend="{clockDisplayBlend}" />
-		<Greeting {lang} center blend="{clockDisplayBlend}" />
+		<Greeting lang="{$language}" center blend="{clockDisplayBlend}" />
 	</div>
 	{/if}
 
 	<Quote />
 	<div class="main__item main__item--bottom-left">
-		<button class="setting-btn icon-btn mdi mdi--settings" type="button" on:click="{toggleSettingPanels}"></button>
-		<!-- <PhotoCredit :imgData="wallpaper" /> -->
+		<button
+			class="setting-btn icon-btn mdi mdi--settings"
+			type="button"
+			on:click="{toggleSettingPanels}"
+		></button>
+		<PhotoCredit />
 	</div>
 	<div class="main__item main__item--bottom-right">
 		<div class="brand-logo">
@@ -188,15 +195,16 @@
 	 */
 	import { setContext } from 'svelte';
 	import Wallpaper from './components/Wallpaper.svelte';
+	import PhotoCredit from './components/PhotoCredit.svelte';
 	import Quote from './components/Quote.svelte';
 	import Clock from './components/Clock.svelte';
 	import Greeting from './components/Greeting.svelte';
 	import SettingsOverlay from './components/SettingsOverlay.svelte';
+	import { clockDisplay, language } from './stores/settings';
 
-	let clockMini = false;
-	let clockCenter = true;
-	let clockDisplayBlend = false;
-	let lang = 'en';
+	$: clockMini = $clockDisplay === 'mini';
+	$: clockDisplayBlend = $clockDisplay === 'blend';
+
 	let settingsPanelVisible = false;
 
 	function toggleSettingPanels() {

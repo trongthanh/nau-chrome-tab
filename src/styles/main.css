@@ -112,15 +112,6 @@
 }
 
 /**
- * Photo credit
- */
-.photo-credit {
-	font-size: 0.8em;
-	display: inline-block;
-	margin-bottom: 0.2em;
-}
-
-/**
  * Modal popup
  * Shamelessly copied from: http://tympanus.net/codrops/2013/06/25/nifty-modal-window-effects/;
  * Note: .modal-overlay is now parent of .modal
