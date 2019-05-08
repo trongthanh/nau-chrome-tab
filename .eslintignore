@@ -1,4 +1,5 @@
 app/
+bundle.js
 *.bundle.js
 build/
 test/

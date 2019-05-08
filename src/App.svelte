@@ -171,7 +171,7 @@
 
 	<Quote />
 	<div class="main__item main__item--bottom-left">
-		<button class="setting-btn icon-btn mdi mdi--settings" type="button" @click.stop="onSettingBtnClick"></button>
+		<button class="setting-btn icon-btn mdi mdi--settings" type="button" on:click="{toggleSettingPanels}"></button>
 		<!-- <PhotoCredit :imgData="wallpaper" /> -->
 	</div>
 	<div class="main__item main__item--bottom-right">
@@ -180,19 +180,31 @@
 		</div>
 	</div>
 </main>
-<!-- <SettingsOverlay /> -->
+<SettingsOverlay active="{settingsPanelVisible}" />
 
 <script>
 	/* © 2019 int3ractive.com
 	 * @author Thanh Tran
 	 */
+	import { setContext } from 'svelte';
 	import Wallpaper from './components/Wallpaper.svelte';
 	import Quote from './components/Quote.svelte';
 	import Clock from './components/Clock.svelte';
 	import Greeting from './components/Greeting.svelte';
+	import SettingsOverlay from './components/SettingsOverlay.svelte';
 
 	let clockMini = false;
 	let clockCenter = true;
 	let clockDisplayBlend = false;
 	let lang = 'en';
+	let settingsPanelVisible = false;
+
+	function toggleSettingPanels() {
+		settingsPanelVisible = !settingsPanelVisible;
+		console.log(settingsPanelVisible);
+	}
+
+	setContext('settingsPanel', {
+		toggleSettingPanels,
+	});
 </script>
