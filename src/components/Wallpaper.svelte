@@ -9,12 +9,7 @@
 		background-position: center center;
 		background-size: cover;
 		transition: opacity 500ms;
-		opacity: 0;
 		z-index: 0;
-	}
-
-	.wallpaper--ready {
-		opacity: 1;
 	}
 
 	.wallpaper--blur {
@@ -25,21 +20,12 @@
 <div
 	id="wallpaper"
 	class="wallpaper"
-	class:wallpaper--ready="{wallpaperReady}"
 	class:wallpaper--blur="{settingsActive}"
-	style="background-image:url('{wallpaper.imgUrl}')"
+	style="background-image: url({$wallpaper.imgUrl}); background-color: {$wallpaper.color};"
 ></div>
 
 <script>
-	let wallpaperReady = true;
-	let settingsActive = false;
+	import { wallpaper } from '../stores/wallpapers';
 
-	let wallpaper = {
-		imgUrl:
-			'https://images.unsplash.com/photo-1522988796650-2cc783a2a4b3?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
-		imgId: 'MINzDVNWOWU',
-		authorName: 'Lê Tân',
-		authorUsername: 'ktsfish',
-		color: '#888888', // median color of the photo
-	};
+	let settingsActive = false;
 </script>
