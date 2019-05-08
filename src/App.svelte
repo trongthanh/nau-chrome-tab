@@ -124,6 +124,76 @@
 	}
 
 	/**
+	 * Quick links group overlay
+	 */
+	.quick-links {
+		margin: -1rem; /* compensate buttons padding */
+		opacity: 0.5;
+		transition: opacity 200ms;
+	}
+
+	.quick-links:hover {
+		opacity: 1;
+	}
+
+	/* Brand logo */
+	.logo {
+		padding: 1rem;
+		display: inline-block;
+		color: white;
+		font-size: 2rem;
+		font-weight: bold;
+		line-height: 1;
+		text-decoration: none;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+		opacity: 0.5;
+		transition: all 200ms;
+		/* compensate padding hit */
+		margin-right: -1rem;
+		margin-bottom: -1rem;
+	}
+
+	.logo:hover {
+		color: white;
+		opacity: 1;
+		-ms-transform: translateY(-5px);
+		transform: translateY(-5px);
+	}
+
+	/* square icon */
+	.logo::before {
+		display: block;
+		content: '';
+		width: 1.5rem;
+		height: 2rem;
+		border: solid 3px white;
+	}
+
+	/* brand logo has text on the left */
+	.logo::after {
+		content: attr(title);
+		position: absolute;
+		transform: translateX(-50%);
+		font-size: 0.7em;
+		font-weight: normal;
+		white-space: nowrap;
+		transition: all 200ms;
+		visibility: hidden;
+		opacity: 0;
+		filter: none;
+
+		bottom: 1em;
+		left: auto;
+		right: 35px;
+		transform: translateX(0);
+	}
+
+	.logo:hover::after {
+		visibility: visible;
+		opacity: 1;
+	}
+
+	/**
 	 * Utilities
 	 */
 	:global(.icon-btn) {
@@ -152,7 +222,7 @@
 
 <main class="main">
 	<div class="main__item main__item--top-left quick-links">
-		<!-- <Quicklinks /> -->
+		<Quicklinks />
 	</div>
 
 	{#if clockMini}
@@ -196,6 +266,7 @@
 	import { setContext } from 'svelte';
 	import Wallpaper from './components/Wallpaper.svelte';
 	import PhotoCredit from './components/PhotoCredit.svelte';
+	import Quicklinks from './components/Quicklinks.svelte';
 	import Quote from './components/Quote.svelte';
 	import Clock from './components/Clock.svelte';
 	import Greeting from './components/Greeting.svelte';
