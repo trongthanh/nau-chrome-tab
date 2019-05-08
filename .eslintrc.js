@@ -4,20 +4,13 @@ module.exports = {
 	extends: ['nau'],
 	plugins: ['svelte3'],
 	rules: {
+		'padding-line-between-statements': 'off',
 		'no-param-reassign': 'off',
-		'padding-line-between-statements': ['off'],
 		'prefer-arrow-callback': 'off',
-		'import/prefer-default-export': 'off',
 		'no-mixed-operators': 'off',
 		strict: 'off',
-		// don't require .vue extension when importing
-		'import/extensions': [
-			'error',
-			'always',
-			{
-				js: 'never',
-			},
-		],
+		'import/no-anonymous-default-export': 'off',
+		'import/prefer-default-export': 'off',
 		// allow optionalDependencies
 		'import/no-extraneous-dependencies': [
 			'error',
@@ -25,7 +18,11 @@ module.exports = {
 				optionalDependencies: ['test/unit/index.js'],
 			},
 		],
-		'import/no-anonymous-default-export': 'off',
+		// svelte specific:
+		'import/first': 'off', //import orders cannot be determined correctly in .svelte components
+		'import/no-mutable-exports': 'off',
+		'no-labels': 'off',
+		'no-restricted-syntax': ['error', 'ForInStatement', 'ForOfStatement', 'WithStatement'], // remove LabeledStatement from the list
 	},
 	globals: {
 		browser: false,

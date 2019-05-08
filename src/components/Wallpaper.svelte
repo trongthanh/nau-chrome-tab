@@ -25,7 +25,7 @@
 ></div>
 
 <script>
-	import { wallpaper } from '../stores/wallpapers';
+	import wallpaper from '../stores/wallpaper';
 
-	let settingsActive = false;
+	export let settingsActive = false;
 </script>

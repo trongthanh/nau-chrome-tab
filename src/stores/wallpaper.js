@@ -23,7 +23,7 @@ import { wallpaperMode } from './settings';
 // 	color: '#888888',
 // };
 
-export const wallpaper = derived([wallpaperMode, persistStore], ([$wallpaperMode, $persistStore]) => {
+export default derived([wallpaperMode, persistStore], ([$wallpaperMode, $persistStore]) => {
 	if ($wallpaperMode === 'user' && $persistStore.userPhoto) {
 		return $persistStore.userPhoto;
 	}

@@ -46,6 +46,7 @@ const defaultState = {
 
 const { subscribe, update } = writable(defaultState);
 
+// eslint-disable-next-line
 (async function() {
 	const keys = Object.keys(defaultState);
 	const incomingState = await PersistStorage.get(keys);

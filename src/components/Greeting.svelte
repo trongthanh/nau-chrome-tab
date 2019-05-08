@@ -78,7 +78,7 @@
 		<input
 			bind:this="{nameInput}"
 			class="greeting__name__input"
-			class:greeting__name__input--empty="{isInputEmpty }"
+			class:greeting__name__input--empty="{!inputValue}"
 			bind:value="{inputValue}"
 			v-click-outside="onInputClickOutside"
 			placeholder="gorgeous"
@@ -98,7 +98,6 @@
 	let greetText = '';
 	let greetingName = ''; // should be from store
 	let inputValue = '';
-	let isInputEmpty = false;
 	let isInputActive = true;
 	let nameInput = null; //ref
 
@@ -117,21 +116,6 @@
 		greetText = 'Good night';
 	}
 
-	function handleKeyPress(event) {
-		// enter
-		if (event.charCode === 13) {
-			nameInputSubmit();
-		}
-	}
-
-	function handleNameClick(event) {
-		isInputActive = true;
-		nameInput.focus();
-		nameInput.setSelectionRange(0, nameInput.value.length);
-
-		document.addEventListener('click', nameInputSubmit);
-	}
-
 	function nameInputSubmit() {
 		if (inputValue) {
 			isInputActive = false;
@@ -139,6 +123,21 @@
 		}
 
 		document.removeEventListener('click', nameInputSubmit);
+	}
+
+	function handleKeyPress(event) {
+		// enter
+		if (event.charCode === 13) {
+			nameInputSubmit();
+		}
+	}
+
+	function handleNameClick() {
+		isInputActive = true;
+		nameInput.focus();
+		nameInput.setSelectionRange(0, nameInput.value.length);
+
+		document.addEventListener('click', nameInputSubmit);
 	}
 
 	export let center = false;
