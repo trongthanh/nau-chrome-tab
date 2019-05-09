@@ -8,7 +8,6 @@
 		height: 100%;
 		background-position: center center;
 		background-size: cover;
-		transition: opacity 500ms;
 		z-index: 0;
 	}
 

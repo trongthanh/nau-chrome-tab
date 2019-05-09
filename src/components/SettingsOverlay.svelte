@@ -13,7 +13,7 @@
 		left: 0;
 		z-index: 1000;
 		opacity: 0;
-		background: rgba(0, 0, 0, 0.3);
+		background: rgba(0, 0, 0, 0.5);
 		transition: all 0.3s;
 	}
 
@@ -24,8 +24,13 @@
 </style>
 
 <!-- modal settings popup -->
-<div class="modal-overlay" class:modal-overlay--active="{active}" tabindex="0" on:click="{handleClick}">
-	<!-- SettingsModal @close="onModalClose" / -->
+<div
+	class="modal-overlay"
+	class:modal-overlay--active="{active}"
+	tabindex="0"
+	on:click="{handleClick}"
+>
+	<SettingsModal {active} on:close="{handleClick}" />
 </div>
 <!-- /.modal-overlay -->
 
@@ -34,6 +39,7 @@
 	 * @author Thanh Tran
 	 */
 	import { getContext } from 'svelte';
+	import SettingsModal from './SettingsModal.svelte';
 
 	const { toggleSettingPanels } = getContext('settingsPanel');
 
