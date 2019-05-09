@@ -199,62 +199,62 @@
 			<fieldset id="setting-quicklinks">
 				<legend i18n="quick_links">Quick Links</legend>
 				<label title="https://mail.google.com" class="settings__label"
-					><input type="checkbox" value="gmail" bind:group="{quicklinks}" /> <i class="mdi mdi--gmail"></i> GMail</label
+					><input type="checkbox" value="gmail" bind:group="{$quicklinks}" /> <i class="mdi mdi--gmail"></i> GMail</label
 				>
 				<label title="https://calendar.google.com" class="settings__label"
-					><input type="checkbox" value="gcalendar" bind:group="{quicklinks}" />
+					><input type="checkbox" value="gcalendar" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--calendar"></i> Google Calendar</label
 				>
 				<label title="https://drive.google.com" class="settings__label"
-					><input type="checkbox" value="gdrive" bind:group="{quicklinks}" />
+					><input type="checkbox" value="gdrive" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--google-drive"></i> Google Drive</label
 				>
 				<label title="https://github.com" class="settings__label"
-					><input type="checkbox" value="github" bind:group="{quicklinks}" />
+					><input type="checkbox" value="github" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--github-circle"></i> Github</label
 				>
 				<label title="https://bitbucket.org" class="settings__label"
-					><input type="checkbox" value="bitbucket" bind:group="{quicklinks}" />
+					><input type="checkbox" value="bitbucket" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--bitbucket"></i> Bitbucket</label
 				>
 				<label title="https://trello.com" class="settings__label"
-					><input type="checkbox" value="trello" bind:group="{quicklinks}" />
+					><input type="checkbox" value="trello" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--trello"></i> Trello</label
 				>
 				<label title="https://facebook.com" class="settings__label"
-					><input type="checkbox" value="facebook" bind:group="{quicklinks}" />
+					><input type="checkbox" value="facebook" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--facebook"></i> Facebook</label
 				>
 				<label title="https://twitter.com" class="settings__label"
-					><input type="checkbox" value="twitter" bind:group="{quicklinks}" />
+					><input type="checkbox" value="twitter" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--twitter"></i> Twitter</label
 				>
 				<label title="https://plus.google.com" class="settings__label"
-					><input type="checkbox" value="gplus" bind:group="{quicklinks}" /> <i class="mdi mdi--google-plus"></i> Google
+					><input type="checkbox" value="gplus" bind:group="{$quicklinks}" /> <i class="mdi mdi--google-plus"></i> Google
 					+</label
 				>
 				<label title="http://tuoitre.vn" class="settings__label"
-					><input type="checkbox" value="tuoitre" bind:group="{quicklinks}" />
+					><input type="checkbox" value="tuoitre" bind:group="{$quicklinks}" />
 					<span class="u-serif-text">tt</span> Tuoitre.vn</label
 				>
 				<label title="http://vnexpress.net/" class="settings__label"
-					><input type="checkbox" value="vnexpress" bind:group="{quicklinks}" />
+					><input type="checkbox" value="vnexpress" bind:group="{$quicklinks}" />
 					<span class="u-serif-text">vE</span> VNExpress</label
 				>
 				<label title="http://thanhnien.vn/" class="settings__label"
-					><input type="checkbox" value="thanhnien" bind:group="{quicklinks}" />
+					><input type="checkbox" value="thanhnien" bind:group="{$quicklinks}" />
 					<span class="u-serif-text">Tn</span> Thanhnien.vn</label
 				>
 				<label title="https://photos.google.com" class="settings__label"
-					><input type="checkbox" value="gphotos" bind:group="{quicklinks}" /> <i class="mdi mdi--image"></i> Google
+					><input type="checkbox" value="gphotos" bind:group="{$quicklinks}" /> <i class="mdi mdi--image"></i> Google
 					Photos</label
 				>
 				<label title="https://youtube.com" class="settings__label"
-					><input type="checkbox" value="youtube" bind:group="{quicklinks}" />
+					><input type="checkbox" value="youtube" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--youtube-play"></i> Youtube</label
 				>
 				<label title="https://jukebox.naustud.io" class="settings__label"
-					><input type="checkbox" value="naujukebox" bind:group="{quicklinks}" /> <i class="mdi mdi--play"></i> Nau
+					><input type="checkbox" value="naujukebox" bind:group="{$quicklinks}" /> <i class="mdi mdi--play"></i> Nau
 					Jukebox</label
 				>
 			</fieldset>
@@ -290,7 +290,7 @@
 		clockDisplay,
 		// userPhotoName,
 		userPhoto,
-		activeQuicklinks,
+		quicklinks,
 	} from '../stores/settings';
 
 	const dispatch = createEventDispatcher();
@@ -298,7 +298,6 @@
 	export let active = false;
 
 	$: userPhotoName = $userPhoto ? $userPhoto.id : 'Choose a file';
-	$: quicklinks = Object.keys(activeQuicklinks).filter(linkName => activeQuicklinks[linkName]);
 
 	function handleUserPhotoFileChange(event) {
 		console.log('file selector change:', event.target.files);

@@ -72,7 +72,7 @@
 </style>
 
 <ul id="quicklinks" class="quick-links__list">
-	{#each quicklinks as link (link.id)}
+	{#each activeQuicklinks as link (link.id)}
 
 	<li class="quick-links__li" id="link-{link.id}">
 		<a href="{link.url}" class="quick-links__link mdi {link.icon}" title="{link.title}">
@@ -88,10 +88,10 @@
 	/* © 2019 int3ractive.com
 	 * @author Thanh
 	 */
-	import { activeQuicklinks } from '../stores/settings';
+	import { quicklinks } from '../stores/settings';
 	/* eslint no-multi-spaces: off */
 	// prettier-ignore
-	const quicklinkInfo = [
+	const quicklinkData = [
 		{ id: 'gmail',      url: 'https://mail.google.com', icon: 'mdi--gmail', title: 'GMail' },
 		{ id: 'gcalendar',  url: 'https://calendar.google.com', icon: 'mdi--calendar', title: 'Google Calendar' },
 		{ id: 'gdrive',     url: 'https://drive.google.com', icon: 'mdi--google-drive', title: 'Google Drive' },
@@ -109,5 +109,5 @@
 		{ id: 'naujukebox', url: 'https://jukebox.naustud.io', icon: 'mdi--play', title: 'Nau Jukebox' },
 	];
 
-	$: quicklinks = quicklinkInfo.filter(link => $activeQuicklinks[link.id]);
+	$: activeQuicklinks = quicklinkData.filter(link => $quicklinks.includes(link.id));
 </script>
