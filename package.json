@@ -9,7 +9,8 @@
 		"dev": "run-p start:dev autobuild",
 		"start": "sirv public",
 		"start:dev": "sirv public --dev",
-		"eslint": "eslint --ext .js,.svelte ."
+		"eslint": "eslint --ext .js,.svelte .",
+		"predev": "rm -f public/js/bundle.js public/js/bundle.js.map public/css/bundle.css public/css/bundle.css.map"
 	},
 	"engines": {
 		"node": ">=6.0.0",
