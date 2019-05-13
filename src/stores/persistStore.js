@@ -51,13 +51,19 @@ const { subscribe, update } = writable(defaultState);
 	const keys = Object.keys(defaultState);
 	const incomingState = await PersistStorage.get(keys);
 
+	const unsaved = {};
+	let unsavedCount = 0;
 	keys.forEach(key => {
+		console.log(incomingState[key]);
 		// remove undefined stored data
 		if (incomingState[key] === undefined) {
 			delete incomingState[key];
+			unsaved[key] = defaultState[key];
+			unsavedCount += 1;
 		}
 	});
 	console.log('imcomingState', incomingState);
+	console.log('unsaved', unsaved);
 
 	update(currentState => {
 		// TODO: use spread?
@@ -67,6 +73,13 @@ const { subscribe, update } = writable(defaultState);
 		const state = Object.assign({}, currentState, incomingState, { settings });
 		return state;
 	});
+
+	if (unsavedCount) {
+		// save the unsaved
+		PersistStorage.set(unsaved).then(() => {
+			console.log('persist unsaved data');
+		});
+	}
 })();
 
 /**
