@@ -5,16 +5,17 @@ import { writable } from 'svelte/store';
 import PersistStorage from '../common/PersistStorage';
 
 const defaultState = {
+	_rehydrated: false, // flag to check if we're still rehydrating
 	lastPhotoFetch: 0, // timestamp
 	nextPhoto: null,
 	currentPhoto: {
 		imgUrl:
-			'https://images.unsplash.com/photo-1462688681110-15bc88b1497c?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
-		imgId: 'gzeUpbjoTUA',
-		authorName: 'Hoach Le Dinh',
-		authorUsername: 'hoachld',
-		color: '#888888', // median color of the photo
-	}, // unsplash photo data, with structure similar to wallpaper
+			'https://images.unsplash.com/photo-1522988796650-2cc783a2a4b3?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
+		imgId: 'MINzDVNWOWU',
+		authorName: 'Lê Tân',
+		authorUsername: 'ktsfish',
+		color: '#888888',
+	}, // unsplash photo data
 	userPhoto: null, // user photo data, with structure similar to wallpaper
 	greetingName: '',
 
@@ -48,13 +49,13 @@ const { subscribe, update } = writable(defaultState);
 
 // eslint-disable-next-line
 (async function() {
-	const keys = Object.keys(defaultState);
+	const keys = Object.keys(defaultState).filter(key => key !== '_rehydrated');
 	const incomingState = await PersistStorage.get(keys);
 
 	const unsaved = {};
 	let unsavedCount = 0;
 	keys.forEach(key => {
-		console.log(incomingState[key]);
+		// console.log(incomingState[key]);
 		// remove undefined stored data
 		if (incomingState[key] === undefined) {
 			delete incomingState[key];
@@ -66,11 +67,11 @@ const { subscribe, update } = writable(defaultState);
 	console.log('unsaved', unsaved);
 
 	update(currentState => {
-		// TODO: use spread?
 		// make sure new default settings are kept instead of being omitted
-		const settings = Object.assign({}, currentState.settings, incomingState.settings);
+		const settings = { ...currentState.settings, ...incomingState.settings };
 		delete incomingState.settings;
-		const state = Object.assign({}, currentState, incomingState, { settings });
+		const state = { ...currentState, ...incomingState, settings, _rehydrated: true };
+		console.log('NOW state', state);
 		return state;
 	});
 
@@ -89,6 +90,7 @@ const { subscribe, update } = writable(defaultState);
  *
  * @param {*} key
  * @param {*} value
+ * TODO: use the form {state} as param instead
  */
 function setState(key, value) {
 	update(state => {
@@ -102,6 +104,7 @@ function setState(key, value) {
  *
  * @param {string} key
  * @param {*} value
+ * TODO: use the form {state} as param instead
  */
 function saveState(key, value) {
 	PersistStorage.set({ [key]: value }).then(() => {

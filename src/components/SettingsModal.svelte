@@ -288,7 +288,6 @@
 		// language,
 		wallpaperMode,
 		clockDisplay,
-		// userPhotoName,
 		userPhoto,
 		quicklinks,
 	} from '../stores/settings';
@@ -297,14 +296,12 @@
 
 	export let active = false;
 
-	$: userPhotoName = $userPhoto ? $userPhoto.id : 'Choose a file';
+	$: userPhotoName = $userPhoto ? $userPhoto.imgId : 'Choose a file';
 
 	function handleUserPhotoFileChange(event) {
 		console.log('file selector change:', event.target.files);
 		const file = event.target.files[0];
 		if (file.type.includes('image')) {
-			// TODO: store file name is user's wallpaper ID
-			// $userPhoto.id = file.name;
 			storeUserPhoto(file);
 		} else {
 			/* eslint-disable-next-line no-alert */
@@ -314,40 +311,14 @@
 
 	function storeUserPhoto(file) {
 		readAndResizeImage(file).then(imgDataUrl => {
-			this.dispatch({
-				type: 'UPDATE_USER_PHOTO',
-				userPhoto: {
-					imgUrl: imgDataUrl,
-					imgId: file.name,
-					authorName: 'You',
-					authorUsername: '',
-				},
+			userPhoto.set({
+				imgUrl: imgDataUrl,
+				imgId: file.name,
+				authorName: 'You',
+				authorUsername: '',
 			});
+			wallpaperMode.set('user');
 			console.log('readAndResizeImage DONE');
 		});
-	}
-
-	function updateSettings() {
-		const { language, wallpaperMode, clockDisplay, userPhotoName, quicklinks } = this;
-		// prettier-ignore
-		const activeQuicklinks = ['gmail', 'gcalendar', 'gdrive', 'github', 'bitbucket', 'trello', 'facebook', 'twitter', 'gplus', 'tuoitre', 'vnexpress', 'thanhnien', 'gphotos', 'youtube', 'naujukebox']
-		.reduce((obj, linkName) => {
-			obj[linkName] = quicklinks.includes(linkName);
-			return obj;
-		}, {});
-
-		this.dispatch({
-			type: 'UPDATE_SETTINGS',
-			settings: {
-				// these properties must be inside 'settings' due to legacy versions used them
-				language,
-				userPhotoName,
-				activeQuicklinks,
-				wallpaperMode,
-				clockDisplay,
-			},
-		});
-
-		console.log('settings updated', { language, userPhotoName, activeQuicklinks, wallpaperMode, clockDisplay });
 	}
 </script>
