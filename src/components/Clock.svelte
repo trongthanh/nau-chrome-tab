@@ -22,7 +22,9 @@
 </style>
 
 <div class="clock" class:clock--center="{center}" class:clock--blend="{blend}">
-	<span class="clock__hour">{ $timer.hours }</span>:<span class="clock__minute">{ $timer.minutes }</span>
+	<span class="clock__hour">{ $timer.hours }</span>:<span class="clock__minute"
+		>{ $timer.minutes }</span
+	>
 </div>
 
 <script>

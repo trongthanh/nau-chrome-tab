@@ -301,6 +301,10 @@
 	function handleUserPhotoFileChange(event) {
 		console.log('file selector change:', event.target.files);
 		const file = event.target.files[0];
+		if (!file) {
+			return;
+		}
+
 		if (file.type.includes('image')) {
 			storeUserPhoto(file);
 		} else {

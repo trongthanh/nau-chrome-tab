@@ -6,11 +6,11 @@
 	"scripts": {
 		"build": "rollup -c",
 		"autobuild": "rollup -c -w",
-		"dev": "run-p start:dev autobuild",
-		"start": "sirv public",
-		"start:dev": "sirv public --dev",
+		"start": "run-p serve:dev autobuild",
+		"serve:dev": "sirv public --dev",
+		"serve:prod": "sirv public",
 		"eslint": "eslint --ext .js,.svelte .",
-		"predev": "rm -f public/js/bundle.js public/js/bundle.js.map public/css/bundle.css public/css/bundle.css.map"
+		"prestart": "rm -f public/js/bundle.js public/js/bundle.js.map public/css/bundle.css public/css/bundle.css.map"
 	},
 	"engines": {
 		"node": ">=6.0.0",
