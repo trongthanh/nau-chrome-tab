@@ -88,31 +88,31 @@ const { subscribe, update } = writable(defaultState);
  *
  * Input can be key-value params pair or a state object
  *
- * @param {*} key
- * @param {*} value
- * TODO: use the form {state} as param instead
+ * @param {Object} newState object to be merge to current state
  */
-function setState(key, value) {
-	update(state => {
-		state[key] = value;
-		return state;
-	});
+function setState(newState) {
+	update(state => ({
+		...state,
+		...newState,
+	}));
 }
 
 /**
  * Save state of each key and persist data if needed
  *
- * @param {string} key
- * @param {*} value
- * TODO: use the form {state} as param instead
+ * @param {Object} newState object to be merge to current state
  */
-function saveState(key, value) {
-	PersistStorage.set({ [key]: value }).then(() => {
-		update(state => {
-			state[key] = value;
-			return state;
-		});
+function saveState(newState) {
+	PersistStorage.set(newState).then(() => {
+		update(state => ({
+			...state,
+			...newState,
+		}));
 	});
+}
+
+function migrateStorage() {
+	//TODO
 }
 
 export default { subscribe, setState, saveState };

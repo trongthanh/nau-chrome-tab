@@ -20,7 +20,7 @@ export const quicklinks = {
 			return quickLinksObj;
 		}, {});
 		//
-		persistStore.saveState('activeQuicklinks', activeQuicklinks);
+		persistStore.saveState({ activeQuicklinks });
 	},
 };
 
@@ -31,7 +31,7 @@ function createPersistSettingStore(settingName) {
 		subscribe,
 		set(value) {
 			// set state and persist
-			persistStore.saveState(settingName, value);
+			persistStore.saveState({ [settingName]: value });
 		},
 	};
 }
