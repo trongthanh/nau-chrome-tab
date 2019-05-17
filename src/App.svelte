@@ -119,8 +119,9 @@
 	}
 
 	.clock-group--blend {
-		color: #444;
-		mix-blend-mode: color-dodge;
+		color: #888; /* to be changed at inline style */
+		mix-blend-mode: difference;
+		filter: invert(0.9);
 	}
 
 	/**
@@ -236,6 +237,7 @@
 	<div
 		class="main__item main__item--center clock-group"
 		class:clock-group--blend="{clockDisplayBlend}"
+		style="{centerGroupStyle}"
 	>
 		<Clock center blend="{clockDisplayBlend}" />
 		<Greeting lang="{$language}" center blend="{clockDisplayBlend}" />
@@ -259,7 +261,7 @@
 </main>
 <SettingsOverlay active="{settingsPanelVisible}" />
 
-<svelte:window on:keyup={handleKeyUp}/>
+<svelte:window on:keyup="{handleKeyUp}" />
 
 <script>
 	/* © 2019 int3ractive.com
@@ -274,9 +276,11 @@
 	import Greeting from './components/Greeting.svelte';
 	import SettingsOverlay from './components/SettingsOverlay.svelte';
 	import { clockDisplay, language } from './stores/settings';
+	import wallpaper from './stores/wallpaper';
 
 	$: clockMini = $clockDisplay === 'mini';
 	$: clockDisplayBlend = $clockDisplay === 'blend';
+	$: centerGroupStyle = $clockDisplay === 'blend' ? `color: ${$wallpaper.color}` : '';
 
 	let settingsPanelVisible = false;
 
