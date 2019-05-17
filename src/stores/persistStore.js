@@ -9,12 +9,13 @@ const defaultState = {
 	lastPhotoFetch: 0, // timestamp
 	nextPhoto: null,
 	currentPhoto: {
-		imgUrl:
-			'https://images.unsplash.com/photo-1522988796650-2cc783a2a4b3?dpr=1&auto=compress,format&w=1920&q=80&cs=tinysrgb',
-		imgId: 'MINzDVNWOWU',
-		authorName: 'Lê Tân',
-		authorUsername: 'ktsfish',
-		color: '#888888',
+		// a transparent 1x1px gif
+		imgUrl: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+		// empty id will make the app fetch for new photo
+		imgId: '',
+		authorName: '',
+		authorUsername: '',
+		color: '#977857',
 	}, // unsplash photo data
 	userPhoto: null, // user photo data, with structure similar to wallpaper
 	greetingName: '',
