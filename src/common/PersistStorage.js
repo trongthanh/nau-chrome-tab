@@ -19,21 +19,24 @@ if ('browser' in window) {
 const PersistStorage = {
 	/**
 	 * set data object to local storage
-	 * @param {object} obj Object to save to local storage, data type
-	 * (string, number, boolean, Object, Array) is mantained
+	 * @param {object} store Object to save to local storage, data type (string, number, boolean, Object, Array) is mantained
 	 * @return {object} the promise object which resolve when storing is done
 	 */
-	set(obj) {
+	set(store) {
+		if (store == null || typeof store !== 'object') {
+			throw new Error('store must be an object of states');
+		}
+
 		return new Promise((resolve /*, reject*/) => {
 			if (webStorage) {
-				webStorage.set(obj, () => {
-					resolve(obj);
+				webStorage.set(store, () => {
+					resolve(store);
 				});
 			} else {
-				Object.keys(obj).forEach(key => {
-					Lockr.set(key, obj[key]);
+				Object.keys(store).forEach(key => {
+					Lockr.set(key, store[key]);
 				});
-				resolve(obj);
+				resolve(store);
 			}
 		});
 	},
@@ -62,6 +65,33 @@ const PersistStorage = {
 				});
 
 				resolve(result);
+			}
+		});
+	},
+
+	/**
+	 * delete from local storage completely
+	 * @param  {string|Array} keys key string or array of key string
+	 * @return {object} the promise object which resolve when storing is done
+	 */
+	remove(keys) {
+		if (typeof keys === 'string') {
+			keys = [keys];
+		} else if (!Array.isArray(keys)) {
+			throw new Error('key must be either string or Array of key strings');
+		}
+
+		return new Promise((resolve /*, reject*/) => {
+			if (webStorage) {
+				webStorage.remove(keys, () => {
+					resolve(keys);
+				});
+			} else {
+				keys.forEach(key => {
+					Lockr.rm(key);
+				});
+
+				resolve(keys);
 			}
 		});
 	},

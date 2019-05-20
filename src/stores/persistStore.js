@@ -6,6 +6,7 @@ import PersistStorage from '../common/PersistStorage';
 
 const defaultState = {
 	_rehydrated: false, // flag to check if we're still rehydrating
+	_version: '3', // used to do migration
 	lastPhotoFetch: 0, // timestamp
 	nextPhoto: null,
 	currentPhoto: {
@@ -20,7 +21,6 @@ const defaultState = {
 	userPhoto: null, // user photo data, with structure similar to wallpaper
 	greetingName: '',
 
-	// TODO: migrate old settings to top level
 	settings: null, // old settings group is now at top level
 	// settings
 	language: navigator.language.includes('vi') ? 'vi' : 'en',
@@ -67,19 +67,27 @@ const { subscribe, update } = writable(defaultState);
 	console.log('imcomingState', incomingState);
 	console.log('unsaved', unsaved);
 
+	if (incomingState._version !== defaultState._version) {
+		unsavedCount += await migrateStorage(defaultState, incomingState, unsaved);
+		console.log('Storage migrated to v', defaultState._version);
+	}
+
 	update(currentState => {
-		// make sure new default settings are kept instead of being omitted
-		const settings = { ...currentState.settings, ...incomingState.settings };
-		delete incomingState.settings;
-		const state = { ...currentState, ...incomingState, settings, _rehydrated: true };
+		const state = { ...currentState, ...incomingState, _rehydrated: true };
 		console.log('NOW state', state);
 		return state;
 	});
 
+	// I can use Object.keys(unsaved).length here but isn't it more costly?
 	if (unsavedCount) {
 		// save the unsaved
 		PersistStorage.set(unsaved).then(() => {
-			console.log('persist unsaved data');
+			// if a key is set to null at this stage, we'll clean it up (migration requests)
+			const removeKeys = Object.keys(unsaved).filter(key => unsaved[key] == null);
+
+			PersistStorage.remove(removeKeys).then(() => {
+				console.log('persist unsaved data');
+			});
 		});
 	}
 })();
@@ -112,8 +120,31 @@ function saveState(newState) {
 	});
 }
 
-function migrateStorage() {
-	//TODO
+/**
+ * Simple storage migration script
+ * @return {Promise}  Resolve when done
+ */
+function migrateStorage(defaults, incoming, toBeSaved) {
+	return new Promise(resolve => {
+		// for version 2 to 3
+		if (incoming.settings) {
+			const currentSettings = incoming.settings;
+			delete currentSettings.collectionId; // collectionId cannot be changed by users, as per unsplash rules
+			delete currentSettings.userPhotoName; // this is stored in userPhoto.imgId now
+
+			// spread settings to top level
+			Object.assign(incoming, currentSettings, { settings: null, _version: defaults._version });
+			// remove old settings
+			toBeSaved.settings = null;
+			// switch to latest version
+			toBeSaved._version = defaults._version;
+
+			return resolve(1);
+		}
+
+		// return number of toBeSaved count
+		return resolve(0);
+	});
 }
 
 export default { subscribe, setState, saveState };
