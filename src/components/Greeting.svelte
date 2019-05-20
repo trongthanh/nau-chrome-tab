@@ -7,13 +7,13 @@
 		font-size: 1.8rem;
 		font-weight: normal;
 		white-space: nowrap;
-		text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 	}
 
 	.greeting--center {
 		font-size: 4rem;
 		font-weight: bold;
-		text-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+		text-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 	}
 
 	.greeting--blend {

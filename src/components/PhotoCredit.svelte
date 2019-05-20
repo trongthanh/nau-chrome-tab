@@ -6,6 +6,7 @@
 		font-size: 0.8em;
 		display: inline-block;
 		margin-bottom: 0.1em;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 	}
 </style>
 

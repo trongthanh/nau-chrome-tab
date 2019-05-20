@@ -3,8 +3,7 @@
 	 * Quotes
 	 */
 	.quotes {
-		text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-		mix-blend-mode: hard-light;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 	}
 
 	.quotes > p {
