@@ -5,13 +5,12 @@
 	"author": "Thanh Tran",
 	"version": "3.0.0",
 	"description": "Beautiful new tab page for modern browsers. A browser extension that will not track you.",
-	"applications": {
+	"browser_specific_settings": {
 		"gecko": {
 			"id": "nau-tab@int3ractive.com",
 			"strict_min_version": "45.0"
 		}
 	},
-
 	"icons": {
 		"16": "images/icon-16.png",
 		"48": "images/icon-48.png",
@@ -25,11 +24,8 @@
 		]
 	},
 	"permissions": [
-		"bookmarks",
-		"topSites",
 		"storage",
-		"webNavigation",
-		"webRequest"
+		"webRequest",
 	],
 	"options_ui": {
 		"page": "options.html",

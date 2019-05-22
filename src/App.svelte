@@ -219,6 +219,10 @@
 	}
 </style>
 
+<svelte:head>
+	<title>{$asciimoji}</title>
+</svelte:head>
+
 <Wallpaper settingsActive="{settingsPanelVisible}" />
 
 <main class="main">
@@ -277,6 +281,7 @@
 	import SettingsOverlay from './components/SettingsOverlay.svelte';
 	import { clockDisplay, language } from './stores/settings';
 	import wallpaper from './stores/wallpaper';
+	import asciimoji from './stores/asciimoji';
 
 	$: clockMini = $clockDisplay === 'mini';
 	$: clockDisplayBlend = $clockDisplay === 'blend';
