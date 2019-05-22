@@ -925,10 +925,10 @@ escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-nau@^13.2.0:
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-nau/-/eslint-config-nau-13.2.0.tgz#1ea6f75d70569dc809bd2e2328d6e1745c69a8c9"
-  integrity sha512-8dUL1IGhG2ESZAbpEJu9tXkq14AErkRWTKdBgZvM+MB53ct7UI+rhj1MuQ7Ax4G3Cdj75XMA6gXObOuQhg8l2g==
+eslint-config-nau@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-nau/-/eslint-config-nau-14.0.0.tgz#80efd042e170a7b57c5fdadcf9e64bd136a3ab62"
+  integrity sha512-dsdEcmx0hIzgkm4PJO4c2wQmUOKb4gHCa+KlRpx/y5eyw1K8Un+K+paPrX8SC2SaMlQGhHzNLabR1xsjomkw8g==
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
@@ -2784,6 +2784,11 @@ prettier-plugin-svelte@^0.4.2:
   integrity sha512-BjMxmU5aZJSW5hDEG3BhZ4GUzx28cgOkfwO/SOCxkCq/4qbAR2AoCtB+t7j2mg0TPJG0oA7glCDri8QpcTSuQA==
   dependencies:
     tslib "^1.9.3"
+
+prettier@^1.17.1:
+  version "1.17.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.17.1.tgz#ed64b4e93e370cb8a25b9ef7fef3e4fd1c0995db"
+  integrity sha512-TzGRNvuUSmPgwivDqkZ9tM/qTGW9hqDKWOE9YHiyQdixlKbv7kvEqsmDPrcHJTKwthU774TQwZXVtaQ/mMsvjg==
 
 process-nextick-args@~2.0.0:
   version "2.0.0"

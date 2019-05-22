@@ -28,6 +28,7 @@ const collectionsByPeriod = {
 	dawn: [4748158],
 	dusk: [4748158],
 };
+
 /**
  * Fetch Unplash random image
  *

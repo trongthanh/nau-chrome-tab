@@ -4,11 +4,8 @@ module.exports = {
 	extends: ['nau'],
 	plugins: ['svelte3'],
 	rules: {
-		'padding-line-between-statements': 'off',
 		'no-param-reassign': 'off',
-		'prefer-arrow-callback': 'off',
 		'no-mixed-operators': 'off',
-		'no-use-before-define': 'off',
 		strict: 'off',
 		'import/no-anonymous-default-export': 'off',
 		'import/prefer-default-export': 'off',
