@@ -147,4 +147,4 @@ function migrateStorage(defaults, incoming, toBeSaved) {
 	});
 }
 
-export default { subscribe, setState, saveState };
+export default { subscribe, setState, saveState, defaultState };
