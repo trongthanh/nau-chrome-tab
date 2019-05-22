@@ -119,9 +119,8 @@
 	}
 
 	.clock-group--blend {
-		color: #888; /* to be changed at inline style */
-		mix-blend-mode: difference;
-		filter: invert(0.9);
+		color: #eee; /* to be changed at inline style */
+		mix-blend-mode: color-dodge;
 	}
 
 	/**

@@ -17,7 +17,7 @@
 	}
 
 	.greeting--blend {
-		text-shadow: 0 0 2px rgba(255, 255, 255, 0.7);
+		text-shadow: none;
 	}
 
 	.greeting__name {
@@ -56,7 +56,8 @@
 	}
 
 	.greeting__name__input::placeholder {
-		color: rgba(255, 255, 255, 0.8);
+		color: inherit;
+		opacity: 0.8;
 	}
 
 	.greeting__name__input:focus {
@@ -80,7 +81,6 @@
 			class="greeting__name__input"
 			class:greeting__name__input--empty="{!inputValue}"
 			bind:value="{inputValue}"
-			v-click-outside="onInputClickOutside"
 			placeholder="gorgeous"
 			on:blur="{() => nameInputSubmit()}"
 			on:keypress="{handleKeyPress}"
