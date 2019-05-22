@@ -105,7 +105,10 @@
 
 <div class="modal modal--slide-up" class:modal--active="{active}" on:click|stopPropagation>
 	<h3 class="modal__title" i18n="settings">Settings</h3>
-	<button class="modal__close icon-btn mdi mdi--close" on:click={() => dispatch('close')}></button>
+	<button
+		class="modal__close icon-btn mdi mdi--close"
+		on:click="{() => dispatch('close')}"
+	></button>
 	<div class="modal__content">
 		<form id="settings-panel" class="modal__body settings">
 			<!-- temporary hide this setting, will come back later when I have full quote translation
@@ -199,7 +202,8 @@
 			<fieldset id="setting-quicklinks">
 				<legend i18n="quick_links">Quick Links</legend>
 				<label title="https://mail.google.com" class="settings__label"
-					><input type="checkbox" value="gmail" bind:group="{$quicklinks}" /> <i class="mdi mdi--gmail"></i> GMail</label
+					><input type="checkbox" value="gmail" bind:group="{$quicklinks}" />
+					<i class="mdi mdi--gmail"></i> GMail</label
 				>
 				<label title="https://calendar.google.com" class="settings__label"
 					><input type="checkbox" value="gcalendar" bind:group="{$quicklinks}" />
@@ -230,8 +234,8 @@
 					<i class="mdi mdi--twitter"></i> Twitter</label
 				>
 				<label title="https://plus.google.com" class="settings__label"
-					><input type="checkbox" value="gplus" bind:group="{$quicklinks}" /> <i class="mdi mdi--google-plus"></i> Google
-					+</label
+					><input type="checkbox" value="gplus" bind:group="{$quicklinks}" />
+					<i class="mdi mdi--google-plus"></i> Google +</label
 				>
 				<label title="http://tuoitre.vn" class="settings__label"
 					><input type="checkbox" value="tuoitre" bind:group="{$quicklinks}" />
@@ -246,16 +250,16 @@
 					<span class="u-serif-text">Tn</span> Thanhnien.vn</label
 				>
 				<label title="https://photos.google.com" class="settings__label"
-					><input type="checkbox" value="gphotos" bind:group="{$quicklinks}" /> <i class="mdi mdi--image"></i> Google
-					Photos</label
+					><input type="checkbox" value="gphotos" bind:group="{$quicklinks}" />
+					<i class="mdi mdi--image"></i> Google Photos</label
 				>
 				<label title="https://youtube.com" class="settings__label"
 					><input type="checkbox" value="youtube" bind:group="{$quicklinks}" />
 					<i class="mdi mdi--youtube-play"></i> Youtube</label
 				>
 				<label title="https://jukebox.naustud.io" class="settings__label"
-					><input type="checkbox" value="naujukebox" bind:group="{$quicklinks}" /> <i class="mdi mdi--play"></i> Nau
-					Jukebox</label
+					><input type="checkbox" value="naujukebox" bind:group="{$quicklinks}" />
+					<i class="mdi mdi--play"></i> Nau Jukebox</label
 				>
 			</fieldset>
 			<div class="copyright">
@@ -263,7 +267,10 @@
 					>&copy; 2019 <a href="https://int3ractive.com">Thanh Tran</a>.
 					<span i18n="oss_notice">Open source under Apache License v2.0</span>.</small
 				>
-				<a class="icon-btn" href="https://github.com/trongthanh/nau-chrome-tab" title="Source code on Github"
+				<a
+					class="icon-btn"
+					href="https://github.com/trongthanh/nau-chrome-tab"
+					title="Source code on Github"
 					><i class="mdi mdi--github-circle"></i></a
 				><!--
 				--><a
