@@ -69,8 +69,8 @@
 	}
 </style>
 
-<h1 id="greeting" class="greeting" class:greeting--center="{center}" class:greeting--blend="{blend}">
-	<span id="greeting-text">{ greetText } </span>,
+<h1 class="greeting" class:greeting--center="{center}" class:greeting--blend="{blend}">
+	<span>{ greetText } </span>,
 	<div
 		class="greeting__name"
 		class:greeting__name--active="{ isInputActive }"
@@ -82,10 +82,10 @@
 			class:greeting__name__input--empty="{!inputValue}"
 			bind:value="{inputValue}"
 			placeholder="gorgeous"
-			on:blur="{() => nameInputSubmit()}"
+			on:blur="{nameInputSubmit}"
 			on:keypress="{handleKeyPress}"
 		/>
-		<span class="greeting__name__output">{ greetingName }</span>
+		<span class="greeting__name__output">{ $greetingName }</span>
 	</div>
 </h1>
 
@@ -94,12 +94,14 @@
 	 * @author Thanh Tran
 	 */
 	import timer from '../stores/timer';
+	import { greetingName } from '../stores/settings';
 
 	let greetText = '';
-	let greetingName = ''; // should be from store
-	let inputValue = '';
-	let isInputActive = true;
+	let isInputFocus = false;
 	let nameInput = null; //ref
+
+	$: isInputActive = !$greetingName || isInputFocus;
+	$: inputValue = $greetingName || '';
 
 	const { hours } = $timer;
 
@@ -118,9 +120,11 @@
 
 	function nameInputSubmit() {
 		if (inputValue) {
-			isInputActive = false;
-			greetingName = inputValue;
+			$greetingName = inputValue;
+		} else if ($greetingName) {
+			inputValue = $greetingName;
 		}
+		isInputFocus = false;
 
 		document.removeEventListener('click', nameInputSubmit);
 	}
@@ -133,7 +137,7 @@
 	}
 
 	function handleNameClick() {
-		isInputActive = true;
+		isInputFocus = true;
 		nameInput.focus();
 		nameInput.setSelectionRange(0, nameInput.value.length);
 

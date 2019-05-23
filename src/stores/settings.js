@@ -41,3 +41,4 @@ export const language = createPersistSettingStore('language');
 export const userPhotoName = createPersistSettingStore('userPhotoName');
 export const wallpaperMode = createPersistSettingStore('wallpaperMode');
 export const userPhoto = createPersistSettingStore('userPhoto');
+export const greetingName = createPersistSettingStore('greetingName');
