@@ -116,11 +116,19 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
+		visibility: visible;
+		opacity: 1;
+		transition: opacity 0.3s ease;
 	}
 
 	.clock-group--blend {
 		color: #eee; /* to be changed at inline style */
 		mix-blend-mode: color-dodge;
+	}
+
+	.clock-group--invisible {
+		visibility: hidden;
+		opacity: 0;
 	}
 
 	/**
@@ -240,6 +248,7 @@
 	<div
 		class="main__item main__item--center clock-group"
 		class:clock-group--blend="{clockDisplayBlend}"
+		class:clock-group--invisible="{!$settingsReady}"
 		style="{centerGroupStyle}"
 	>
 		<Clock center blend="{clockDisplayBlend}" />
@@ -278,7 +287,7 @@
 	import Clock from './components/Clock.svelte';
 	import Greeting from './components/Greeting.svelte';
 	import SettingsOverlay from './components/SettingsOverlay.svelte';
-	import { clockDisplay, language } from './stores/settings';
+	import { clockDisplay, language, settingsReady } from './stores/settings';
 	import wallpaper from './stores/wallpaper';
 	import asciimoji from './stores/asciimoji';
 

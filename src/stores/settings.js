@@ -4,6 +4,12 @@
 import { derived } from 'svelte/store';
 import persistStore from './persistStore';
 
+export const settingsReady = derived(
+	persistStore,
+	$persistStore => $persistStore._rehydrated,
+	false
+);
+
 let activeQuicklinks;
 const quicklinksStore = derived(persistStore, $persistStore => {
 	// transform from Object to Array[linkName:string]
