@@ -327,6 +327,7 @@
 				imgId: file.name,
 				authorName: 'You',
 				authorUsername: '',
+				fetchTime: Date.now(),
 			});
 			wallpaperMode.set('user');
 			console.log('readAndResizeImage DONE');

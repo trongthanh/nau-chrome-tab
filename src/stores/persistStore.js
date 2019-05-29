@@ -17,6 +17,7 @@ const defaultState = {
 		authorName: '',
 		authorUsername: '',
 		color: '#977857',
+		fetchTime: 0,
 	}, // unsplash photo data
 	userPhoto: null, // user photo data, with structure similar to wallpaper
 	greetingName: '',

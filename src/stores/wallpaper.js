@@ -5,7 +5,7 @@ import { derived } from 'svelte/store';
 import persistStore from './persistStore';
 import { wallpaperMode } from './settings';
 import { fetchUnsplash } from '../common/services';
-import { getDayPeriod } from '../common/utils';
+import { getDayPeriod, hasPeriodChanged } from '../common/utils';
 
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
@@ -59,11 +59,19 @@ function checkWallpaperRetention($persistStore) {
 			console.log('change currentPhoto to', nextPhoto);
 			photoStates.currentPhoto = nextPhoto;
 		}
-		// add one hour for next hour
-		fetchNewPhoto(now + RENEW_DURATION)
+		let lastPhotoFetch = now;
+		let timeFetch = now + RENEW_DURATION; // we're fetching early for next swap, hence, time in the next hour
+
+		if (hasPeriodChanged(now, lastCheck)) {
+			// swap wallpaper immedately in next open, to sync to the right period of day
+			lastPhotoFetch = now - RENEW_DURATION;
+			timeFetch = now;
+		}
+
+		fetchNewPhoto(timeFetch)
 			.then(newNextPhoto => {
 				photoStates.nextPhoto = newNextPhoto;
-				photoStates.lastPhotoFetch = now;
+				photoStates.lastPhotoFetch = lastPhotoFetch;
 			})
 			.catch(() => {
 				console.log('Failed to fetch new photo for next hour');
@@ -101,6 +109,7 @@ async function fetchNewPhoto(time) {
 				authorName: user.name,
 				authorUsername: user.username,
 				color: json.color,
+				fetchTime: time, // not actually using
 			});
 		};
 

@@ -89,3 +89,14 @@ export function getDayPeriod(timeValue) {
 	// else
 	return 'night';
 }
+
+/**
+ * Check whether there was change in period of the day
+ * @param  {[type]}  time1 [description]
+ * @param  {[type]}  time2 [description]
+ * @return {Boolean}       [description]
+ */
+export function hasPeriodChanged(time1, time2) {
+	console.log('getDayPeriod(time1, time2)', getDayPeriod(time1), getDayPeriod(time2));
+	return getDayPeriod(time1) !== getDayPeriod(time2);
+}
