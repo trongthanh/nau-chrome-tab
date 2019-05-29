@@ -321,12 +321,13 @@
 	}
 
 	function storeUserPhoto(file) {
-		readAndResizeImage(file).then(imgDataUrl => {
+		readAndResizeImage(file).then(({ imgDataUrl, color }) => {
 			userPhoto.set({
 				imgUrl: imgDataUrl,
 				imgId: file.name,
 				authorName: 'You',
 				authorUsername: '',
+				color,
 				fetchTime: Date.now(),
 			});
 			wallpaperMode.set('user');

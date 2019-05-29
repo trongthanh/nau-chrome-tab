@@ -55,13 +55,25 @@ export function readAndResizeImage(file) {
 			// 0.8 is of decent quality with optimal size
 			const imgDataUrl = canvas.toDataURL('image/jpeg', 0.8);
 			// console.log('Resized image size:', imgDataUrl.length / 1024, 'KB');
-			resolve(imgDataUrl);
+
+			// draw image to a 1x1 px bitmap to get median color
+			ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 1, 1);
+			const imgData = ctx.getImageData(0, 0, 1, 1).data;
+			const color = `#${rgbToHex(imgData[0], imgData[1], imgData[2])}`;
+			console.log('median color', color);
+			resolve({ imgDataUrl, color });
 		};
 		img.onerror = () => {
 			reject();
 		};
 		img.src = url;
 	});
+}
+
+/* eslint-disable no-bitwise */
+export function rgbToHex(r, g, b) {
+	if (r > 255 || g > 255 || b > 255) throw new Error('Invalid color component');
+	return ((r << 16) | (g << 8) | b).toString(16);
 }
 
 /**

@@ -124,6 +124,7 @@
 	.clock-group--blend {
 		color: #eee; /* to be changed at inline style */
 		mix-blend-mode: color-dodge;
+		filter: brightness(0.6);
 	}
 
 	.clock-group--invisible {
