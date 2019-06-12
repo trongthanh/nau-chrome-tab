@@ -9,3 +9,7 @@ semi: true
 singleQuote: true
 trailingComma: es5
 useTabs: true
+overrides:
+  - files: "*.svelte"
+    options:
+      parser: html
