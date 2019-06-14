@@ -102,8 +102,36 @@
 		z-index: -1;
 	}
 
-	.icon-select {
-		font-family: Material Design Icons;
+	.settings__user-link {
+		display: inline-block;
+		padding: 1rem 0.5rem;
+		margin-right: 1rem;
+	}
+
+	.icon-selector {
+		position: relative;
+	}
+
+	.icon-selector__select {
+		display: block;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		appearance: none;
+		opacity: 0;
+		cursor: pointer;
+	}
+
+	.user-link__input {
+		appearance: none;
+		background: transparent;
+		border: 1px solid #999;
+		border-radius: 2px;
+		color: white;
+		padding: 2px;
 	}
 </style>
 
@@ -206,44 +234,53 @@
 			<fieldset id="setting-quicklinks">
 				<legend i18n="quick_links">Quick Links</legend>
 				{#each quicklinks as link}
-				<label title="{link.title}" class="settings__label"
+				<label title="{link.url}" class="settings__label"
 					><input type="checkbox" value="{link.id}" bind:group="{$activeQuicklinks}" />
 					<i class="{`mdi ${link.icon}`}"></i> {link.title}</label
 				>
 				{/each}
-				<!-- <div>
+				<hr />
+				{#each userLinks as userLink}
+				<div class="settings__user-link">
 					<input type="checkbox" name="user-link-active" />
-					<select name="user-link-icon" class="icon-select">
-						<option value="">{@html ''}</option>
-						<option value="">News</option>
-						<option value="">Shop</option>
-						<option value="">Social Network</option>
-					</select>
-					<input type="text" name="user-link-title" value="" />
-					<input type="text" name="user-link-url" value="" />
+					<label class="icon-selector" title="Click to select icon">
+						<select
+							name="user-link-icon"
+							bind:value="{userLink.icon}"
+							class="icon-selector__select"
+						>
+							<option value="mdi--wordpress">Blog</option>
+							<option value="mdi--newspaper">News</option>
+							<option value="mdi--book">Book</option>
+							<option value="mdi--shopping">Shop</option>
+							<option value="mdi--video-vintage">Movie</option>
+							<option value="mdi--headphones">Music</option>
+							<option value="mdi--account-group">Social</option>
+							<option value="mdi--gamepad-variant">Gaming</option>
+							<option value="mdi--food">Food</option>
+							<option value="mdi--train-car">Transport</option>
+							<option value="mdi--briefcase">Work</option>
+							<option value="mdi--earth">Globe</option>
+						</select>
+						<i class="{`mdi ${userLink.icon}`}"></i>
+					</label>
+					<input
+						type="text"
+						class="user-link__input"
+						name="user-link-title"
+						maxlength="20"
+						placeholder="Enter link title"
+						bind:value="{userLink.title}"
+					/>
+					<input
+						type="text"
+						class="user-link__input"
+						name="user-link-url"
+						placeholder="Enter link URL"
+						bind:value="{userLink.url}"
+					/>
 				</div>
-				<div>
-					<input type="checkbox" name="user-link-active" />
-					<select name="user-link-icon" class="icon-select">
-						<option value="">Blog</option>
-						<option value="">News</option>
-						<option value="">Shop</option>
-						<option value="">Social Network</option>
-					</select>
-					<input type="text" name="user-link-title" value="" />
-					<input type="text" name="user-link-url" value="" />
-				</div>
-				<div>
-					<input type="checkbox" name="user-link-active" />
-					<select name="user-link-icon" class="icon-select">
-						<option value="">Blog</option>
-						<option value="">News</option>
-						<option value="">Shop</option>
-						<option value="">Social Network</option>
-					</select>
-					<input type="text" name="user-link-title" value="" />
-					<input type="text" name="user-link-url" value="" />
-				</div> -->
+				{/each}
 			</fieldset>
 			<div class="copyright">
 				<small
@@ -286,6 +323,29 @@
 	const dispatch = createEventDispatcher();
 
 	export let active = false;
+
+	const userLinks = [
+		{
+			url: '',
+			icon: 'mdi--newspaper',
+			title: 'News',
+		},
+		{
+			url: '',
+			icon: 'mdi--shopping',
+			title: 'Shopping',
+		},
+		{
+			url: '',
+			icon: 'mdi--wordpress',
+			title: 'My Blog',
+		},
+		{
+			url: '',
+			icon: 'mdi--earth',
+			title: '',
+		},
+	];
 
 	$: userPhotoName = $userPhoto ? $userPhoto.imgId : 'Choose a file';
 

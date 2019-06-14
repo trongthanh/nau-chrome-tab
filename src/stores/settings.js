@@ -42,6 +42,7 @@ function createPersistSettingStore(settingName) {
 	};
 }
 
+export const userQuicklinks = createPersistSettingStore('userQuicklinks');
 export const clockDisplay = createPersistSettingStore('clockDisplay');
 export const language = createPersistSettingStore('language');
 export const userPhotoName = createPersistSettingStore('userPhotoName');

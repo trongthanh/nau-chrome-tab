@@ -39,18 +39,21 @@ const defaultState = {
 		user2: false,
 		user3: false,
 	},
-	userQuicklinks: {
-		// custom link
-		user1: {
+	// user custom link
+	userQuicklinks: [
+		{
 			url: 'https://tuoitre.vn', icon: 'mdi--newspaper', title: 'Tuoitre',
 		},
-		user2: {
+		{
 			url: 'https://lazada.vn', icon: 'mdi--shopping', title: 'Lazada',
 		},
-		user3: {
+		{
 			url: 'https://wordpress.com', icon: 'mdi--wordpress', title: 'Personal Blog',
 		},
-	},
+		{
+			url: '', icon: 'mdi--video-vintage', title: 'Entertainment',
+		},
+	],
 };
 
 const { subscribe, update } = writable(defaultState);
