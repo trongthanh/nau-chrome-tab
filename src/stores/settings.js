@@ -10,18 +10,18 @@ export const settingsReady = derived(
 	false
 );
 
-let activeQuicklinks;
 const quicklinksStore = derived(persistStore, $persistStore => {
 	// transform from Object to Array[linkName:string]
-	activeQuicklinks = $persistStore.activeQuicklinks;
+	const activeQuicklinks = $persistStore.activeQuicklinks;
+	// return only active ones
 	return Object.keys(activeQuicklinks).filter(linkName => activeQuicklinks[linkName]);
 });
 
-export const quicklinks = {
+export const activeQuicklinks = {
 	subscribe: quicklinksStore.subscribe,
 	set(quicklinks) {
 		// transform from Array[linkName:string] back to Object
-		activeQuicklinks = Object.keys(activeQuicklinks).reduce((quickLinksObj, linkName) => {
+		const activeQuicklinks = quicklinks.reduce((quickLinksObj, linkName) => {
 			quickLinksObj[linkName] = quicklinks.includes(linkName);
 			return quickLinksObj;
 		}, {});

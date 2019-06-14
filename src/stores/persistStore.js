@@ -4,6 +4,7 @@
 import { writable } from 'svelte/store';
 import PersistStorage from '../common/PersistStorage';
 
+// prettier-ignore
 const defaultState = {
 	_rehydrated: false, // flag to check if we're still rehydrating
 	_version: '3', // used to do migration
@@ -30,20 +31,25 @@ const defaultState = {
 	userPhotoName: '', // file name to display at file selector
 	activeQuicklinks: {
 		gmail: true,
-		gcalendar: true,
-		gdrive: true,
-		github: false,
-		bitbucket: false,
-		trello: false,
 		facebook: true,
 		twitter: true,
-		gplus: false,
-		tuoitre: true,
-		vnexpress: false,
-		thanhnien: false,
-		gphotos: false,
 		youtube: true,
-		naujukebox: false,
+		wikipedia: true,
+		user1: false,
+		user2: false,
+		user3: false,
+	},
+	userQuicklinks: {
+		// custom link
+		user1: {
+			url: 'https://tuoitre.vn', icon: 'mdi--newspaper', title: 'Tuoitre',
+		},
+		user2: {
+			url: 'https://lazada.vn', icon: 'mdi--shopping', title: 'Lazada',
+		},
+		user3: {
+			url: 'https://wordpress.com', icon: 'mdi--wordpress', title: 'Personal Blog',
+		},
 	},
 };
 

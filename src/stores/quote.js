@@ -5,7 +5,7 @@ import { derived } from 'svelte/store';
 import { enQuotes, viQuotes } from '../common/quotes';
 import { language } from './settings';
 
-export default derived([language], $language => {
+export default derived(language, $language => {
 	const quoteList = $language === 'vi' ? viQuotes : enQuotes;
 
 	const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
