@@ -3,7 +3,7 @@
 	 * Quotes
 	 */
 	.quotes {
-		text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 	}
 
 	.quotes > p {

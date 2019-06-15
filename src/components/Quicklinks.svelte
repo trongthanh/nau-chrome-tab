@@ -38,8 +38,8 @@
 		font-weight: bold;
 		line-height: 1;
 		text-decoration: none;
-		text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-		opacity: 0.5;
+		text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+		opacity: 0.8;
 		transition: all 200ms;
 	}
 
@@ -51,7 +51,7 @@
 	}
 
 	.quick-links__link::after {
-		content: attr(title);
+		content: attr(data-title);
 		position: absolute;
 		left: 50%;
 		bottom: -1.5rem;
@@ -74,7 +74,12 @@
 <ul id="quicklinks" class="quick-links__list">
 	{#each $quicklinks as link (link.id)}
 	<li class="quick-links__li" id="link-{link.id}">
-		<a href="{link.url}" class="quick-links__link mdi {link.icon}" title="{link.title}">
+		<a
+			href="{link.url}"
+			class="quick-links__link mdi {link.icon}"
+			data-title="{link.title}"
+			title="{`Open ${link.url}`}"
+		>
 			{#if link.typeicon }
 			<span class="typeicon">{link.typeicon}</span>
 			{/if}

@@ -180,7 +180,7 @@
 
 	/* brand logo has text on the left */
 	.logo::after {
-		content: attr(title);
+		content: attr(data-title);
 		position: absolute;
 		transform: translateX(-50%);
 		font-size: 0.7em;
@@ -262,13 +262,20 @@
 		<button
 			class="setting-btn icon-btn mdi mdi--settings"
 			type="button"
+			title="Open Settings"
 			on:click="{toggleSettingPanels}"
 		></button>
 		<PhotoCredit />
 	</div>
 	<div class="main__item main__item--bottom-right">
 		<div class="brand-logo">
-			<a href="https://int3ractive.com" class="quick-links__link logo" title="Made in Saigon"> </a>
+			<a
+				href="https://int3ractive.com/nau-tab"
+				class="quick-links__link logo"
+				data-title="Made in Saigon"
+				title="Visit project site"
+			>
+			</a>
 		</div>
 	</div>
 </main>
@@ -304,7 +311,7 @@
 	}
 
 	function handleKeyUp(event) {
-		console.log(event.key);
+		// console.log(event.key);
 		if (settingsPanelVisible && event.key === 'Escape') {
 			settingsPanelVisible = false;
 		}
