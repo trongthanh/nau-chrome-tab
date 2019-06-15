@@ -3,9 +3,15 @@
  */
 import { derived } from 'svelte/store';
 import { quicklinks } from '../common/quicklinks';
-import { activeQuicklinks } from './settings';
+import { activeQuicklinks, userQuicklinks } from './settings';
 
-export default derived(activeQuicklinks, $activeQuicklinks => {
-	console.log($activeQuicklinks);
-	return quicklinks.filter(link => $activeQuicklinks.includes(link.id));
-});
+export default derived(
+	[activeQuicklinks, userQuicklinks],
+	([$activeQuicklinks, $userQuicklinks]) => {
+		// console.log($activeQuicklinks);
+		return [
+			...quicklinks.filter(link => $activeQuicklinks.includes(link.id)),
+			...$userQuicklinks.filter(link => link.active),
+		];
+	}
+);

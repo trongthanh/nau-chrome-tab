@@ -101,38 +101,6 @@
 		position: absolute;
 		z-index: -1;
 	}
-
-	.settings__user-link {
-		display: inline-block;
-		padding: 1rem 0.5rem;
-		margin-right: 1rem;
-	}
-
-	.icon-selector {
-		position: relative;
-	}
-
-	.icon-selector__select {
-		display: block;
-		position: absolute;
-		width: 20px;
-		height: 20px;
-		top: 0;
-		left: 0;
-		z-index: 1;
-		appearance: none;
-		opacity: 0;
-		cursor: pointer;
-	}
-
-	.user-link__input {
-		appearance: none;
-		background: transparent;
-		border: 1px solid #999;
-		border-radius: 2px;
-		color: white;
-		padding: 2px;
-	}
 </style>
 
 <div class="modal modal--slide-up" class:modal--active="{visible}" on:click|stopPropagation>
@@ -188,6 +156,7 @@
 						id="setting-photo-selector-input"
 						type="file"
 						class="u-hidden"
+						accept="image/png, image/jpeg"
 						on:change="{handleUserPhotoFileChange}"
 					/>
 					<i class="mdi mdi--file-image"></i>
@@ -240,47 +209,8 @@
 				>
 				{/each}
 				<hr />
-				{#each userLinks as userLink}
-				<div class="settings__user-link">
-					<input type="checkbox" name="user-link-active" />
-					<label class="icon-selector" title="Click to select icon">
-						<select
-							name="user-link-icon"
-							bind:value="{userLink.icon}"
-							class="icon-selector__select"
-						>
-							<option value="mdi--wordpress">Blog</option>
-							<option value="mdi--newspaper">News</option>
-							<option value="mdi--book">Book</option>
-							<option value="mdi--shopping">Shop</option>
-							<option value="mdi--video-vintage">Movie</option>
-							<option value="mdi--headphones">Music</option>
-							<option value="mdi--account-group">Social</option>
-							<option value="mdi--gamepad-variant">Gaming</option>
-							<option value="mdi--food">Food</option>
-							<option value="mdi--train-car">Transport</option>
-							<option value="mdi--briefcase">Work</option>
-							<option value="mdi--earth">Globe</option>
-						</select>
-						<i class="{`mdi ${userLink.icon}`}"></i>
-					</label>
-					<input
-						type="text"
-						class="user-link__input"
-						name="user-link-title"
-						maxlength="20"
-						placeholder="Enter link title"
-						bind:value="{userLink.title}"
-					/>
-					<input
-						type="text"
-						class="user-link__input"
-						name="user-link-url"
-						placeholder="Enter link URL"
-						bind:value="{userLink.url}"
-					/>
-				</div>
-				{/each}
+				{#each $userQuicklinks as userLink (userLink.id)}
+				<UserLink {...userLink} onChange="{handleUserLinkChange}" /> {/each}
 			</fieldset>
 			<div class="copyright">
 				<small
@@ -312,40 +242,19 @@
 	import { createEventDispatcher } from 'svelte';
 	import { readAndResizeImage } from '../common/utils';
 	import { quicklinks } from '../common/quicklinks';
+	import UserLink from './widgets/UserLink.svelte';
 	import {
 		// language,
 		wallpaperMode,
 		clockDisplay,
 		userPhoto,
 		activeQuicklinks,
+		userQuicklinks,
 	} from '../stores/settings';
-
-	const dispatch = createEventDispatcher();
 
 	export let visible = false;
 
-	const userLinks = [
-		{
-			url: '',
-			icon: 'mdi--newspaper',
-			title: 'News',
-		},
-		{
-			url: '',
-			icon: 'mdi--shopping',
-			title: 'Shopping',
-		},
-		{
-			url: '',
-			icon: 'mdi--wordpress',
-			title: 'My Blog',
-		},
-		{
-			url: '',
-			icon: 'mdi--earth',
-			title: '',
-		},
-	];
+	const dispatch = createEventDispatcher();
 
 	$: userPhotoName = $userPhoto ? $userPhoto.imgId : 'Choose a file';
 
@@ -377,5 +286,15 @@
 			wallpaperMode.set('user');
 			console.log('readAndResizeImage DONE');
 		});
+	}
+
+	function handleUserLinkChange(updatedLink) {
+		const newUserQuicklinks = $userQuicklinks.map(link => {
+			if (link.id === updatedLink.id) {
+				return updatedLink;
+			}
+			return link;
+		});
+		userQuicklinks.set(newUserQuicklinks);
 	}
 </script>

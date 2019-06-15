@@ -35,24 +35,13 @@ const defaultState = {
 		twitter: true,
 		youtube: true,
 		wikipedia: true,
-		user1: false,
-		user2: false,
-		user3: false,
 	},
 	// user custom link
 	userQuicklinks: [
-		{
-			url: 'https://tuoitre.vn', icon: 'mdi--newspaper', title: 'Tuoitre',
-		},
-		{
-			url: 'https://lazada.vn', icon: 'mdi--shopping', title: 'Lazada',
-		},
-		{
-			url: 'https://wordpress.com', icon: 'mdi--wordpress', title: 'Personal Blog',
-		},
-		{
-			url: '', icon: 'mdi--video-vintage', title: 'Entertainment',
-		},
+		{ id: 'user1', active: false, url: '', icon: 'mdi--newspaper', title: 'News' },
+		{ id: 'user2', active: false, url: '', icon: 'mdi--shopping', title: 'Shopping' },
+		{ id: 'user3', active: false, url: '', icon: 'mdi--wordpress', title: 'My Blog' },
+		{ id: 'user4', active: false, url: '', icon: 'mdi--earth', title: '' },
 	],
 };
 
@@ -74,8 +63,8 @@ const { subscribe, update } = writable(defaultState);
 			unsavedCount += 1;
 		}
 	});
-	console.log('imcomingState', incomingState);
-	console.log('unsaved', unsaved);
+	// console.log('imcomingState', incomingState);
+	// console.log('unsaved', unsaved);
 
 	if (incomingState._version !== defaultState._version) {
 		unsavedCount += await migrateStorage(defaultState, incomingState, unsaved);
