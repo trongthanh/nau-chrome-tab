@@ -19,12 +19,12 @@
 <div
 	id="wallpaper"
 	class="wallpaper"
-	class:wallpaper--blur="{settingsActive}"
+	class:wallpaper--blur="{settingsVisible}"
 	style="background-image: url({$wallpaper.imgUrl}); background-color: {$wallpaper.color};"
 ></div>
 
 <script>
 	import wallpaper from '../stores/wallpaper';
 
-	export let settingsActive = false;
+	export let settingsVisible = false;
 </script>

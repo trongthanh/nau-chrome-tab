@@ -231,7 +231,7 @@
 	<title>{$asciimoji}</title>
 </svelte:head>
 
-<Wallpaper settingsActive="{settingsPanelVisible}" />
+<Wallpaper settingsVisible="{settingsPanelVisible}" />
 
 <main class="main">
 	<div class="main__item main__item--top-left quick-links">
@@ -272,7 +272,7 @@
 		</div>
 	</div>
 </main>
-<SettingsOverlay active="{settingsPanelVisible}" />
+<SettingsOverlay visible="{settingsPanelVisible}" />
 
 <svelte:window on:keyup="{handleKeyUp}" />
 

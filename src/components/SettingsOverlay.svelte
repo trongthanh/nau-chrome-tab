@@ -26,11 +26,11 @@
 <!-- modal settings popup -->
 <div
 	class="modal-overlay"
-	class:modal-overlay--active="{active}"
+	class:modal-overlay--active="{visible}"
 	tabindex="0"
 	on:click="{handleClick}"
 >
-	<SettingsModal {active} on:close="{handleClick}" />
+	<SettingsModal {visible} on:close="{handleClick}" />
 </div>
 <!-- /.modal-overlay -->
 
@@ -47,5 +47,5 @@
 		toggleSettingPanels();
 	}
 
-	export let active = false;
+	export let visible = false;
 </script>

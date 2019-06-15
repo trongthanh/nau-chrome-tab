@@ -38,7 +38,7 @@
 
 	/* modal content styles */
 	.modal__content {
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.7);
 		position: relative;
 		border-radius: 3px;
 		margin: 0 auto;
@@ -135,7 +135,7 @@
 	}
 </style>
 
-<div class="modal modal--slide-up" class:modal--active="{active}" on:click|stopPropagation>
+<div class="modal modal--slide-up" class:modal--active="{visible}" on:click|stopPropagation>
 	<h3 class="modal__title" i18n="settings">Settings</h3>
 	<button
 		class="modal__close icon-btn mdi mdi--close"
@@ -322,7 +322,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	export let active = false;
+	export let visible = false;
 
 	const userLinks = [
 		{
