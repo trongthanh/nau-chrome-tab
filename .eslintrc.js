@@ -3,6 +3,10 @@ module.exports = {
 	root: true,
 	extends: ['nau'],
 	plugins: ['svelte3'],
+	parserOptions: {
+		ecmaVersion: 2018,
+		sourceType: 'module',
+	},
 	rules: {
 		'no-param-reassign': 'off',
 		'no-mixed-operators': 'off',

@@ -7,11 +7,8 @@ import { activeQuicklinks, userQuicklinks } from './settings';
 
 export default derived(
 	[activeQuicklinks, userQuicklinks],
-	([$activeQuicklinks, $userQuicklinks]) => {
-		// console.log($activeQuicklinks);
-		return [
-			...quicklinks.filter(link => $activeQuicklinks.includes(link.id)),
-			...$userQuicklinks.filter(link => link.active),
-		];
-	}
+	([$activeQuicklinks, $userQuicklinks]) => [
+		...quicklinks.filter(link => $activeQuicklinks.includes(link.id)),
+		...$userQuicklinks.filter(link => link.active),
+	]
 );
