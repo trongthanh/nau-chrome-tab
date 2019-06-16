@@ -3,12 +3,12 @@
 
 	"name": "Nau Tab",
 	"author": "Thanh Tran",
-	"version": "2.9.1",
+	"version": "3.0.0",
 	"description": "Beautiful new tab page for modern browsers. A browser extension that will not track you.",
 	"browser_specific_settings": {
 		"gecko": {
 			"id": "nau-tab@int3ractive.com",
-			"strict_min_version": "45.0"
+			"strict_min_version": "57.0"
 		}
 	},
 	"icons": {
@@ -19,13 +19,11 @@
 	"default_locale": "en",
 	"background": {
 		"scripts": [
-			"js/chromereload.js",
 			"js/background.js"
 		]
 	},
 	"permissions": [
-		"storage",
-		"webRequest"
+		"storage"
 	],
 	"options_ui": {
 		"page": "options.html",
@@ -37,8 +35,8 @@
 	"browser_action": {
 		"default_icon": {
 			"16": "images/icon-16.png",
-			"19": "images/icon-19.png",
-			"38": "images/icon-38.png"
+			"32": "images/icon-32.png",
+			"48": "images/icon-48.png"
 		},
 		"default_title": "nau-tab"
 	},

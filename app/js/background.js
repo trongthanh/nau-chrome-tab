@@ -16,4 +16,3 @@ browser.browserAction.onClicked.addListener(function() {
 		url: appURL,
 	});
 });
-
