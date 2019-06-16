@@ -28,24 +28,24 @@ Install the dependencies...
 
 ```bash
 cd svelte-app
-npm install
+yarn
 ```
 
 ...then start [Rollup](https://rollupjs.org):
 
 ```bash
-npm run start
+yarn start
 ```
 
 Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
 ### Minimum supported browser:
 
-- Chrome 42 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
-- Opera 29 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
-- Firefox 45 (get the installable .xpi files [here](https://github.com/trongthanh/nau-chrome-tab/releases).)
-- Edge 14 (as home page, point to [here](https://naustud.io/start/))
-- Safari 10.1 (as home page, point to [here](https://naustud.io/start/))
+- Chrome 60 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
+- Opera 47 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
+- Firefox 57 (install [from here](https://addons.mozilla.org/en-US/firefox/addon/nau-tab).)
+- Edge (to be supported with new Chromium core)
+- Chromium-based browser: supported from Chromium 60
 
 ### Build and Package
 
@@ -58,31 +58,25 @@ yarn install
 ### Compiles and hot-reloads for development
 
 ```
-yarn run serve
+yarn start
 ```
 
 ### Compiles and minifies for production
 
-```
-yarn run build
-```
-
-### Run your tests
+Update `public/manifest.json` version and then run:
 
 ```
-yarn run test
+yarn build
 ```
+
+Command will generate a build to `public/`, remove source map files and it's ready to be deployed. `app/` folder is a snapshot build for current version.
 
 ### Lints and fixes files
 
 ```
-yarn run lint
+yarn eslint
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## License
 
-Copyright 2016 Thanh Tran - Int3ractive.com. Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
+Copyright 2019 Thanh Tran - Int3ractive.com. Licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
