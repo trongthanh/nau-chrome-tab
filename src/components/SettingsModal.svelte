@@ -215,8 +215,9 @@
 			<div class="copyright">
 				<small
 					>&copy; 2019 <a href="https://int3ractive.com">Thanh Tran</a>.
-					<span i18n="oss_notice">Open source under Apache License v2.0</span>.</small
-				>
+					<span i18n="oss_notice">Open source under Apache License v2.0</span>.
+					<a href="/options.html">Release notes.</a>
+				</small>
 				<a
 					class="icon-btn"
 					href="https://github.com/trongthanh/nau-chrome-tab"
@@ -226,8 +227,14 @@
 				--><a
 					class="icon-btn"
 					href="https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en"
-					title="Install this extension on Chrome Webstore"
-					><i class="mdi mdi--google-chrome"></i
+					title="Install this extension on Chrome"
+					><i class="mdi mdi--google-chrome"></i></a
+				><!--
+				--><a
+					class="icon-btn"
+					href="https://addons.mozilla.org/en-US/firefox/addon/nau-tab/"
+					title="Install this extension on Firefox"
+					><i class="mdi mdi--firefox"></i
 				></a>
 			</div>
 		</form>
