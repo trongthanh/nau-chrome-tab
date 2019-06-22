@@ -13,11 +13,17 @@
 <div id="photo-credit" class="photo-credit">
 	{#if creditVisible}
 	<span>Photo by </span>
-	<a href="https://unsplash.com/@{$wallpaper.authorUsername}" class="photo-credit__author"
+	<a
+		href="https://unsplash.com/@{$wallpaper.authorUsername}?utm_source=nau-tab&utm_medium=referral"
+		class="photo-credit__author"
 		>{ $wallpaper.authorName }</a
 	>
 	<span> / </span>
-	<a href="https://unsplash.com/photos/{$wallpaper.imgId}" class="photo-credit__origin">Unsplash</a>
+	<a
+		href="https://unsplash.com/photos/{$wallpaper.imgId}?utm_source=nau-tab&utm_medium=referral"
+		class="photo-credit__origin"
+		>Unsplash</a
+	>
 	{/if}
 </div>
 

@@ -139,6 +139,7 @@
 		margin: -1rem; /* compensate buttons padding */
 		opacity: 0.5;
 		transition: opacity 200ms;
+		z-index: 1; /* raise it above mini clock */
 	}
 
 	.quick-links:hover {
