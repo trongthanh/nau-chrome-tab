@@ -109,6 +109,6 @@ export function getDayPeriod(timeValue) {
  * @return {Boolean}       [description]
  */
 export function hasPeriodChanged(time1, time2) {
-	console.log('getDayPeriod(time1, time2)', getDayPeriod(time1), getDayPeriod(time2));
+	console.log('hasPeriodChanged(time1, time2)', getDayPeriod(time1), getDayPeriod(time2));
 	return getDayPeriod(time1) !== getDayPeriod(time2);
 }
