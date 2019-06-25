@@ -15,10 +15,10 @@ let runOnce = false; // to make sure checkWallpaperRetention run only once
 
 // wallpaper store
 export default derived(
-	[wallpaperMode, persistStore],
-	([$wallpaperMode, $persistStore]) => {
+	[persistStore],
+	([$persistStore]) => {
 		if ($persistStore._rehydrated) {
-			if ($wallpaperMode === 'user' && $persistStore.userPhoto) {
+			if ($persistStore.wallpaperMode === 'user' && $persistStore.userPhoto) {
 				return $persistStore.userPhoto;
 			}
 
