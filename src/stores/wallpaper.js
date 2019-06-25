@@ -53,16 +53,17 @@ function checkWallpaperRetention($persistStore) {
 	// the first hour after install, user will see default background,
 	// then we'll fetch new image in the next hour
 	if (now > lastCheck + RENEW_DURATION) {
+		let currentPhoto = $persistStore.currentPhoto;
 		const nextPhoto = $persistStore.nextPhoto;
 		const photoStates = {};
 		if (nextPhoto) {
 			console.log('change currentPhoto to', nextPhoto);
-			photoStates.currentPhoto = nextPhoto;
+			currentPhoto = photoStates.currentPhoto = nextPhoto;
 		}
 		let lastPhotoFetch = now;
 		let timeFetch = now + RENEW_DURATION; // we're fetching early for next swap, hence, time in the next hour
 
-		if (hasPeriodChanged(now, lastCheck)) {
+		if (hasPeriodChanged(now, currentPhoto.fetchTime) && hasPeriodChanged(now, lastCheck)) {
 			// swap wallpaper immedately in next open, to sync to the right period of day
 			lastPhotoFetch = now - RENEW_DURATION;
 			timeFetch = now;
@@ -109,7 +110,7 @@ async function fetchNewPhoto(time) {
 				authorName: user.name,
 				authorUsername: user.username,
 				color: json.color,
-				fetchTime: time, // not actually using
+				fetchTime: time, // to check for shift of day period
 			});
 		};
 
