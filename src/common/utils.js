@@ -112,3 +112,22 @@ export function hasPeriodChanged(time1, time2) {
 	console.log('hasPeriodChanged(time1, time2)', getDayPeriod(time1), getDayPeriod(time2));
 	return getDayPeriod(time1) !== getDayPeriod(time2);
 }
+
+/**
+ * Get query string from param object
+ * @param  {Object} params params object with key: value pairs
+ * @return {string}        Query string to use with GET URL
+ */
+export function queryString(params) {
+	return Object.keys(params)
+		.map(k => {
+			let val = params[k];
+			// join array values with comma
+			if (Array.isArray(val)) {
+				val = val.join(',');
+			}
+
+			return `${encodeURIComponent(k)}=${encodeURIComponent(val)}`;
+		})
+		.join('&');
+}

@@ -3,9 +3,8 @@
  */
 import { derived } from 'svelte/store';
 import persistStore from './persistStore';
-import { wallpaperMode } from './settings';
-import { fetchUnsplash } from '../common/services';
-import { getDayPeriod, hasPeriodChanged } from '../common/utils';
+import { fetchNewPhoto } from '../common/services';
+import { hasPeriodChanged } from '../common/utils';
 
 const RENEW_DURATION = 1000 * 60 * 60; // fetch new image every hour
 
@@ -46,7 +45,8 @@ export default derived(
 	persistStore.defaultState.currentPhoto
 );
 
-function checkWallpaperRetention($persistStore) {
+// export for unit testing only
+export function checkWallpaperRetention($persistStore) {
 	const lastCheck = $persistStore.lastPhotoFetch;
 
 	const now = Date.now();
@@ -86,39 +86,4 @@ function checkWallpaperRetention($persistStore) {
 
 	// time limit is not reached
 	return $persistStore.currentPhoto;
-}
-
-async function fetchNewPhoto(time) {
-	// const period = getDayPeriod(1549029600000); // this value to test night time
-	const period = getDayPeriod(time);
-	const json = await fetchUnsplash(period);
-
-	console.log('fetch result', json);
-	const url = json.urls.custom || json.urls.full;
-	const user = json.user || { name: '', username: '' };
-
-	return new Promise((resolve, reject) => {
-		// cache the image via normal browser cache in the background
-		// but don't show it immediately after load, user will see new image in next open tab
-		const imgEl = document.createElement('IMG');
-		imgEl.onload = () => {
-			console.log('Image is loaded, ready for view in next hour');
-			resolve({
-				location: json.location,
-				imgUrl: url,
-				imgId: json.id,
-				authorName: user.name,
-				authorUsername: user.username,
-				color: json.color,
-				fetchTime: time, // to check for shift of day period
-			});
-		};
-
-		imgEl.onerror = err => {
-			console.log('Image load errors, we will try again next open tab');
-			reject(err);
-		};
-		// load the image
-		imgEl.src = url;
-	});
 }

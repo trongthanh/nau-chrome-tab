@@ -1,25 +1,7 @@
 /* © 2019 int3ractive.com
  * @author Thanh
  */
-
-/**
- * Get query string from param object
- * @param  {Object} params params object with key: value pairs
- * @return {string}        Query string to use with GET URL
- */
-function queryString(params) {
-	return Object.keys(params)
-		.map(k => {
-			let val = params[k];
-			// join array values with comma
-			if (Array.isArray(val)) {
-				val = val.join(',');
-			}
-
-			return `${encodeURIComponent(k)}=${encodeURIComponent(val)}`;
-		})
-		.join('&');
-}
+import { getDayPeriod, queryString } from './utils';
 
 const unsplashAPI = 'https://api.unsplash.com/photos/random';
 const collectionsByPeriod = {
@@ -71,4 +53,39 @@ export function fetchUnsplash(period = 'day') {
 
 			return err;
 		});
+}
+
+export async function fetchNewPhoto(time) {
+	// const period = getDayPeriod(1549029600000); // this value to test night time
+	const period = getDayPeriod(time);
+	const json = await fetchUnsplash(period);
+
+	console.log('fetch result', json);
+	const url = json.urls.custom || json.urls.full;
+	const user = json.user || { name: '', username: '' };
+
+	return new Promise((resolve, reject) => {
+		// cache the image via normal browser cache in the background
+		// but don't show it immediately after load, user will see new image in next open tab
+		const imgEl = document.createElement('IMG');
+		imgEl.onload = () => {
+			console.log('Image is loaded, ready for view in next hour');
+			resolve({
+				location: json.location,
+				imgUrl: url,
+				imgId: json.id,
+				authorName: user.name,
+				authorUsername: user.username,
+				color: json.color,
+				fetchTime: time, // to check for shift of day period
+			});
+		};
+
+		imgEl.onerror = err => {
+			console.log('Image load errors, we will try again next open tab');
+			reject(err);
+		};
+		// load the image
+		imgEl.src = url;
+	});
 }
