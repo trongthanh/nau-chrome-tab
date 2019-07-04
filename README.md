@@ -1,6 +1,11 @@
+# NAU Tab
+[![](https://api.travis-ci.org/trongthanh/nau-chrome-tab.svg?branch=master)](https://travis-ci.org/trongthanh/nau-chrome-tab/)
+
+> Not Another Useless Tab
+
 ## Getting Started
 
-Follow these steps to run NauTab in Google Chrome as a developer.
+Follow these steps to run NAU Tab in Google Chrome as a developer.
 
 - Open the url chrome://extensions/ in Google Chrome.
 - Click to enable _Developer mode_ so that you see developer options.
