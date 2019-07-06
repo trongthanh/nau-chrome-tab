@@ -1,38 +1,23 @@
 # NAU Tab
-[![](https://api.travis-ci.org/trongthanh/nau-chrome-tab.svg?branch=master)](https://travis-ci.org/trongthanh/nau-chrome-tab/)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-brightgreen.svg?logo=Google%20Chrome)](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en)
+[![Firefox Add-on](https://img.shields.io/badge/Firefox-Add--on-orange.svg?logo=Mozilla%20Firefox)](https://addons.mozilla.org/en-US/firefox/addon/nau-tab/)
+[![Travis build status](https://api.travis-ci.org/trongthanh/nau-chrome-tab.svg?branch=master)](https://travis-ci.org/trongthanh/nau-chrome-tab/)
+![Version](https://img.shields.io/github/package-json/v/trongthanh/nau-chrome-tab.svg)
+![Apache License](https://img.shields.io/github/license/trongthanh/nau-chrome-tab.svg)
 
 > Not Another Useless Tab
 
-## Getting Started
+Before landing at [Svelte 3.0](https://svelte.dev), I have developed this browser extension using two other solutions (with features of **2.6**):
 
-Follow these steps to run NAU Tab in Google Chrome as a developer.
+- [Vanilla JavaScript bundled with webpack](https://github.com/trongthanh/nau-chrome-tab/tree/vanilla-webpack)
+- [Vue 2.6](https://github.com/trongthanh/nau-chrome-tab/tree/vue-app-migration)
 
-- Open the url chrome://extensions/ in Google Chrome.
-- Click to enable _Developer mode_ so that you see developer options.
-- Click the "Load unpackaged extensions..."
-- Browse to the location where iChrome repo is installed, and select the sub-directory `app` as the extension source.
-- When you make change to the code for the tab page, just reload the tab.
-
-## svelte app
-
-This app used project template for [Svelte 3](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
+### Getting started
 
 Install the dependencies...
 
 ```bash
-cd svelte-app
+cd nau-chrome-tab
 yarn
 ```
 
@@ -42,9 +27,19 @@ yarn
 yarn start
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and the page should auto-reload to update with changes.
 
-### Minimum supported browser:
+## Preview as real Chrome Extension
+
+Follow these steps to run NAU Tab in Google Chrome as a developer.
+
+- Open the url chrome://extensions/ in Google Chrome.
+- Click to enable _Developer mode_ so that you see developer options.
+- Click the "Load unpackaged extensions..."
+- Browse to the location where iChrome repo is installed, and select the sub-directory `public` as the extension source.
+- When you make change to the code for the tab page, just reload the tab.
+
+## Minimum supported browser:
 
 - Chrome 60 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
 - Opera 47 (install from [here](https://chrome.google.com/webstore/detail/nau-tab/pimockeojlggmlnknhicajgckmlggifa?hl=en))
@@ -52,19 +47,7 @@ Navigate to [localhost:5000](http://localhost:5000). You should see your app run
 - Edge (to be supported with new Chromium core)
 - Chromium-based browser: supported from Chromium 60
 
-### Build and Package
-
-### Project setup
-
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-
-```
-yarn start
-```
+## Build and Package
 
 ### Compiles and minifies for production
 
@@ -76,10 +59,16 @@ yarn build
 
 Command will generate a build to `public/`, remove source map files and it's ready to be deployed. `app/` folder is a snapshot build for current version.
 
-### Lints and fixes files
+### Lint and fix files
 
 ```
 yarn eslint
+```
+
+### Unit test with Jest
+
+```js
+yarn test
 ```
 
 ## License
