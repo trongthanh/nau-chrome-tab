@@ -4,13 +4,15 @@
 	"license": "Apache-2.0",
 	"author": "Thanh Tran <trongthanh@gmail.com> (https://int3ractive.com)",
 	"scripts": {
-		"build": "rollup -c",
+		"prebuild": "run-p clean",
+		"build": "rollup --no-sourcemap -c",
 		"autobuild": "rollup -c -w",
+		"prestart": "run-p clean",
 		"start": "run-p serve:dev autobuild",
 		"serve:dev": "sirv public --dev",
 		"serve:prod": "sirv public",
+		"clean": "rm -f public/js/bundle.js public/js/bundle.js.map public/css/bundle.css public/css/bundle.css.map",
 		"eslint": "eslint --ext .js,.svelte .",
-		"prestart": "rm -f public/js/bundle.js public/js/bundle.js.map public/css/bundle.css public/css/bundle.css.map",
 		"test": "jest --runInBand --no-cache --config ./jest.config.js"
 	},
 	"engines": {
