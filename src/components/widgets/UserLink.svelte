@@ -22,6 +22,10 @@
 		cursor: pointer;
 	}
 
+	.icon-selector__select:focus + .mdi {
+		outline: 1px white dotted;
+	}
+
 	.user-link__input {
 		appearance: none;
 		background: transparent;
