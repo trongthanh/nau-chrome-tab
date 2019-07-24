@@ -282,7 +282,7 @@
 </main>
 <SettingsOverlay visible="{settingsPanelVisible}" />
 
-<svelte:window on:keyup="{handleKeyUp}" />
+<svelte:window on:keydown="{handleKeyDown}" />
 
 <script>
 	/* © 2019 int3ractive.com
@@ -311,7 +311,7 @@
 		// console.log(settingsPanelVisible);
 	}
 
-	function handleKeyUp(event) {
+	function handleKeyDown(event) {
 		// console.log(event.key);
 		if (settingsPanelVisible && event.key === 'Escape') {
 			settingsPanelVisible = false;
