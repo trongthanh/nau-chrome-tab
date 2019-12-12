@@ -121,19 +121,17 @@
 	if (center) {
 		icon = $tinycare[0];
 		greetText = $tinycare[1];
+	} else if (hours < 12) {
+		// morning
+		greetText = 'Good morning';
+	} else if (hours < 18) {
+		// afternoon
+		greetText = 'Good afternoon';
+	} else if (hours < 22) {
+		// evening
+		greetText = 'Good evening';
 	} else {
-		if (hours < 12) {
-			// morning
-			greetText = 'Good morning';
-		} else if (hours < 18) {
-			// afternoon
-			greetText = 'Good afternoon';
-		} else if (hours < 22) {
-			// evening
-			greetText = 'Good evening';
-		} else {
-			greetText = 'Good night';
-		}
+		greetText = 'Good night';
 	}
 
 	function nameInputSubmit() {
