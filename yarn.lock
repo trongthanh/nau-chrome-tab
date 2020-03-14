@@ -518,19 +518,14 @@ acorn-walk@^6.0.1:
   integrity sha512-7evsyfH1cLOCdAzZAd43Cic04yKydNx0cF+7tiA19p1XnLLPU4dpCQOqpjqwokFe//vS0QqfqqjCS2JkiIs0cA==
 
 acorn@^5.5.3:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.4.tgz#3e8d8a9947d0599a1796d10225d7432f4a4acf5e"
+  integrity sha512-1D++VG7BhrtvQpNbBzovKNc1FLGGEE/oGe7b9xJm/RFHMBeUaUGpluV9RLjZa47YFdPcDAenEYuq9pQPcMdLJg==
 
-acorn@^6.0.1:
+acorn@^6.0.1, acorn@^6.0.7:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.0.tgz#b659d2ffbafa24baf5db1cdbb2c94a983ecd2784"
   integrity sha512-gac8OEcQ2Li1dxIEWGZzsp2BitJxwkwcOm0zHAJLcPJaVvm58FRnk6RkuLRpU1EujipU2ZFODv2P9DLMfnV8mw==
-
-acorn@^6.0.7:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
-  integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
 acorn@^7.1.0:
   version "7.1.0"
@@ -1249,10 +1244,10 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-deasync@^0.1.15:
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.16.tgz#44195eb4330fc9fc487f31ec614cbbdd57633897"
-  integrity sha512-FNCjDwxGbhK+Ye8fmE3p2ahIjERhkbuwX+WVGZPtSbAh9LfE1Saa2p0l+f0t11sIlk9D8W+Bym+cDp6r5yghAQ==
+deasync@^0.1.19:
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.19.tgz#e7ea89fcc9ad483367e8a48fe78f508ca86286e8"
+  integrity sha512-oh3MRktfnPlLysCPpBpKZZzb4cUC/p0aA3SyRGp15lN30juJBTo/CiD0d4fR+f1kBtUQoJj1NE9RPNWQ7BQ9Mg==
   dependencies:
     bindings "^1.5.0"
     node-addon-api "^1.7.1"
@@ -2936,12 +2931,12 @@ jest-snapshot@^24.9.0:
     pretty-format "^24.9.0"
     semver "^6.2.0"
 
-jest-transform-svelte@^2.0.2:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-transform-svelte/-/jest-transform-svelte-2.1.0.tgz#d0aa59c41c6d2014543d7e249404841668e73ff8"
-  integrity sha512-XeQQaEoxH9HVG5LDWJKTSBwodmRj3Rcpt498vhOT81mkhZk6sW6sofzsQtZ3K2xREIGIlffpKfA2UuuN0NAw0w==
+jest-transform-svelte@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jest-transform-svelte/-/jest-transform-svelte-2.1.1.tgz#d25cb142195fa8906b38d9bd4bc4a7947324e952"
+  integrity sha512-hdOB+HeIufvOjGH3o1oz72ORacmVJzkhvGglqmOllXDu3+m2lIeBo6UpCdJ1yCIAkdNztiFUm0WRpCVATI9rhw==
   dependencies:
-    deasync "^0.1.15"
+    deasync "^0.1.19"
 
 jest-util@^24.9.0:
   version "24.9.0"
@@ -4558,10 +4553,10 @@ rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^1.27.11:
-  version "1.27.13"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.27.13.tgz#d6d3500512daacbf8de54d2800de62d893085b90"
-  integrity sha512-hDi7M07MpmNSDE8YVwGVFA8L7n8jTLJ4lG65nMAijAyqBe//rtu4JdxjUBE7JqXfdpqxqDTbCDys9WcqdpsQvw==
+rollup@^1.27.13:
+  version "1.32.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.32.1.tgz#4480e52d9d9e2ae4b46ba0d9ddeaf3163940f9c4"
+  integrity sha512-/2HA0Ec70TvQnXdzynFffkjA6XN+1e2pEv/uKS5Ulca40g2L7KuOE3riasHoNVHOsFD5KKZgDsMk1CP3Tw9s+A==
   dependencies:
     "@types/estree" "*"
     "@types/node" "*"
