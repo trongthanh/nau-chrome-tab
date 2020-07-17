@@ -1249,10 +1249,10 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-deasync@^0.1.15:
-  version "0.1.16"
-  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.16.tgz#44195eb4330fc9fc487f31ec614cbbdd57633897"
-  integrity sha512-FNCjDwxGbhK+Ye8fmE3p2ahIjERhkbuwX+WVGZPtSbAh9LfE1Saa2p0l+f0t11sIlk9D8W+Bym+cDp6r5yghAQ==
+deasync@^0.1.19:
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/deasync/-/deasync-0.1.20.tgz#546fd2660688a1eeed55edce2308c5cf7104f9da"
+  integrity sha512-E1GI7jMI57hL30OX6Ht/hfQU8DO4AuB9m72WFm4c38GNbUD4Q03//XZaOIHZiY+H1xUaomcot5yk2q/qIZQkGQ==
   dependencies:
     bindings "^1.5.0"
     node-addon-api "^1.7.1"
@@ -2936,12 +2936,12 @@ jest-snapshot@^24.9.0:
     pretty-format "^24.9.0"
     semver "^6.2.0"
 
-jest-transform-svelte@^2.0.2:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jest-transform-svelte/-/jest-transform-svelte-2.1.0.tgz#d0aa59c41c6d2014543d7e249404841668e73ff8"
-  integrity sha512-XeQQaEoxH9HVG5LDWJKTSBwodmRj3Rcpt498vhOT81mkhZk6sW6sofzsQtZ3K2xREIGIlffpKfA2UuuN0NAw0w==
+jest-transform-svelte@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jest-transform-svelte/-/jest-transform-svelte-2.1.1.tgz#d25cb142195fa8906b38d9bd4bc4a7947324e952"
+  integrity sha512-hdOB+HeIufvOjGH3o1oz72ORacmVJzkhvGglqmOllXDu3+m2lIeBo6UpCdJ1yCIAkdNztiFUm0WRpCVATI9rhw==
   dependencies:
-    deasync "^0.1.15"
+    deasync "^0.1.19"
 
 jest-util@^24.9.0:
   version "24.9.0"
@@ -3222,9 +3222,9 @@ lodash.sortby@^4.7.0:
   integrity sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
 
 lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.0.0, log-symbols@^2.2.0:
   version "2.2.0"
@@ -4558,10 +4558,10 @@ rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^1.27.11:
-  version "1.27.13"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.27.13.tgz#d6d3500512daacbf8de54d2800de62d893085b90"
-  integrity sha512-hDi7M07MpmNSDE8YVwGVFA8L7n8jTLJ4lG65nMAijAyqBe//rtu4JdxjUBE7JqXfdpqxqDTbCDys9WcqdpsQvw==
+rollup@^1.27.13:
+  version "1.32.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.32.1.tgz#4480e52d9d9e2ae4b46ba0d9ddeaf3163940f9c4"
+  integrity sha512-/2HA0Ec70TvQnXdzynFffkjA6XN+1e2pEv/uKS5Ulca40g2L7KuOE3riasHoNVHOsFD5KKZgDsMk1CP3Tw9s+A==
   dependencies:
     "@types/estree" "*"
     "@types/node" "*"
