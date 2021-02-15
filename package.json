@@ -7,6 +7,10 @@
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
 		"start": "sirv public",
+		"ffrun": "web-ext run",
+		"ffbuild": "web-ext build",
+		"ffsign": "web-ext sign",
+		"fflint": "web-ext lint",
 		"eslint": "eslint --ext .js,.svelte .",
 		"test": "jest --runInBand --no-cache --config ./jest.config.js"
 	},
@@ -58,5 +62,11 @@
 		"> 1%",
 		"last 2 versions",
 		"not ie <= 11"
-	]
+	],
+	"webExt": {
+		"sourceDir": "public/",
+		"run": {
+	    	"firefox": "firefoxdeveloperedition"
+	  }
+	}
 }
