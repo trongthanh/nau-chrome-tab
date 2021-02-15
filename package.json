@@ -31,7 +31,6 @@
 	"devDependencies": {
 		"@babel/core": "^7.7.5",
 		"@babel/plugin-transform-modules-commonjs": "^7.7.5",
-		"@sveltejs/eslint-config": "github:sveltejs/eslint-config",
 		"babel-eslint": "^10.0.3",
 		"babel-jest": "^24.9.0",
 		"eslint": "^7.20.0",
