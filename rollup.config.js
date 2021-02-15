@@ -6,7 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
+const rollupConfig = {
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
@@ -42,3 +42,5 @@ export default {
 		production && terser(),
 	],
 };
+
+export default rollupConfig;

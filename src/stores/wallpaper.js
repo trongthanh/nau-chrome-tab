@@ -58,7 +58,8 @@ export function checkWallpaperRetention($persistStore) {
 		const photoStates = {};
 		if (nextPhoto) {
 			console.log('change currentPhoto to', nextPhoto);
-			currentPhoto = photoStates.currentPhoto = nextPhoto;
+			currentPhoto = nextPhoto;
+			photoStates.currentPhoto = currentPhoto;
 		}
 		let lastPhotoFetch = now;
 		let timeFetch = now + RENEW_DURATION; // we're fetching early for next swap, hence, time in the next hour
