@@ -6,13 +6,16 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv public",
-		"ffrun": "web-ext run",
-		"ffbuild": "web-ext build",
-		"ffsign": "web-ext sign",
-		"fflint": "web-ext lint",
 		"eslint": "eslint --ext .js,.svelte .",
-		"test": "jest --runInBand --no-cache --config ./jest.config.js"
+		"ffbuild": "web-ext build",
+		"fflint": "web-ext lint",
+		"ffrun": "web-ext run",
+		"ffsign": "web-ext sign",
+		"release:major": "npx standard-version -t '' -r major",
+		"release:minor": "npx standard-version -t '' -r minor",
+		"start": "sirv public",
+		"jest": "jest --runInBand --no-cache --config ./jest.config.js",
+		"test": "npm run eslint && npm run fflint && npm run jest"
 	},
 	"engines": {
 		"node": ">= 14.0.0",
@@ -66,7 +69,12 @@
 	"webExt": {
 		"sourceDir": "public/",
 		"run": {
-	    	"firefox": "firefoxdeveloperedition"
-	  }
+			"firefox": "firefoxdeveloperedition"
+		}
+	},
+	"standard-version": {
+		"skip": {
+			"tag": true
+		}
 	}
 }

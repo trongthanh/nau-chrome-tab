@@ -1,8 +1,8 @@
-# Nau Tab Changelog
+# Changelog
 
-I only started change logging since 3.0.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## 3.0.1
+## [3.0.1](https://github.com/trongthanh/nau-chrome-tab/compare/3.0.0...3.0.1)
 
 - Configure unit test for Svelte app.
 - Fix an issue with wallpaper continuously fetch new photo during twilight
