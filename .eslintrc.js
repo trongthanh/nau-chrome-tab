@@ -1,30 +1,21 @@
-/* eslint-disable quote-props */
 module.exports = {
 	root: true,
-	extends: ['nau'],
-	plugins: ['svelte3'],
+	extends: ['chotot-base'],
+	plugins: ['import', 'svelte3'],
 	parserOptions: {
 		ecmaVersion: 2018,
 		sourceType: 'module',
 	},
 	rules: {
-		'no-param-reassign': 'off',
-		'no-mixed-operators': 'off',
-		strict: 'off',
-		'import/no-anonymous-default-export': 'off',
 		'import/prefer-default-export': 'off',
-		// allow optionalDependencies
-		'import/no-extraneous-dependencies': [
-			'error',
-			{
-				optionalDependencies: ['test/unit/index.js'],
-			},
-		],
+		'no-console': 'off',
+		'no-shadow': 'off',
+		'no-tabs': 'off',
+		'prefer-destructuring': 'off',
 		// svelte specific:
-		'import/first': 'off', //import orders cannot be determined correctly in .svelte components
+		'import/first': 'off', // import orders cannot be determined correctly in .svelte components
 		'import/no-mutable-exports': 'off',
-		'no-labels': 'off',
-		'no-restricted-syntax': ['error', 'ForInStatement', 'ForOfStatement', 'WithStatement'], // remove LabeledStatement from the list
+		'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 	},
 	globals: {
 		browser: false,
@@ -35,6 +26,12 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
+	overrides: [
+		{
+			files: ['*.svelte'],
+			processor: 'svelte3/svelte3',
+		},
+	],
 	settings: {
 		'import/resolver': {
 			node: {

@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - '10'
+  - '14'
 script:
-  - yarn eslint
-  - yarn test
-  - yarn build
+  - npm test
+  - npm run build
 sudo: false

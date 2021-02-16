@@ -38,7 +38,8 @@ export function readAndResizeImage(file) {
 	const URL = window.URL;
 	const canvas = document.createElement('CANVAS');
 	// match canvasWidth with full screen width
-	const canvasWidth = (canvas.width = window.screen.width);
+	const canvasWidth = window.screen.width;
+	canvas.width = canvasWidth;
 
 	return new Promise((resolve, reject) => {
 		const ctx = canvas.getContext('2d');

@@ -27,7 +27,7 @@ const PersistStorage = {
 			throw new Error('store must be an object of states');
 		}
 
-		return new Promise((resolve /*, reject*/) => {
+		return new Promise((resolve /* , reject */) => {
 			if (webStorage) {
 				webStorage.set(store, () => {
 					resolve(store);
@@ -53,7 +53,7 @@ const PersistStorage = {
 			throw new Error('key must be either string or Array of key strings');
 		}
 
-		return new Promise((resolve /*, reject*/) => {
+		return new Promise((resolve /* , reject */) => {
 			if (webStorage) {
 				webStorage.get(keys, result => {
 					resolve(result);
@@ -81,7 +81,7 @@ const PersistStorage = {
 			throw new Error('key must be either string or Array of key strings');
 		}
 
-		return new Promise((resolve /*, reject*/) => {
+		return new Promise((resolve /* , reject */) => {
 			if (webStorage) {
 				webStorage.remove(keys, () => {
 					resolve(keys);

@@ -138,12 +138,14 @@ function migrateStorage(defaults, incoming, toBeSaved) {
 			// switch to latest version
 			toBeSaved._version = defaults._version;
 
-			return resolve(1);
+			resolve(1);
 		}
 
 		// return number of toBeSaved count
-		return resolve(0);
+		resolve(0);
 	});
 }
 
-export default { subscribe, setState, saveState, defaultState };
+const persistStore = { subscribe, setState, saveState, defaultState };
+
+export default persistStore;

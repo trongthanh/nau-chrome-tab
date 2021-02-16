@@ -59,7 +59,7 @@
 			name="user-link-icon"
 			bind:value="{icon}"
 			class="icon-selector__select"
-			on:change="{handleChange}"
+			on:blur="{handleChange}"
 		>
 			<option value="mdi--wordpress">Blog</option>
 			<option value="mdi--newspaper">News</option>

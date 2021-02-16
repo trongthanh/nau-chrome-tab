@@ -111,7 +111,7 @@
 	let greetText = '';
 	let icon = '';
 	let isInputFocus = false;
-	let nameInput = null; //ref
+	let nameInput = null; // ref
 
 	$: isInputActive = !$greetingName || isInputFocus;
 	$: inputValue = $greetingName || '';

@@ -1,5 +1,3 @@
-'use strict';
-
 // universal Web Extension
 window.browser = window.msBrowser || window.browser || window.chrome;
 
@@ -11,7 +9,7 @@ browser.runtime.onInstalled.addListener(details => {
 
 const appURL = browser.extension.getURL('index.html');
 // Open new tab with our index.html when click on the extension button
-browser.browserAction.onClicked.addListener(function() {
+browser.browserAction.onClicked.addListener(function extBtnClick() {
 	browser.tabs.create({
 		url: appURL,
 	});
