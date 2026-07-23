@@ -1,6 +1,6 @@
 {
 	"name": "nau-tab",
-	"version": "4.0.0-alpha.1",
+	"version": "3.1.0",
 	"license": "Apache-2.0",
 	"author": "Thanh Tran <trongthanh@gmail.com> (https://int3ractive.com)",
 	"scripts": {

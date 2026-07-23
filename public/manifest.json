@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Nau Tab",
 	"author": "Thanh Tran",
-	"version": "3.0.1",
+	"version": "3.1.0",
 	"description": "Beautiful new tab page for modern browsers. A browser extension that will not track you.",
 	"browser_specific_settings": {
 		"gecko": {
